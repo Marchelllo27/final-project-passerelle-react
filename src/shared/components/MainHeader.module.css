@@ -1,0 +1,12 @@
+.mainHeader {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 5rem;
+  background-color: grey;
+
+}
