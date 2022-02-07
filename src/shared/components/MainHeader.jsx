@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { spacing } from '@mui/system';
 
 import Navigation from "./Navigation";
 import Busket from "./Busket";
@@ -14,7 +15,7 @@ const MainHeader = props => {
       </Link>
       <nav className="control-account">
       <Navigation />
-        <Busket classes={classes.basketIcon} />
+        <Busket/>
         <AccountCircleIcon fontSize="large" />
       </nav>
     </header>
