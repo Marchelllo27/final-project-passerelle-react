@@ -14,9 +14,23 @@ const useStyles = makeStyles({
   accountMenu: {
     display: "flex",
     flexDirection: "column",
+    "& a": {
+      color: "#585858"
+    },
+    "& a:active": {
+      color: "#78BF35"
+    },
+    "& a:hover": {
+      color: "#78BF35"
+    },
+    "& a:last-child:hover": {
+      color: "red"
+    },
+
   },
   accountIcon: {
     cursor: "pointer",
+    color: "#585858",
     "&:hover": {
       color: "#78BF35",
     },
@@ -42,8 +56,10 @@ const MainHeader = props => {
       </Link>
       <Navigation />
       <Box sx={{ display: "flex", alignItems: "center", height: "5rem" }}>
-        <Basket />
-        <Box sx={{height: "100%", display:"flex", alignItems:"center"}}>
+        <Link to="/basket">
+          <Basket />
+        </Link>
+        <Box sx={{ height: "100%", display: "flex", alignItems: "center" }}>
           <AccountCircleIcon
             fontSize="large"
             id="basic-button"
@@ -63,8 +79,12 @@ const MainHeader = props => {
               className: style.accountMenu,
             }}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <Link to="/profile">
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+            </Link>
+            <Link to="/">
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Link>
           </Menu>
         </Box>
       </Box>
