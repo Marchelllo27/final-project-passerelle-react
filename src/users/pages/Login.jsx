@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Paper from "@mui/material/Paper";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -45,6 +46,19 @@ const useStyles = makeStyles({
       },
     },
   },
+  liItem: {
+    color: "white",
+    fontWeight: "bold",
+    width: "100%",
+    justifyContent: "center",
+    transition: "0.5",
+  },
+  paper: {
+    marginTop: "2%",
+    borderRadius: "15px",
+    padding: "1rem",
+    background: "#eeeeee",
+  },
 });
 
 
@@ -68,21 +82,29 @@ export default function SignIn() {
     <ThemeProvider theme={theme}>
       <Container component="div" maxWidth="xs">
         <CssBaseline />
+                <Paper elevation="24" className={classes.paper}>
+
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Connexion
           </Typography>
-          <Box className={classes.root} component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            className={classes.root}
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -103,17 +125,17 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            
+
             <Button
+              className={classes.liItem}
               type="submit"
-              fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              color="success"
             >
-              Sign In
+              Connexion
             </Button>
             <Grid container>
-              
               <Grid item>
                 <Link href="/signup" variant="body2">
                   {"Vous n'avez pas encore de compte?    Inscription"}
@@ -122,6 +144,7 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
+        </Paper>
       </Container>
     </ThemeProvider>
   );
