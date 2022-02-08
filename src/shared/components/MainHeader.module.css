@@ -8,7 +8,7 @@
   align-items: center;
   padding: 0 2rem;
   height: 5rem;
-  background-color: grey;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .logoBox {

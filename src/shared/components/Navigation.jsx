@@ -14,17 +14,15 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     width: "9rem",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   item: {
     color: "green",
     "&:hover": {
-      color: "yellow"
-    }
-  }
+      color: "yellow",
+    },
+  },
 });
-
-
 
 const Navigation = props => {
   const style = useStyles();
@@ -39,45 +37,55 @@ const Navigation = props => {
   };
 
   return (
-      <ul>
-        <li>
-          <Button
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-            variant="contained"
-            size="small"
-          >
-            Nos produits
+    <ul>
+      <li>
+        <Button
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+          variant="contained"
+          size="small"
+        >
+          Nos produits
+        </Button>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+            className: style.listRoot,
+          }}
+        >
+          <MenuItem onClick={handleClose}>
+            <Link to="/dishes">Plats</Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to="/drinks">Boissons</Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to="/desserts">Desserts</Link>
+          </MenuItem>
+        </Menu>
+      </li>
+      <li>
+        <Link to="/signup">
+          <Button variant="contained" size="small">
+            Inscription
           </Button>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-              className: style.listRoot
-            }}
-          >
-            <MenuItem onClick={handleClose}><Link to='/dishes'>Plats</Link></MenuItem>
-            <MenuItem onClick={handleClose}><Link to='/drinks'>Boissons</Link></MenuItem>
-            <MenuItem onClick={handleClose}><Link to='/desserts'>Desserts</Link></MenuItem>
-          </Menu>
-        </li>
-        <li>
-          <Link to="/signup">
-            <Button variant="contained" size="small">Inscription</Button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/login">
-            <Button variant="contained" size="small">Connexion</Button>
-          </Link>
-        </li>
-      </ul>
+        </Link>
+      </li>
+      <li>
+        <Link to="/login">
+          <Button variant="contained" size="small">
+            Connexion
+          </Button>
+        </Link>
+      </li>
+    </ul>
   );
 };
 
