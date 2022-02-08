@@ -15,8 +15,8 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
   },
-  liItem: {
-    color: "#707070",
+  navButtons: {
+    color: "#585858",
     fontWeight: "bold",
     width: "100%",
     justifyContent: "center",
@@ -25,6 +25,10 @@ const useStyles = makeStyles({
     },
     "&:active": {
       color: "#78BF35",
+    },
+    "& li": {
+      justifyContent: "center",
+      fontWeight: "bold",
     },
   },
 });
@@ -53,7 +57,7 @@ const Navigation = props => {
             onClick={handleClick}
             size="small"
             endIcon={<ArrowDropDownIcon />}
-            className={style.liItem}
+            className={style.navButtons}
           >
             Nos produits
           </Button>
@@ -67,25 +71,30 @@ const Navigation = props => {
               className: style.listRoot,
             }}
           >
-            <MenuItem className={style.liItem} onClick={handleClose}>
-              <Link to="/dishes">Plats</Link>
-            </MenuItem>
-            <MenuItem className={style.liItem} onClick={handleClose}>
-              <Link to="/drinks">Boissons</Link>
-            </MenuItem>
-            <MenuItem className={style.liItem} onClick={handleClose}>
-              <Link to="/desserts">Desserts</Link>
-            </MenuItem>
+            <Link className={style.navButtons} to="/dishes">
+              <MenuItem onClick={handleClose}>Plats</MenuItem>
+            </Link>
+            <Link className={style.navButtons} to="/drinks">
+              <MenuItem onClick={handleClose}>Boissons</MenuItem>
+            </Link>
+
+            <Link className={style.navButtons} to="/desserts">
+              <MenuItem onClick={handleClose}>Desserts</MenuItem>
+            </Link>
           </Menu>
         </li>
         <li>
           <Link to="/signup">
-            <Button className={style.liItem} size="small">Inscription</Button>
+            <Button className={style.navButtons} size="small">
+              Inscription
+            </Button>
           </Link>
         </li>
         <li>
           <NavLink to="/login">
-            <Button className={style.liItem} size="small">Connexion</Button>
+            <Button className={style.navButtons} size="small">
+              Connexion
+            </Button>
           </NavLink>
         </li>
       </ul>

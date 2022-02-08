@@ -11,8 +11,8 @@ const useStyles = makeStyles({
     alignItems: "center",
     padding: spacing(2),
     "& .MuiTextField-root": {
-      margin: spacing(1),
       width: "400px",
+      margin: "15px"
     },
     "& .MuiButtonBase-root": {
       margin: spacing(2),

@@ -7,6 +7,8 @@ import MainHeader from "./shared/components/MainHeader";
 import Dishes from "./products/pages/Dishes";
 import Desserts from "./products/pages/Desserts";
 import Drinks from "./products/pages/Drinks";
+import Basket from "./orders/pages/Basket"
+import Profile from "./users/pages/Profile"
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route path="/dishes" exact><Dishes/></Route>
             <Route path="/desserts" exact><Desserts/></Route>
             <Route path="/drinks" exact><Drinks/></Route>
+            <Route path="/basket" exact><Basket/></Route>
+            <Route path="/profile" exact><Profile/></Route>
             <Redirect to="/"></Redirect>
           </Switch>
         </main>
