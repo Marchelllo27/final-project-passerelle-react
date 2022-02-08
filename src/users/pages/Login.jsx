@@ -20,7 +20,6 @@ const useStyles = makeStyles({
     "& .MuiTextField-root": {
       margin: spacing(1),
       width: "400px",
-      margin: "15px",
     },
     "& .MuiButtonBase-root": {
       margin: spacing(2),
@@ -87,7 +86,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="div" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
