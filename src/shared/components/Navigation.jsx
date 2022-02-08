@@ -49,7 +49,7 @@ const Navigation = props => {
   };
 
   return (
-    <nav>
+    <nav className={classes.navigation}>
       <ul>
         <li>
           <Button
