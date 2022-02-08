@@ -47,7 +47,7 @@ const useStyles = makeStyles({
   },
   container: {
     background: "",
-    marginTop: "8%",
+    paddingTop: "2rem",
   },
   box: {
     display: "flex",

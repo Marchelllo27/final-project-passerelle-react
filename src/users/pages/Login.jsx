@@ -46,6 +46,26 @@ const useStyles = makeStyles({
       },
     },
   },
+  liItem: {
+    color: "white",
+    fontWeight: "bold",
+    width: "100%",
+    justifyContent: "center",
+    transition: "0.5",
+    background: "green",
+    "&:hover": {
+      color: "#78BF35",
+    },
+    "&:active": {
+      color: "#78BF35",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "green",
+    },
+    "&:hover fieldset": {
+        borderColor: "green",
+      },
+  },
 });
 
 
@@ -72,18 +92,24 @@ export default function SignIn() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Connexion
           </Typography>
-          <Box className={classes.root} component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            className={classes.root}
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -104,8 +130,9 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            
+
             <Button
+              className={classes.liItem}
               type="submit"
               fullWidth
               variant="contained"
@@ -114,7 +141,6 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-              
               <Grid item>
                 <Link href="/signup" variant="body2">
                   {"Vous n'avez pas encore de compte?    Inscription"}
