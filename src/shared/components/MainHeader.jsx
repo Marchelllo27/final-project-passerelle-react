@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import Navigation from "./Navigation";
-import Busket from "./Busket";
+import Basket from "./Basket";
 import classes from "./MainHeader.module.css";
 
 const useStyles = makeStyles({
@@ -18,9 +18,9 @@ const useStyles = makeStyles({
   accountIcon: {
     cursor: "pointer",
     "&:hover": {
-      color: "#78BF35"
-    }
-  }
+      color: "#78BF35",
+    },
+  },
 });
 
 const MainHeader = props => {
@@ -41,9 +41,9 @@ const MainHeader = props => {
         <img src="/logo.png" alt="Eat Smart logo" />
       </Link>
       <Navigation />
-      <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Busket />
-        <Box>
+      <Box sx={{ display: "flex", alignItems: "center", height: "5rem" }}>
+        <Basket />
+        <Box sx={{height: "100%", display:"flex", alignItems:"center"}}>
           <AccountCircleIcon
             fontSize="large"
             id="basic-button"

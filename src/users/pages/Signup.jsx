@@ -47,14 +47,13 @@ const useStyles = makeStyles({
   },
   container: {
     background: "",
-    marginTop: "8%",
+    paddingTop: "1rem"
   },
   box: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     maxWidth: "auto",
-    marginTop: "5%",
   },
   connexion: {
     justifyContent: "center",
