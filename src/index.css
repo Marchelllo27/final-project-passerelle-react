@@ -15,7 +15,7 @@ body {
 main {
   margin: 5rem auto 0 auto;
   width: 100%;
-  min-height: calc(100vh - 5rem);
+  min-height: calc(100vh - 10rem);
   background-color: #e9e9e9;
 }
 

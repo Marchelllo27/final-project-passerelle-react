@@ -9,6 +9,7 @@ import Desserts from "./products/pages/Desserts";
 import Drinks from "./products/pages/Drinks";
 import Basket from "./orders/pages/Basket"
 import Profile from "./users/pages/Profile"
+import Footer from "./shared/components/Footer";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
             <Redirect to="/"></Redirect>
           </Switch>
         </main>
-        <footer></footer>
+        <Footer/>
       </BrowserRouter>
   );
 }

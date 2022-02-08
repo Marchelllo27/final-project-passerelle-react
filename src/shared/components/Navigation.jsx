@@ -4,14 +4,17 @@ import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
-import { Link, NavLink } from "react-router-dom";
+import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
+import LocalBarIcon from '@mui/icons-material/LocalBar';
+import CakeIcon from '@mui/icons-material/Cake';
 
 import classes from "./Navigation.module.css";
 
+import { Link, NavLink } from "react-router-dom";
+
 const useStyles = makeStyles({
   listRoot: {
-    width: "8rem",
+    width: "9rem",
     display: "flex",
     flexDirection: "column",
   },
@@ -27,7 +30,7 @@ const useStyles = makeStyles({
       color: "#78BF35",
     },
     "& li": {
-      justifyContent: "center",
+      justifyContent: "space-between",
       fontWeight: "bold",
     },
   },
@@ -72,14 +75,14 @@ const Navigation = props => {
             }}
           >
             <Link className={style.navButtons} to="/dishes">
-              <MenuItem onClick={handleClose}>Plats</MenuItem>
+              <MenuItem onClick={handleClose}>Plats<DinnerDiningIcon/></MenuItem>
             </Link>
             <Link className={style.navButtons} to="/drinks">
-              <MenuItem onClick={handleClose}>Boissons</MenuItem>
+              <MenuItem onClick={handleClose}>Boissons<LocalBarIcon/></MenuItem>
             </Link>
 
             <Link className={style.navButtons} to="/desserts">
-              <MenuItem onClick={handleClose}>Desserts</MenuItem>
+              <MenuItem onClick={handleClose}>Desserts<CakeIcon/></MenuItem>
             </Link>
           </Menu>
         </li>
