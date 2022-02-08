@@ -1,6 +1,10 @@
 nav {
   display: flex;
+  justify-content: center;
   align-items: center;
+  position: absolute;
+  width: 30rem;
+  left: calc(50% - 15rem);
 }
 
 ul {
@@ -8,8 +12,8 @@ ul {
   align-items: center;
 }
 
-ul li:nth-child(1),
-ul li:nth-child(2) {
+ nav > ul li:nth-child(1),
+ nav > ul li:nth-child(2) {
   margin-right: 0.5rem;
 }
 
