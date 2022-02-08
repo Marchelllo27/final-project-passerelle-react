@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Paper from "@mui/material/Paper";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -51,19 +52,12 @@ const useStyles = makeStyles({
     width: "100%",
     justifyContent: "center",
     transition: "0.5",
-    background: "green",
-    "&:hover": {
-      color: "#78BF35",
-    },
-    "&:active": {
-      color: "#78BF35",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "green",
-    },
-    "&:hover fieldset": {
-        borderColor: "green",
-      },
+  },
+  paper: {
+    marginTop: "2%",
+    borderRadius: "15px",
+    padding: "1rem",
+    background: "#eeeeee",
   },
 });
 
@@ -88,6 +82,8 @@ export default function SignIn() {
     <ThemeProvider theme={theme}>
       <Container component="div" maxWidth="xs">
         <CssBaseline />
+                <Paper elevation="24" className={classes.paper}>
+
         <Box
           sx={{
             marginTop: 8,
@@ -133,11 +129,11 @@ export default function SignIn() {
             <Button
               className={classes.liItem}
               type="submit"
-              fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              color="success"
             >
-              Sign In
+              Connexion
             </Button>
             <Grid container>
               <Grid item>
@@ -148,6 +144,7 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
+        </Paper>
       </Container>
     </ThemeProvider>
   );

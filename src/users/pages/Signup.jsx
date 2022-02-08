@@ -1,4 +1,4 @@
-import { TextField, Button, Container,Box } from "@mui/material";
+import { TextField, Button, Container,Box ,Paper} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 // import classes from "./Signup.module.css";
  import { spacing } from "@mui/system";
@@ -11,20 +11,20 @@ const useStyles = makeStyles({
     alignItems: "center",
     padding: spacing(2),
     "& .MuiTextField-root": {
-      margin: spacing(1),
       width: "400px",
+      margin: "10px",
     },
     "& .MuiButtonBase-root": {
       margin: spacing(2),
     },
 
-    //text in green when click to write
-    "& label.Mui-focused": {
-      color: "green",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "green",
-    },
+    // text in green when click to write
+    // "& label.Mui-focused": {
+    //   color: "green",
+    // },
+    // "& .MuiInput-underline:after": {
+    //   borderBottomColor: "green",
+    // },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
         borderColor: "green",
@@ -37,15 +37,11 @@ const useStyles = makeStyles({
         borderColor: "green",
       },
     },
-
-    // palette: {
-    //   primary: "lightGreen",
-    //   secondary: "green",
-    // },
   },
   container: {
     background: "",
-    paddingTop: "1rem"
+    paddingTop: "1rem",
+    // height:"fit-content"
   },
   box: {
     display: "flex",
@@ -60,6 +56,12 @@ const useStyles = makeStyles({
     color: "green",
     fontWeight: "bold",
   },
+  paper: {
+    marginTop: "2%",
+    borderRadius: "15px",
+    padding: "1rem",
+    background: "#f5f5f5",
+  },
 });
 const Signup = () => {
   const classes = useStyles();
@@ -67,12 +69,12 @@ const Signup = () => {
   return (
     <Container className={classes.container}>
       <Box className={classes.box}>
-     
-        
         {/* <Grid item xs={8} className={classes.gridRight}> */}
-          <div className={classes.connexion}>
-            Vous avez déja un compte ? <span className={classes.span}>Connectez vous</span>
-          </div>
+        <div className={classes.connexion}>
+          Vous avez déja un compte ?{" "}
+          <span className={classes.span}>Connectez vous</span>
+        </div>
+        <Paper elevation="24" className={classes.paper}>
           <form
             className={classes.root}
             // sx={{
@@ -123,7 +125,7 @@ const Signup = () => {
             />
             <span className={classes.span}>Votre adresse</span>
             <TextField
-              label="Rue"
+              label="Nom et Numéro de rue"
               id="outlined-basic"
               variant="outlined"
               required
@@ -141,12 +143,17 @@ const Signup = () => {
               required
             />
 
-            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button
+              color="success"
+              type="submit"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
               Insciption
             </Button>
           </form>
-        {/* </Grid>
-      </Grid> */}
+        </Paper>
+     
       </Box>
     </Container>
   );
