@@ -1,5 +1,4 @@
 import { TextField, Button, Container,Box } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import { makeStyles } from "@mui/styles";
 // import classes from "./Signup.module.css";
  import { spacing } from "@mui/system";
@@ -14,7 +13,6 @@ const useStyles = makeStyles({
     "& .MuiTextField-root": {
       margin: spacing(1),
       width: "400px",
-      margin: "15px",
     },
     "& .MuiButtonBase-root": {
       margin: spacing(2),
