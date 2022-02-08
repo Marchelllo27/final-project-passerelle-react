@@ -20,7 +20,6 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     width: "100%",
     justifyContent: "center",
-    transition: "0.5",
     "&:hover": {
       color: "#78BF35",
     },
