@@ -1,4 +1,4 @@
-import { TextField, Button, Container,Box ,Paper} from "@mui/material";
+import { TextField, Button, Container,Box ,Paper,Link} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 // import classes from "./Signup.module.css";
  import { spacing } from "@mui/system";
@@ -18,13 +18,6 @@ const useStyles = makeStyles({
       margin: spacing(2),
     },
 
-    // text in green when click to write
-    // "& label.Mui-focused": {
-    //   color: "green",
-    // },
-    // "& .MuiInput-underline:after": {
-    //   borderBottomColor: "green",
-    // },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
         borderColor: "green",
@@ -41,7 +34,6 @@ const useStyles = makeStyles({
   container: {
     background: "",
     paddingTop: "1rem",
-    // height:"fit-content"
   },
   box: {
     display: "flex",
@@ -51,6 +43,7 @@ const useStyles = makeStyles({
   },
   connexion: {
     justifyContent: "center",
+    fontSize:"1rem"
   },
   span: {
     color: "green",
@@ -69,21 +62,21 @@ const Signup = () => {
   return (
     <Container className={classes.container}>
       <Box className={classes.box}>
-        {/* <Grid item xs={8} className={classes.gridRight}> */}
-        <div className={classes.connexion}>
-          Vous avez déja un compte ?{" "}
-          <span className={classes.span}>Connectez vous</span>
-        </div>
+        <Link
+          href="/login"
+          variant="body2"
+          underline="hover"
+          className={classes.connexion}
+        >
+          Vous avez déja un compte?
+          <span className={classes.span}> Connectez vous</span>
+        </Link>
+
         <Paper elevation="24" className={classes.paper}>
           <form
-            className={classes.root}
-            // sx={{
-            //   width: 500,
-            //   maxWidth: "100%",
-            // }}
+            className={classes.root} 
           >
             <TextField
-              //sx={{ paddingTop: 2 }}
               label="Votre prénom"
               id="outlined-basic"
               variant="outlined"
@@ -153,7 +146,6 @@ const Signup = () => {
             </Button>
           </form>
         </Paper>
-     
       </Box>
     </Container>
   );
