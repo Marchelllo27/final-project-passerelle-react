@@ -11,13 +11,50 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from "@mui/styles";
 
+import { spacing } from "@mui/system";
 
+const useStyles = makeStyles({
+  root: {
+    "& .MuiTextField-root": {
+      margin: spacing(1),
+      width: "400px",
+      margin: "15px",
+    },
+    "& .MuiButtonBase-root": {
+      margin: spacing(2),
+    },
+
+    //text in green when click to write
+    "& label.Mui-focused": {
+      color: "green",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "green",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "green",
+      },
+      //border Green
+      "&:hover fieldset": {
+        borderColor: "green",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "green",
+      },
+    },
+  },
+});
 
 
 const theme = createTheme();
 
 export default function SignIn() {
+
+ const classes = useStyles();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -46,7 +83,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Connexion
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box className={classes.root} component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
