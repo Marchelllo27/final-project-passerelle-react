@@ -19,7 +19,7 @@ export default function Album() {
   return (
     <ThemeProvider theme={theme}>
       
-      <main>
+      <div>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
@@ -56,7 +56,7 @@ export default function Album() {
             ))}
           </Grid>
         </Container>
-      </main>
+      </div>
      
     </ThemeProvider>
   );
