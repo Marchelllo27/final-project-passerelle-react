@@ -50,6 +50,7 @@ const useStyles = makeStyles({
       },
     },
   },
+
   container: {
     paddingTop: "1rem",
     paddingBottom: "2rem",
@@ -103,10 +104,6 @@ const Signup = () => {
 
   const validationOpt = {
     resolver: yupResolver(formSchema),
-    // mode: "onBlur",
-    // shouldFocusError: true,
-    // criteriaMode: "all",
-    // reValidateMode: "onChange",
   };
 
   const { register, handleSubmit, reset, formState } = useForm(validationOpt);
