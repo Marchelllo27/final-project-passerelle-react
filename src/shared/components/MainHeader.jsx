@@ -1,9 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { Box } from "@mui/material";
+import { Menu, MenuItem, Box, Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import Navigation from "./Navigation";
@@ -15,18 +13,17 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     "& a": {
-      color: "#585858"
+      color: "#585858",
     },
     "& a:active": {
-      color: "#78BF35"
+      color: "#78BF35",
     },
     "& a:hover": {
-      color: "#78BF35"
+      color: "#78BF35",
     },
     "& a:last-child:hover": {
-      color: "red"
+      color: "red",
     },
-
   },
   accountIcon: {
     cursor: "pointer",
@@ -56,19 +53,24 @@ const MainHeader = props => {
       </Link>
       <Navigation />
       <Box sx={{ display: "flex", alignItems: "center", height: "5rem" }}>
-        <Link to="/basket">
-          <Basket />
-        </Link>
+        <Tooltip title="Panier" arrow>
+          <Link to="/basket">
+            <Basket />
+          </Link>
+        </Tooltip>
         <Box sx={{ height: "100%", display: "flex", alignItems: "center" }}>
-          <AccountCircleIcon
-            fontSize="large"
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-            className={style.accountIcon}
-          />
+          <Tooltip title="Espace personnel" arrow>
+            <AccountCircleIcon
+              fontSize="large"
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+              className={style.accountIcon}
+              // {...props}
+            />
+          </Tooltip>
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}

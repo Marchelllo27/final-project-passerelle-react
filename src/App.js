@@ -29,6 +29,7 @@ function App() {
             <Route path="/dishes" exact><Dishes/></Route>
             <Route path="/desserts" exact><Desserts/></Route>
             <Route path="/drinks" exact><Drinks/></Route>
+            <Route path="/product/:id" exact><p>Description of product</p></Route>
             <Route path="/basket" exact><Basket/></Route>
             <Route path="/profile" exact><Profile/></Route>
             <Redirect to="/"></Redirect>
