@@ -19,6 +19,22 @@ let theme = createTheme({
       main: "#8bc34a",
     },
   },
+
+  components: {
+    MuiInputBase: {
+      styleOverrides: {
+        // Name of the slot
+        input: {
+          // Some CSS
+          "&:-webkit-autofill": {
+            "-webkit-box-shadow": "0 0 0 100px white inset",
+            "-webkit-text-fill-color": "black",
+          },
+          background: "white",
+        },
+      },
+    },
+  },
 });
 
 
