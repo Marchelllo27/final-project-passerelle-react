@@ -1,4 +1,4 @@
-import { Paper, Grid, Typography } from "@mui/material";
+import { Paper, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Tooltip } from "@mui/material";
@@ -13,7 +13,6 @@ const useStyles = makeStyles({
     "&:hover": {
       transform: "scale(1.1)",
       outline: "6px solid #78bf35",
-      // outlineOffset: "-2px",
     },
   },
   addToBasketBox: {
@@ -49,12 +48,8 @@ const ProductItem = props => {
   const {
     _id: id,
     name,
-    ingredients,
-    nutrients,
     image,
     weight,
-    description,
-    type,
     price,
   } = props.product;
 
@@ -74,17 +69,18 @@ const ProductItem = props => {
               className={classes.productImage}
             />
             <div className={classes.description}>
+              {/* name of product */}
               <div className={classes.productTitle}>
                 <h3>{name}</h3>
               </div>
-
+                {/* price and add button */}
               <div className={classes.actionControl}>
                 <span className={classes.price}>{price}€</span>
-                <div className={style.addToBasketBox}>
                   <Tooltip title="Ajouter au panier" arrow>
+                <div className={style.addToBasketBox}>
                     <ShoppingCartIcon onClick={addProductHandler} />
-                  </Tooltip>
                 </div>
+                  </Tooltip>
               </div>
             </div>
           </article>
