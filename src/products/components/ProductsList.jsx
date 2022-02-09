@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import ProductItem from "./ProductItem";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import classes from "./ProductList.module.css";
+import SkeletonList from "../../shared/UIElements/SkeletonList";
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
@@ -18,7 +20,7 @@ const ProductsList = () => {
 
       if (!response.ok) {
         console.log(response);
-        throw new Error("Something went wrong");
+        throw new Error("Malheureusement, une erreur s'est produite lors du chargement des données. Esseyez plus tard");
       }
 
       const responseData = await response.json();
@@ -27,13 +29,25 @@ const ProductsList = () => {
       setIsLoading(false);
     };
 
-    try {
-      fetchProducts();
-    } catch (error) {
+    fetchProducts().catch(error => {
       setIsLoading(false);
-      setHttpError(error)
-    }
+      setHttpError(error.message);
+    });
   }, []);
+
+  // SHOW WHEN LOADING FROM DATABASE
+  if (isLoading) {
+    return <SkeletonList/>
+  }
+  
+  // SHOW WHEN ERROR OCCUR
+  if (httpError) {
+    return (
+      <section className={classes.httpError}>
+        <p>{httpError}</p>
+      </section>
+    );
+  }
 
   return (
     <Container>

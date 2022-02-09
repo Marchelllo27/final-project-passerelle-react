@@ -1,6 +1,6 @@
-import ProductsList from "../components/ProductsList-hiba"
+
 const Desserts = props => {
-  return <ProductsList/>
+  return <p>Desserts</p>
 };
 
 export default Desserts;
