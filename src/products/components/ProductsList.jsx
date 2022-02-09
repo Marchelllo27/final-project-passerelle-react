@@ -7,20 +7,32 @@ import Grid from "@mui/material/Grid";
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     const fetchProducts = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_URL_API}/products/all-dishes`
       );
 
+      if (!response.ok) {
+        console.log(response);
+        throw new Error("Something went wrong");
+      }
+
       const responseData = await response.json();
 
       setProducts(responseData);
-      setIsLoading(false)
+      setIsLoading(false);
     };
-    fetchProducts();
+
+    try {
+      fetchProducts();
+    } catch (error) {
+      setIsLoading(false);
+      setHttpError(error)
+    }
   }, []);
 
   return (
