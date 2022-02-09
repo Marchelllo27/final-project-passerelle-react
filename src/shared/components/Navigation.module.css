@@ -1,4 +1,4 @@
-nav {
+.navigation {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,17 +8,17 @@ nav {
 }
 
 ul {
-  display: flex !important;
+  display: flex;
   align-items: center;
 }
 
- nav > ul li:nth-child(1),
- nav > ul li:nth-child(2) {
+nav > ul li:nth-child(1),
+nav > ul li:nth-child(2) {
   margin-right: 0.5rem;
 }
 
 @media (max-width: 48rem) {
-  nav {
+  .navigation {
     display: none;
   }
 }

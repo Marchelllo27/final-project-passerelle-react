@@ -7,10 +7,10 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import CakeIcon from '@mui/icons-material/Cake';
+import {NavLink } from "react-router-dom";
 
 import classes from "./Navigation.module.css";
 
-import { Link, NavLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   listRoot: {
@@ -22,7 +22,6 @@ const useStyles = makeStyles({
     color: "#585858",
     fontWeight: "bold",
     width: "100%",
-    justifyContent: "center",
     "&:hover": {
       color: "#78BF35",
     },
@@ -49,8 +48,8 @@ const Navigation = props => {
   };
 
   return (
-    <nav>
-      <ul>
+    <nav className={classes.navigation}>
+      <ul className={classes.navLinks}>
         <li>
           <Button
             id="basic-button"
@@ -74,24 +73,24 @@ const Navigation = props => {
               className: style.listRoot,
             }}
           >
-            <Link className={style.navButtons} to="/dishes">
+            <NavLink className={style.navButtons} to="/dishes">
               <MenuItem onClick={handleClose}>Plats<DinnerDiningIcon/></MenuItem>
-            </Link>
-            <Link className={style.navButtons} to="/drinks">
+            </NavLink>
+            <NavLink className={style.navButtons} to="/drinks">
               <MenuItem onClick={handleClose}>Boissons<LocalBarIcon/></MenuItem>
-            </Link>
+            </NavLink>
 
-            <Link className={style.navButtons} to="/desserts">
+            <NavLink className={style.navButtons} to="/desserts">
               <MenuItem onClick={handleClose}>Desserts<CakeIcon/></MenuItem>
-            </Link>
+            </NavLink>
           </Menu>
         </li>
         <li>
-          <Link to="/signup">
+          <NavLink to="/signup">
             <Button className={style.navButtons} size="small">
               Inscription
             </Button>
-          </Link>
+          </NavLink>
         </li>
         <li>
           <NavLink to="/login">

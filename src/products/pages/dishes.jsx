@@ -1,7 +1,7 @@
+import ProductsList from "../components/ProductsList";
 
 const Dishes = props => {
-  return <p>Plats</p>;
+  return <ProductsList />;
 };
 
 export default Dishes;
-
