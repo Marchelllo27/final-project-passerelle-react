@@ -1,14 +1,22 @@
-import {useState} from "react";
-
-import { TextField, Button, Container,Box ,Paper,Link} from "@mui/material";
+import {
+  TextField,
+  Button,
+  Container,
+  Box,
+  Paper,
+  Link,
+  Alert,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 // import classes from "./Signup.module.css";
- import { spacing } from "@mui/system";
-
- import validator from "validator";
-
- 
-
+import { spacing } from "@mui/system";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+//validation password
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 const useStyles = makeStyles({
   root: {
@@ -18,6 +26,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     padding: spacing(2),
+    //Css textField
     "& .MuiTextField-root": {
       width: "400px",
       margin: "10px",
@@ -27,13 +36,15 @@ const useStyles = makeStyles({
     },
 
     "& .MuiOutlinedInput-root": {
+      //border Green
       "& fieldset": {
         borderColor: "green",
       },
-      //border Green
+      //border Green when mouse in the box
       "&:hover fieldset": {
         borderColor: "green",
       },
+      //border Green when mouse out the box
       "&.Mui-focused fieldset": {
         borderColor: "green",
       },
@@ -41,7 +52,7 @@ const useStyles = makeStyles({
   },
   container: {
     paddingTop: "1rem",
-    paddingBottom:"2rem"
+    paddingBottom: "2rem",
   },
   box: {
     display: "flex",
@@ -51,36 +62,61 @@ const useStyles = makeStyles({
   },
   connexion: {
     justifyContent: "center",
-    fontSize:"1rem"
+    fontSize: "1rem",
   },
   span: {
     color: "green",
     fontWeight: "bold",
   },
   paper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+
     marginTop: "2%",
     borderRadius: "15px",
     padding: "1rem",
     background: "#f5f5f5",
   },
+  invalidFeedback: {
+    marginBottom: "2rem",
+    marginTop: "-0.5rem",
+    color: "red",
+  },
 });
-const validationPassword = (value) => {
-   let errors = {};
 
-  if (!validator.equals(value.password, value.passwordConfirmation)) {
-    errors.passwordConfirmation = "Passwords must match";
-  }
-};
 const Signup = () => {
   const classes = useStyles();
 
-  const [values,setValues]=useState("");
-  const handleChange=e=>{
-   console.log(`${e.target.values}`);
-   setValues(e.target.values);
-  
+  //Validation password
+  const formSchema = Yup.object().shape({
+    password: Yup.string()
+      .required("Veuillez entrer votre mot de passe")
+      .min(4, "Le mot de passe doit contenir au moins 4 caractéres"),
+    passwordConfirm: Yup.string()
+      .required("La confirmation de votre mot de passe est requise")
+      .oneOf(
+        [Yup.ref("password")],
+        "La validation du mot de passe est incorrecte"
+      ),
+  });
+
+  const validationOpt = {
+    resolver: yupResolver(formSchema),
+    // mode: "onBlur",
+    // shouldFocusError: true,
+    // criteriaMode: "all",
+    // reValidateMode: "onChange",
+  };
+
+  const { register, handleSubmit, reset, formState } = useForm(validationOpt);
+
+  const { errors } = formState;
+
+  function onFormSubmit(data) {
+    console.log(JSON.stringify(data, null, 4));
+    return false;
   }
-  
   return (
     <Container className={classes.container}>
       <Box className={classes.box}>
@@ -95,7 +131,14 @@ const Signup = () => {
         </Link>
 
         <Paper elevation="24" className={classes.paper}>
-          <form className={classes.root}>
+          <Avatar sx={{ m: 1, bgcolor: "green" }}>
+            <AccountBoxIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Inscription
+          </Typography>
+
+          <form className={classes.root} onSubmit={handleSubmit(onFormSubmit)}>
             <TextField
               label="Votre prénom"
               id="outlined-basic"
@@ -115,7 +158,6 @@ const Signup = () => {
               type="email"
               required
             />
-
             <TextField
               label="Votre numéro de téléphone"
               id="outlined-basic"
@@ -123,24 +165,34 @@ const Signup = () => {
               required
               inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
             />
+
             <TextField
               label="Mot de passe"
-              id="outlined-basic"
-              variant="outlined"
+              name="password"
               type="password"
-              value={values}
-              onChange={handleChange}
-              required
+              {...register("password")}
+              className={`form-control ${errors.password ? "is-invalid" : ""}`}
             />
+            {/* <div className={classes.invalidFeedback}>
+              <Alert severity="error">{errors.password?.message}</Alert>
+            </div> */}
+            <div severity="error" className={classes.invalidFeedback}>
+              {errors.password?.message}
+            </div>
             <TextField
               label="Confirmez votre Mot de passe"
-              id="outlined-basic"
-              variant="outlined"
-              type="Password"
-              value={values}
-              onChange={handleChange}
-              required
+              name="passwordConfirm"
+              type="password"
+              {...register("passwordConfirm")}
+              className={`form-control ${
+                errors.passwordConfirm ? "is-invalid" : ""
+              }`}
             />
+            <div className={classes.invalidFeedback}>
+              {errors.passwordConfirm?.message}
+              {/* <Alert severity="error">{errors.passwordConfirm?.message}</Alert> */}
+            </div>
+
             <span className={classes.span}>Votre adresse</span>
             <TextField
               label="Nom et Numéro de rue"
@@ -161,7 +213,6 @@ const Signup = () => {
               variant="outlined"
               required
             />
-
             <Button
               color="success"
               type="submit"
