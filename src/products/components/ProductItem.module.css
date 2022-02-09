@@ -9,7 +9,7 @@ article {
 .productImage {
   width: 100%;
   min-height: 12rem;
-  /* max-height: 12rem; */
+  max-height: 12rem;
   object-fit: cover;
 }
 
