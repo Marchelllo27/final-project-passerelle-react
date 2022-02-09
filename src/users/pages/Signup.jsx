@@ -1,7 +1,15 @@
+import {useState} from "react";
+
 import { TextField, Button, Container,Box ,Paper,Link} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 // import classes from "./Signup.module.css";
  import { spacing } from "@mui/system";
+
+ import validator from "validator";
+
+ 
+
+
 const useStyles = makeStyles({
   root: {
     paddingTop: "5%",
@@ -32,8 +40,8 @@ const useStyles = makeStyles({
     },
   },
   container: {
-    background: "",
     paddingTop: "1rem",
+    paddingBottom:"2rem"
   },
   box: {
     display: "flex",
@@ -56,8 +64,22 @@ const useStyles = makeStyles({
     background: "#f5f5f5",
   },
 });
+const validationPassword = (value) => {
+   let errors = {};
+
+  if (!validator.equals(value.password, value.passwordConfirmation)) {
+    errors.passwordConfirmation = "Passwords must match";
+  }
+};
 const Signup = () => {
   const classes = useStyles();
+
+  const [values,setValues]=useState("");
+  const handleChange=e=>{
+   console.log(`${e.target.values}`);
+   setValues(e.target.values);
+  
+  }
   
   return (
     <Container className={classes.container}>
@@ -73,9 +95,7 @@ const Signup = () => {
         </Link>
 
         <Paper elevation="24" className={classes.paper}>
-          <form
-            className={classes.root} 
-          >
+          <form className={classes.root}>
             <TextField
               label="Votre prénom"
               id="outlined-basic"
@@ -101,12 +121,15 @@ const Signup = () => {
               id="outlined-basic"
               variant="outlined"
               required
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
             />
             <TextField
               label="Mot de passe"
               id="outlined-basic"
               variant="outlined"
               type="password"
+              value={values}
+              onChange={handleChange}
               required
             />
             <TextField
@@ -114,6 +137,8 @@ const Signup = () => {
               id="outlined-basic"
               variant="outlined"
               type="Password"
+              value={values}
+              onChange={handleChange}
               required
             />
             <span className={classes.span}>Votre adresse</span>
@@ -128,6 +153,7 @@ const Signup = () => {
               vid="outlined-basic"
               variant="outlined"
               required
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
             />
             <TextField
               label="Ville"
