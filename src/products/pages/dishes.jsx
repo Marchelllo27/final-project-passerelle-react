@@ -1,6 +1,8 @@
-import ProductsList from "../components/ProductsList";
+import * as React from "react";
 
-const Dishes = props => {
+import ProductsList from "./../components/ProductsList";
+
+const Dishes = (props) => {
   return <ProductsList />;
 };
 

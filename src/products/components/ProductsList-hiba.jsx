@@ -1,24 +1,23 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from "react";
 
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9,10];
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const theme = createTheme();
 
 export default function Album() {
   return (
     <ThemeProvider theme={theme}>
-      
       <div>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
@@ -34,7 +33,6 @@ export default function Album() {
                 >
                   <CardMedia
                     component="img"
-                    
                     image="https://source.unsplash.com/random"
                     alt="random"
                   />
@@ -42,10 +40,7 @@ export default function Album() {
                     <Typography gutterBottom variant="h5" component="h2">
                       Desserts
                     </Typography>
-                    <Typography>
-                      Describe
-                      the content.
-                    </Typography>
+                    <Typography>Describe the content.</Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small">Voir plus</Button>
@@ -57,7 +52,6 @@ export default function Album() {
           </Grid>
         </Container>
       </div>
-     
     </ThemeProvider>
   );
 }
