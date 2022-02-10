@@ -1,10 +1,8 @@
+import * as React from "react";
 
-const Desserts = props => {
-  return <p>Desserts</p>
+import ProductsList from "../components/ProductsList";
+const Desserts = (props) => {
+  return <ProductsList />;
 };
 
 export default Desserts;
-
-
-
-
