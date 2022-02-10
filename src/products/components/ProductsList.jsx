@@ -7,6 +7,8 @@ import ErrorAlert from "../../shared/UIElements/ErrorAlert";
 import sendHttpRequest from "../../utils/sendHttpRequest";
 import ProductFilter from "./ProductFilter"
 
+import * as React from "react";
+
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

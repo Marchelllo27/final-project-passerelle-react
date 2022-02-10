@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import { Paper, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -37,21 +39,15 @@ const useStyles = makeStyles({
   },
 });
 
-const ProductItem = props => {
-  const addProductHandler = event => {
+const ProductItem = (props) => {
+  const addProductHandler = (event) => {
     event.preventDefault();
     console.log("hello there");
   };
 
   const style = useStyles();
 
-  const {
-    _id: id,
-    name,
-    image,
-    weight,
-    price,
-  } = props.product;
+  const { _id: id, name, image, weight, price } = props.product;
 
   return (
     <Grid item xs={12} sm={6} md={3}>
@@ -73,14 +69,14 @@ const ProductItem = props => {
               <div className={classes.productTitle}>
                 <h3>{name}</h3>
               </div>
-                {/* price and add button */}
+              {/* price and add button */}
               <div className={classes.actionControl}>
                 <span className={classes.price}>{price}€</span>
-                  <Tooltip title="Ajouter au panier" arrow>
-                <div className={style.addToBasketBox}>
+                <Tooltip title="Ajouter au panier" arrow>
+                  <div className={style.addToBasketBox}>
                     <ShoppingCartIcon onClick={addProductHandler} />
-                </div>
-                  </Tooltip>
+                  </div>
+                </Tooltip>
               </div>
             </div>
           </article>

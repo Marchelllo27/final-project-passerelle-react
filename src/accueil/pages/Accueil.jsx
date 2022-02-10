@@ -1,4 +1,6 @@
-const Accueil = props => {
+import * as React from "react";
+
+const Accueil = (props) => {
   return <p>ACCEUIL</p>;
 };
 

@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import {
   TextField,
   Button,
@@ -216,7 +218,7 @@ const Signup = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Insciption
+              Inscription
             </Button>
           </form>
         </Paper>
