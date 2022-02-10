@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
 import ProductItem from "./ProductItem";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import classes from "./ProductList.module.css";
+import { Container, Grid } from "@mui/material";
 import SkeletonList from "../../shared/UIElements/SkeletonList";
+import ErrorAlert from "../../shared/UIElements/ErrorAlert";
+import sendHttpRequest from "../../utils/sendHttpRequest";
+import ProductFilter from "./ProductFilter"
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
@@ -13,17 +14,11 @@ const ProductsList = () => {
 
   useEffect(() => {
     setIsLoading(true);
+
     const fetchProducts = async () => {
-      const response = await fetch(
+      const responseData = await sendHttpRequest(
         `${process.env.REACT_APP_URL_API}/products/all-dishes`
       );
-
-      if (!response.ok) {
-        console.log(response);
-        throw new Error("Malheureusement, une erreur s'est produite lors du chargement des données. Esseyez plus tard");
-      }
-
-      const responseData = await response.json();
 
       setProducts(responseData);
       setIsLoading(false);
@@ -37,20 +32,18 @@ const ProductsList = () => {
 
   // SHOW WHEN LOADING FROM DATABASE
   if (isLoading) {
-    return <SkeletonList/>
+    return <SkeletonList />;
   }
-  
+
   // SHOW WHEN ERROR OCCUR
   if (httpError) {
-    return (
-      <section className={classes.httpError}>
-        <p>{httpError}</p>
-      </section>
-    );
+    return <ErrorAlert message={httpError} />;
   }
 
   return (
     <Container>
+      <h1 style={{textAlign: "center"}}>Choisissez les plats selon vos préférences</h1>
+      <ProductFilter/>
       <Grid container marginTop={0} spacing={3}>
         {products.map(product => (
           <ProductItem key={product._id} product={product} />
