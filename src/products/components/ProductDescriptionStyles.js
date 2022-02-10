@@ -1,4 +1,5 @@
-const stylesForDescription = {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
   root: {},
   container: {
     display: "flex",
@@ -116,7 +117,5 @@ const stylesForDescription = {
       background: "green",
     },
   },
-}
+};
 
-
-export default stylesForDescription;

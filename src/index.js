@@ -41,9 +41,9 @@ let theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <StyledEngineProvider injectFirst>
+    {/* <StyledEngineProvider injectFirst> */}
     <App />
-  </StyledEngineProvider>
+  {/* </StyledEngineProvider> */}
   </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
