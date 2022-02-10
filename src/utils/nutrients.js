@@ -1,0 +1,27 @@
+const filterValues = [
+  { name: "Tous les produits", value: "" },
+  { name: "Végétarienne", value: "vegetarian" },
+  { name: "Énergie", value: "energy" },
+  { name: "Calcium", value: "calcium" },
+  { name: "Glucides", value: "carbohydrates" },
+  { name: "Fibre alimentaire", value: "dietaryFiber" },
+  { name: "Fer", value: "iron" },
+  { name: "Lipides", value: "lipids" },
+  { name: "Magnésium", value: "magnesium" },
+  { name: "Protéines", value: "proteins" },
+  { name: "Sucre", value: "sugar" },
+  { name: "Zinc", value: "zinc" },
+  { name: "Vitamine B1", value: "vitaminB1" },
+  { name: "Vitamine B12", value: "vitaminB12" },
+  { name: "Vitamine B2", value: "vitaminB2" },
+  { name: "Vitamine B3", value: "vitaminB3" },
+  { name: "Vitamine B5", value: "vitaminB5" },
+  { name: "Vitamine B6", value: "vitaminB6" },
+  { name: "Vitamine B9", value: "vitaminB9" },
+  { name: "Vitamine C", value: "vitaminC" },
+  { name: "Vitamine D", value: "vitaminD" },
+  { name: "Vitamine E", value: "vitaminE" },
+  { name: "Vitamine K1", value: "vitaminK1" },
+];
+
+export default filterValues;

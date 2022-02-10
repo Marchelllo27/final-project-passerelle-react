@@ -27,8 +27,8 @@ let theme = createTheme({
         input: {
           // Some CSS
           "&:-webkit-autofill": {
-            "-webkit-box-shadow": "0 0 0 100px white inset",
-            "-webkit-text-fill-color": "black",
+            WebkitBoxShadow: "0 0 0 100px white inset",
+            WebkitTextFillColor: "black",
           },
           background: "white",
         },

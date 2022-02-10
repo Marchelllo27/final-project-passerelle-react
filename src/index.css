@@ -8,6 +8,7 @@ html {
   --main-color: #78bf35;
   --main-text-color: #585858;
   --main-body-color: #e9e9e9;
+  color: rgb(182, 182, 182)
 }
 
 body {
@@ -22,6 +23,10 @@ main {
   width: 100%;
   min-height: calc(100vh - 10rem);
   background-color: #e9e9e9;
+}
+
+h1,h2,h3,h4,h5,h5,p,textarea {
+  color: var(--main-text-color)
 }
 
 ul,
