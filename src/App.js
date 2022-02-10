@@ -39,6 +39,7 @@ function App() {
           </Route>
           <Route path="/product/:id" exact>
             <ProductDescription/>
+            {/* <p>hello</p> */}
           </Route>
           <Route path="/basket" exact>
             <Basket />
