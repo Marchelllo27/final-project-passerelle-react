@@ -1,10 +1,10 @@
 import * as React from "react";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import nutrients from "../../utils/nutrients";
+import sendHttpRequest from "../../utils/sendHttpRequest";
 
 const useStyles = makeStyles({
   optionsStyles: {
@@ -23,13 +23,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BasicSelect() {
+ const ProductFilter = (props) => {
   const [filterValue, setFilterValue] = useState("");
 
   const style = useStyles();
 
   const handleChange = (event) => {
     setFilterValue(event.target.value);
+    props.onGetFilterValue(event.target.value)
   };
 
   return (
@@ -59,3 +60,6 @@ export default function BasicSelect() {
     </FormControl>
   );
 }
+
+
+export default ProductFilter;

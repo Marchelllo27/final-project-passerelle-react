@@ -13,6 +13,9 @@ const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState(null);
+  const [selectedFilter, setSelectedFilter] = useState("");
+
+  const getFilterValue = data => setSelectedFilter(data);
 
   useEffect(() => {
     setIsLoading(true);
@@ -32,6 +35,22 @@ const ProductsList = () => {
     });
   }, []);
 
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchProducts = async () => {
+      const responseData = await sendHttpRequest(
+        `${process.env.REACT_APP_URL_API}/products/dishes?filters[]=${selectedFilter}`
+      );
+      setProducts(responseData);
+      setIsLoading(false);
+    };
+
+    fetchProducts().catch(error => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
+  }, [selectedFilter]);
+
   // SHOW WHEN ERROR OCCUR
   if (httpError) {
     return <ErrorAlert message={httpError} />;
@@ -42,7 +61,7 @@ const ProductsList = () => {
       <h1 style={{ textAlign: "center" }}>
         Choisissez les plats selon vos préférences
       </h1>
-      <ProductFilter />
+      <ProductFilter onGetFilterValue={getFilterValue} />
 
       {/* // SHOW WHEN LOADING FROM DATABASE */}
       {isLoading && <SkeletonList />}
