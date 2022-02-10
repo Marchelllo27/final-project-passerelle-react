@@ -2,7 +2,6 @@ import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { makeStyles } from "@mui/styles";
-import { height } from "@mui/system";
 
 const useStyles = makeStyles({
   skeleton: {

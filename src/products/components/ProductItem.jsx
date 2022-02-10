@@ -39,8 +39,8 @@ const useStyles = makeStyles({
   },
 });
 
-const ProductItem = (props) => {
-  const addProductHandler = (event) => {
+const ProductItem = props => {
+  const addProductHandler = event => {
     event.preventDefault();
     console.log("hello there");
   };

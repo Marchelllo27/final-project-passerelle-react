@@ -32,10 +32,6 @@ const ProductsList = () => {
     });
   }, []);
 
-  // SHOW WHEN LOADING FROM DATABASE
-  if (isLoading) {
-    return <SkeletonList />;
-  }
 
   // SHOW WHEN ERROR OCCUR
   if (httpError) {
@@ -46,6 +42,10 @@ const ProductsList = () => {
     <Container>
       <h1 style={{textAlign: "center"}}>Choisissez les plats selon vos préférences</h1>
       <ProductFilter/>
+
+      {/* // SHOW WHEN LOADING FROM DATABASE */}
+      {isLoading && <SkeletonList />}
+
       <Grid container marginTop={0} spacing={3}>
         {products.map(product => (
           <ProductItem key={product._id} product={product} />
