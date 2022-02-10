@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import { useState, useEffect } from "react";
 
 import ProductItem from "./ProductItem";
@@ -5,9 +7,7 @@ import { Container, Grid } from "@mui/material";
 import SkeletonList from "../../shared/UIElements/SkeletonList";
 import ErrorAlert from "../../shared/UIElements/ErrorAlert";
 import sendHttpRequest from "../../utils/sendHttpRequest";
-import ProductFilter from "./ProductFilter"
-
-import * as React from "react";
+import ProductFilter from "./ProductFilter";
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
@@ -32,7 +32,6 @@ const ProductsList = () => {
     });
   }, []);
 
-
   // SHOW WHEN ERROR OCCUR
   if (httpError) {
     return <ErrorAlert message={httpError} />;
@@ -40,8 +39,10 @@ const ProductsList = () => {
 
   return (
     <Container>
-      <h1 style={{textAlign: "center"}}>Choisissez les plats selon vos préférences</h1>
-      <ProductFilter/>
+      <h1 style={{ textAlign: "center" }}>
+        Choisissez les plats selon vos préférences
+      </h1>
+      <ProductFilter />
 
       {/* // SHOW WHEN LOADING FROM DATABASE */}
       {isLoading && <SkeletonList />}
