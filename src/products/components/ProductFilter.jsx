@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import { useState } from "react";
 import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -26,7 +28,7 @@ export default function BasicSelect() {
 
   const style = useStyles();
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setFilterValue(event.target.value);
   };
 

@@ -1,10 +1,12 @@
+import * as React from "react";
+
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 
-const ErrorAlert = props => {
+const ErrorAlert = (props) => {
   return (
-    <Stack sx={{ width: "80%", marginLeft: "auto", marginRight: "auto"}}>
+    <Stack sx={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
       <Alert severity="error">
         <AlertTitle>Error</AlertTitle>
         {props.message}
