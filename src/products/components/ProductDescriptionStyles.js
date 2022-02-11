@@ -1,5 +1,11 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+  // "@media (max-width: 48rem) ":{
+  //   "actionControl": {
+  //     "justifyVontent": "center",
+  //     "gap": "3rem",
+  //   },
+  // },
   root: {},
   container: {
     display: "flex",
@@ -27,7 +33,7 @@ export default {
   //   borderBottomLeftRadius: "10px",
   // },
   image: {
-    width: "80%",
+    width: "50%",
     // minHeight: "12rem",
     // maxHeight: "12rem",
     objectFit: "cover",
@@ -96,10 +102,25 @@ export default {
     background: "white",
   },
   composants: {
+    with:"100%",
     padding: "1rem",
     paddingTop: "2rem",
   },
-  nutrientsList: {
+  ingredientsTypo: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "2rem",
+    
+  },
+p:{
+    fontSize:"2rem",
+  
+    fontWeight:"300"
+  },
+  ingredientsList: {
+    // textDecoration: "wavy underline #78bf35",
+    color: "#78bf35",
     padding: "5px",
     fontSize: "1rem",
   },

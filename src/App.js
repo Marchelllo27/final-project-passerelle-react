@@ -7,7 +7,7 @@ import Login from "./users/pages/Login";
 import Signup from "./users/pages/Signup";
 import MainHeader from "./shared/components/MainHeader";
 import Dishes from "./products/pages/Dishes";
-import Desserts from "./products/pages/Desserts";
+import Desserts from "./products/pages/Desserts1";
 import Drinks from "./products/pages/Drinks";
 import Basket from "./orders/pages/Basket";
 import Profile from "./users/pages/Profile";

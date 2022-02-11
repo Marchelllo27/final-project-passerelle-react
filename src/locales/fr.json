@@ -1,0 +1,32 @@
+{
+  "common": {
+    "no": "Non"
+    
+  },
+  "nutrients": {
+    "nutrient.name":"nom du nutrient",
+    "energy" :"Énergie" ,
+    "calcium":"Calcium"  ,
+    "carbohydrates" : "Glucides"  ,
+     "dietaryFiber" :"Fibre alimentaire",
+    "iron" :"Fer"  ,
+     "lipids":"Lipides" ,
+     "magnesium" :"Magnésium" ,
+    "proteins": "Protéines" ,
+     "sugar":"Sucre" ,
+     "zinc" :"Zinc",
+     "vitaminB1" :"Vitamine B1",
+    "vitaminB12":"Vitamine B12"  ,
+     "vitaminB2":"Vitamine B2" ,
+     "vitaminB3":"Vitamine B3" ,
+     "vitaminB5" :"Vitamine B5",
+     "vitaminB6":"Vitamine B6" ,
+    "vitaminB9": "Vitamine B9"  ,
+    "vitaminC":"Vitamine C"  ,
+    "vitaminD":"Vitamine D"  ,
+    "vitaminE":"Vitamine E"  ,
+     "vitaminK1" :"Vitamine K1"
+  }
+}
+
+  
