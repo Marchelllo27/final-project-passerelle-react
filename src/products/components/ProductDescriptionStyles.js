@@ -13,6 +13,10 @@ export default {
     justifyContente: "Center",
     paddingTop: "2rem",
   },
+  backButton:{
+    paddingLeft :"2rem",
+    paddingTop:"-20px",
+  },
 
   card: {
     display: "flex",

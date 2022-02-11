@@ -14,7 +14,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 //Components
 // import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
@@ -66,22 +67,23 @@ export default function ProductDescription(props) {
 //Translation
 const { t } = useTranslation("nutrients");
 
-useEffect(()=>{
-
-  const fetchProduct = async()=>{
+useEffect(() => {
+  const fetchProduct = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_URL_API}/products/${props.productInUrl}/${id}`
     );
-    if(!response.ok){
-      throw new Error("Error !")
+    if (!response.ok) {
+      throw new Error("Error !");
     }
-     const resData = await response.json();
-     setProductData(resData);
-     
+    const resData = await response.json();
+    setProductData(resData);
+
     //  console.log(productData);
-    }
-    fetchProduct().catch((err)=>{ return sethttpError(err.message)});
-  },[id])
+  };
+  fetchProduct().catch((err) => {
+    return sethttpError(err.message);
+  });
+}, [id, props.productInUrl]);
   
   //state for productData changes
   useEffect(()=>{
@@ -98,13 +100,16 @@ useEffect(()=>{
 
   return (
     <div>
-      {/* <Button > */}
-        <Link to={`/${props.imgUrl}`} 
-        // underline="hover"
+      <Button 
+      className={classes.backButton}
+      startIcon={<ArrowBackIosIcon color="action" />}>
+        <Link
+          to={`/${props.imgUrl}`}
+          // underline="hover"
         >
           Retour à la page précédente
         </Link>
-      {/* </Button> */}
+      </Button>
       <Container
         // className={classes.container}
         fixed
