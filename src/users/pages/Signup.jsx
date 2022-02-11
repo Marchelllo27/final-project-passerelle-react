@@ -7,7 +7,6 @@ import {
   Box,
   Paper,
   Link,
-  Alert,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 // import classes from "./Signup.module.css";
@@ -108,7 +107,7 @@ const Signup = () => {
     resolver: yupResolver(formSchema),
   };
 
-  const { register, handleSubmit, reset, formState } = useForm(validationOpt);
+  const { register, handleSubmit, formState } = useForm(validationOpt);
 
   const { errors } = formState;
 
