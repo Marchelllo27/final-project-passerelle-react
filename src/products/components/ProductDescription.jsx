@@ -21,7 +21,7 @@ import Badge from "@mui/material/Badge";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-//Accordion 
+//Accordion
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -34,14 +34,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-
-
-
-
 const useStyles = makeStyles(stylesDescription);
-export default function ProductDescription() {
+export default function ProductDescription(props) {
   const { id } = useParams();
-  console.log(id)
 
   //Styles
   const classes = useStyles();
@@ -51,37 +46,38 @@ export default function ProductDescription() {
   const [productData, setProductData] = useState(null);
   const [httpError, sethttpError] = useState(null);
 
-//Accordion
+  //Accordion
 
   const [expanded, setExpanded] = useState(false);
 
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-  }
+  };
 
-useEffect(()=>{
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_URL_API}/products/${props.productInUrl}/${id}`
+      );
+      if (!response.ok) {
+        throw new Error("Error !");
+      }
+      const resData = await response.json();
+      setProductData(resData);
 
-  const fetchProduct = async()=>{
-    const response = await fetch(`${process.env.REACT_APP_URL_API}/products/dish/${id}`);
-    if(!response.ok){
-      throw new Error("Error !")
+      //  console.log(productData);
+    };
+    fetchProduct().catch(err => {
+      return sethttpError(err.message);
+    });
+  }, [id, props.productInUrl]);
+
+  useEffect(() => {
+    if (productData) {
+      // console.log(productData.nutrients);
+      // console.log(productData.ingredients);
     }
-     const resData = await response.json();
-     setProductData(resData);
-     
-    //  console.log(productData);
-    }
-    fetchProduct().catch((err)=>{ return sethttpError(err.message)});
-  },[id])
-  
-  useEffect(()=>{
-    if(productData){
-      
-      console.log(productData.nutrients);
-      console.log(productData.ingredients);
-  }
-},[productData]);
-
+  }, [productData]);
 
   // useEffect(() => {
   //   const fetchproductData = async () => {
@@ -97,7 +93,6 @@ useEffect(()=>{
   //     console.log(responseData)
   //   };
 
-      
   //     fetchproductData().catch(error => {
   //       console.log(error)
   //       sethttpError(error.message)
@@ -105,7 +100,7 @@ useEffect(()=>{
 
   // }, [id]);
 
-  console.log(productData)
+  // console.log(productData);
 
   return (
     // <div>
@@ -119,7 +114,7 @@ useEffect(()=>{
           {/* > */}
           <img
             className={classes.image}
-            src={`${process.env.REACT_APP_URL_API}/uploads/images/dishes/${productData.image}`}
+            src={`${process.env.REACT_APP_URL_API}/uploads/images/${props.imgUrl}/${productData.image}`}
             alt={productData.name}
           />
           {/* </Paper> */}
@@ -179,9 +174,9 @@ useEffect(()=>{
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {productData.nutrients.map((nutrient) => (
+                          {productData.nutrients.map(nutrient => (
                             <TableRow
-                              kkey={nutrient._id}
+                              key={nutrient._id}
                               sx={{
                                 "&:last-child td, &:last-child th": {
                                   border: 0,

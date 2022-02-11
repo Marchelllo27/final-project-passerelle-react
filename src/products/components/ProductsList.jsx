@@ -14,15 +14,11 @@ const ProductsList = props => {
   const [httpError, setHttpError] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState("");
 
-  console.log(selectedFilter);
-
   const getFilterValue = data => {
-    console.log(data)
     setSelectedFilter(data);
   };
 
   useEffect(() => {
-    console.log("in use effect")
     setIsLoading(true);
 
     const fetchProducts = async () => {
@@ -42,7 +38,6 @@ const ProductsList = props => {
 
   useEffect(() => {
     setHttpError(false);
-    console.log("in second useEffect")
     setIsLoading(true);
     const fetchProducts = async () => {
       const responseData = await sendHttpRequest(
@@ -55,6 +50,7 @@ const ProductsList = props => {
     fetchProducts().catch(error => {
       setIsLoading(false);
       setHttpError(error.message);
+      setProducts([])
     });
   }, [selectedFilter, props.forWichProduct]);
 

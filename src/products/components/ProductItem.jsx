@@ -42,7 +42,6 @@ const useStyles = makeStyles({
 const ProductItem = props => {
   const addProductHandler = event => {
     event.preventDefault();
-    console.log("hello there");
   };
 
   const style = useStyles();
@@ -51,7 +50,7 @@ const ProductItem = props => {
 
   return (
     <Grid item xs={12} sm={6} md={3}>
-      <Link to={`/product/${id}`}>
+      <Link to={`/${props.forWichProduct}/${id}`}>
         <Paper
           className={style.productItem}
           sx={{ overflow: "hidden" }}

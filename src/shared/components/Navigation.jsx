@@ -4,13 +4,12 @@ import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
-import LocalBarIcon from '@mui/icons-material/LocalBar';
-import CakeIcon from '@mui/icons-material/Cake';
-import {NavLink } from "react-router-dom";
+import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
+import LocalBarIcon from "@mui/icons-material/LocalBar";
+import CakeIcon from "@mui/icons-material/Cake";
+import { NavLink } from "react-router-dom";
 
 import classes from "./Navigation.module.css";
-
 
 const useStyles = makeStyles({
   listRoot: {
@@ -18,21 +17,31 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
   },
-  navButtons: {
+  productLinks: {
     color: "#585858",
     fontWeight: "bold",
     width: "100%",
     "&:hover": {
-      color: "#78BF35",
+      color: "#78bf35",
     },
     "&:active": {
-      color: "#78BF35",
+      color: "#78bf35",
     },
     "& li": {
       justifyContent: "space-between",
       fontWeight: "bold",
     },
   },
+  navLinks: {
+    fontWeight: "bold",
+    color: "#585858",
+    "&:hover": {
+      color: "#78bf35",
+    },
+    "&:active": {
+      color: "#78bf35",
+    },
+  }
 });
 
 const Navigation = props => {
@@ -59,7 +68,8 @@ const Navigation = props => {
             onClick={handleClick}
             size="small"
             endIcon={<ArrowDropDownIcon />}
-            className={style.navButtons}
+            color="inherit"
+            className={style.navLinks}
           >
             Nos produits
           </Button>
@@ -73,31 +83,62 @@ const Navigation = props => {
               className: style.listRoot,
             }}
           >
-            <NavLink className={style.navButtons} to="/dishes">
-              <MenuItem onClick={handleClose}>Plats<DinnerDiningIcon/></MenuItem>
+            <NavLink
+              activeClassName="active-link"
+              className={style.productLinks}
+              to="/dishes"
+            >
+              <MenuItem onClick={handleClose}>
+                Plats
+                <DinnerDiningIcon />
+              </MenuItem>
             </NavLink>
-            <NavLink className={style.navButtons} to="/drinks">
-              <MenuItem onClick={handleClose}>Boissons<LocalBarIcon/></MenuItem>
+            <NavLink
+              activeClassName="active-link"
+              className={style.productLinks}
+              to="/drinks"
+            >
+              <MenuItem onClick={handleClose}>
+                Boissons
+                <LocalBarIcon />
+              </MenuItem>
             </NavLink>
 
-            <NavLink className={style.navButtons} to="/desserts">
-              <MenuItem onClick={handleClose}>Desserts<CakeIcon/></MenuItem>
+            <NavLink
+              activeClassName="active-link"
+              className={style.productLinks}
+              to="/desserts"
+            >
+              <MenuItem onClick={handleClose}>
+                Desserts
+                <CakeIcon />
+              </MenuItem>
             </NavLink>
           </Menu>
         </li>
         <li>
-          <NavLink to="/signup">
-            <Button className={style.navButtons} size="small">
-              Inscription
-            </Button>
-          </NavLink>
+          <Button
+            to="/signup"
+            color="inherit"
+            activeClassName="active-link"
+            className={style.navLinks}
+            size="small"
+            component={NavLink}
+          >
+            Inscription
+          </Button>
         </li>
         <li>
-          <NavLink to="/login">
-            <Button className={style.navButtons} size="small">
-              Connexion
-            </Button>
-          </NavLink>
+          <Button
+            to="/login"
+            color="inherit"
+            activeClassName="active-link"
+            className={style.navLinks}
+            size="small"
+            component={NavLink}
+          >
+            Connexion
+          </Button>
         </li>
       </ul>
     </nav>

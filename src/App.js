@@ -39,8 +39,14 @@ function App() {
           <Route path="/drinks" exact>
             <Drinks />
           </Route>
-          <Route path="/product/:id" exact>
-            <ProductDescription />
+          <Route path="/dishes/:id" exact>
+            <ProductDescription productInUrl="dish" imgUrl="dishes"/>
+          </Route>
+          <Route path="/desserts/:id" exact>
+            <ProductDescription productInUrl="dessert" imgUrl="desserts"/>
+          </Route>
+          <Route path="/drinks/:id" exact>
+            <ProductDescription productInUrl="drink" imgUrl="drinks"/>
           </Route>
           <Route path="/basket" exact>
             <Basket />
