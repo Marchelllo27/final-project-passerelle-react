@@ -1,18 +1,20 @@
 import * as React from "react";
-
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
+// import pages
 import Accueil from "./accueil/pages/Accueil";
 import Login from "./users/pages/Login";
 import Signup from "./users/pages/Signup";
 import MainHeader from "./shared/components/MainHeader";
 import Dishes from "./products/pages/Dishes";
-import Desserts from "./products/pages/Desserts";
+import Desserts from "./products/pages/Desserts1";
 import Drinks from "./products/pages/Drinks";
 import Basket from "./orders/pages/Basket";
 import Profile from "./users/pages/Profile";
+// import components
 import Footer from "./shared/components/Footer";
-import ProductDescription from "./products/components/ProductDescription"
+import ProductDescription from "./products/components/ProductDescription";
+
 function App() {
   return (
     <BrowserRouter>
@@ -37,9 +39,14 @@ function App() {
           <Route path="/drinks" exact>
             <Drinks />
           </Route>
-          <Route path="/product/:id" exact>
-            <ProductDescription/>
-            {/* <p>hello</p> */}
+          <Route path="/dishes/:id" exact>
+            <ProductDescription productInUrl="dish" imgUrl="dishes"/>
+          </Route>
+          <Route path="/desserts/:id" exact>
+            <ProductDescription productInUrl="dessert" imgUrl="desserts"/>
+          </Route>
+          <Route path="/drinks/:id" exact>
+            <ProductDescription productInUrl="drink" imgUrl="drinks"/>
           </Route>
           <Route path="/basket" exact>
             <Basket />

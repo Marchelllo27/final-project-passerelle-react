@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { StyledEngineProvider } from '@mui/material/styles';
+import { StyledEngineProvider } from '@mui/material/styles';
 
 
 import './index.css';
@@ -44,9 +44,9 @@ ReactDOM.render(
   <React.StrictMode>
     <I18nextProvider i18n={i18n}>
       <ThemeProvider theme={theme}>
-        {/* <StyledEngineProvider injectFirst> */}
+        <StyledEngineProvider injectFirst>
         <App />
-        {/* </StyledEngineProvider> */}
+        </StyledEngineProvider>
       </ThemeProvider>
     </I18nextProvider>
   </React.StrictMode>,

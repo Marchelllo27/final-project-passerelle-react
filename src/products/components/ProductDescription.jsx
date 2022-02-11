@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 //Theme & Style
 import { makeStyles } from "@mui/styles";
@@ -13,8 +14,9 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 //Components
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -22,7 +24,7 @@ import Badge from "@mui/material/Badge";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-//Accordion 
+//Accordion
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -41,9 +43,8 @@ import { useTranslation } from "react-i18next";
 
 
 const useStyles = makeStyles(stylesDescription);
-export default function ProductDescription() {
+export default function ProductDescription(props) {
   const { id } = useParams();
-  console.log(id)
 
   //Styles
   const classes = useStyles();
@@ -54,11 +55,11 @@ export default function ProductDescription() {
   const [ingredient, setIngredient] = useState(null);
   const [httpError, sethttpError] = useState(null);
 
-//Accordion
+  //Accordion
 
   const [expanded, setExpanded] = useState(false);
 
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   }
 
@@ -68,7 +69,9 @@ const { t } = useTranslation("nutrients");
 useEffect(()=>{
 
   const fetchProduct = async()=>{
-    const response = await fetch(`${process.env.REACT_APP_URL_API}/products/dish/${id}`);
+    const response = await fetch(
+      `${process.env.REACT_APP_URL_API}/products/${props.productInUrl}/${id}`
+    );
     if(!response.ok){
       throw new Error("Error !")
     }
@@ -91,15 +94,17 @@ useEffect(()=>{
 
 
 
-  console.log(productData)
+  // console.log(productData);
 
   return (
     <div>
-      <Button>
-        {/* <Link to={`/${props.imgUrl}`} underline="hover">
+      {/* <Button > */}
+        <Link to={`/${props.imgUrl}`} 
+        // underline="hover"
+        >
           Retour à la page précédente
-        </Link> */}
-      </Button>
+        </Link>
+      {/* </Button> */}
       <Container
         // className={classes.container}
         fixed
@@ -112,7 +117,7 @@ useEffect(()=>{
             {/* > */}
             <img
               className={classes.image}
-              src={`${process.env.REACT_APP_URL_API}/uploads/images/dishes/${productData.image}`}
+              src={`${process.env.REACT_APP_URL_API}/uploads/images/${props.imgUrl}/${productData.image}`}
               alt={productData.name}
             />
             {/* </Paper> */}
@@ -131,7 +136,7 @@ useEffect(()=>{
                 <div className={classes.composants}>
                   {/* *******Ingredients***** */}
                   <Typography
-                  className={classes.ingredientsTypo}
+                    className={classes.ingredientsTypo}
                     variant="body2"
                     component="div"
                     color="text.secondary"

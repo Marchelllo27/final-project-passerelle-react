@@ -1,5 +1,5 @@
 const filterValues = [
-  { name: "Tous les produits", value: "" },
+  { name: "Tous les produits", value: " " },
   { name: "Végétarienne", value: "vegetarian" },
   { name: "Énergie", value: "energy" },
   { name: "Calcium", value: "calcium" },
