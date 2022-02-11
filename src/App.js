@@ -1,7 +1,7 @@
 import * as React from "react";
-
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
+// import pages
 import Accueil from "./accueil/pages/Accueil";
 import Login from "./users/pages/Login";
 import Signup from "./users/pages/Signup";
@@ -11,8 +11,10 @@ import Desserts from "./products/pages/Desserts";
 import Drinks from "./products/pages/Drinks";
 import Basket from "./orders/pages/Basket";
 import Profile from "./users/pages/Profile";
+// import components
 import Footer from "./shared/components/Footer";
-import ProductDescription from "./products/components/ProductDescription"
+import ProductDescription from "./products/components/ProductDescription";
+
 function App() {
   return (
     <BrowserRouter>
@@ -38,8 +40,7 @@ function App() {
             <Drinks />
           </Route>
           <Route path="/product/:id" exact>
-            <ProductDescription/>
-            {/* <p>hello</p> */}
+            <ProductDescription />
           </Route>
           <Route path="/basket" exact>
             <Basket />

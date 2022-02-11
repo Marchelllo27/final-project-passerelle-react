@@ -60,7 +60,7 @@ const ProductItem = props => {
           <article>
             <div className={classes.gram}>{`${weight}g`}</div>
             <img
-              src={`https://final-project-la-passerelle.herokuapp.com/uploads/images/dishes/${image}`}
+              src={`https://final-project-la-passerelle.herokuapp.com/uploads/images/${props.forWichProduct}/${image}`}
               alt={name}
               className={classes.productImage}
             />

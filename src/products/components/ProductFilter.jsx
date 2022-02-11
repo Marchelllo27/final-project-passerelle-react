@@ -27,6 +27,13 @@ const ProductFilter = props => {
 
   const style = useStyles();
 
+  let nutrientsForFilter = nutrients;
+  if (props.category === "desserts" || props.category === "drinks") {
+    nutrientsForFilter = nutrients.filter(nutrient => {
+      return nutrient.name !== "Végétarienne" && nutrient.name !== "Calcium";
+    });
+  }
+
   const handleChange = event => {
     setFilterValue(event.target.value);
     props.onGetFilterValue(event.target.value);
@@ -50,7 +57,7 @@ const ProductFilter = props => {
         onChange={handleChange}
         MenuProps={{ className: style.optionsStyles }}
       >
-        {nutrients.map((item, index) => (
+        {nutrientsForFilter.map((item, index) => (
           <MenuItem key={index} value={item.value}>
             {item.name}
           </MenuItem>

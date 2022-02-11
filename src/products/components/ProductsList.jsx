@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { useState, useEffect } from "react";
 
 import ProductItem from "./ProductItem";
@@ -9,20 +8,26 @@ import ErrorAlert from "../../shared/UIElements/ErrorAlert";
 import sendHttpRequest from "../../utils/sendHttpRequest";
 import ProductFilter from "./ProductFilter";
 
-const ProductsList = () => {
+const ProductsList = props => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState("");
 
-  const getFilterValue = data => setSelectedFilter(data);
+  console.log(selectedFilter);
+
+  const getFilterValue = data => {
+    console.log(data)
+    setSelectedFilter(data);
+  };
 
   useEffect(() => {
+    console.log("in use effect")
     setIsLoading(true);
 
     const fetchProducts = async () => {
       const responseData = await sendHttpRequest(
-        `${process.env.REACT_APP_URL_API}/products/all-dishes`
+        `${process.env.REACT_APP_URL_API}/products/${props.product}`
       );
 
       setProducts(responseData);
@@ -33,13 +38,15 @@ const ProductsList = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
-  }, []);
+  }, [props.product]);
 
   useEffect(() => {
+    setHttpError(false);
+    console.log("in second useEffect")
     setIsLoading(true);
     const fetchProducts = async () => {
       const responseData = await sendHttpRequest(
-        `${process.env.REACT_APP_URL_API}/products/dishes?filters[]=${selectedFilter}`
+        `${process.env.REACT_APP_URL_API}/products/${props.forWichProduct}?filters[]=${selectedFilter}`
       );
       setProducts(responseData);
       setIsLoading(false);
@@ -49,26 +56,24 @@ const ProductsList = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
-  }, [selectedFilter]);
-
-  // SHOW WHEN ERROR OCCUR
-  if (httpError) {
-    return <ErrorAlert message={httpError} />;
-  }
+  }, [selectedFilter, props.forWichProduct]);
 
   return (
     <Container>
-      <h1 style={{ textAlign: "center" }}>
-        Choisissez les plats selon vos préférences
-      </h1>
-      <ProductFilter onGetFilterValue={getFilterValue} />
+      <ProductFilter onGetFilterValue={getFilterValue} category={props.forWichProduct}/>
 
       {/* // SHOW WHEN LOADING FROM DATABASE */}
       {isLoading && <SkeletonList />}
+      {/* // SHOW WHEN ERROR OCCUR */}
+      {httpError && <ErrorAlert message={httpError}/>}
 
       <Grid container marginTop={0} spacing={3}>
         {products.map(product => (
-          <ProductItem key={product._id} product={product} />
+          <ProductItem
+            key={product._id}
+            product={product}
+            forWichProduct={props.forWichProduct}
+          />
         ))}
       </Grid>
     </Container>

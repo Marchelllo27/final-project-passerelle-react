@@ -33,7 +33,7 @@ export default function ProductDescription() {
   const classes = useStyles();
 
   //Add & substract
-  const [itemCount, setItemCount] = React.useState(1);
+  const [itemCount, setItemCount] = useState(1);
   const [productData, setProductData] = useState(null);
   const [httpError, sethttpError] = useState(null);
 
