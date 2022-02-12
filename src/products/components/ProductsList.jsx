@@ -50,18 +50,21 @@ const ProductsList = props => {
     fetchProducts().catch(error => {
       setIsLoading(false);
       setHttpError(error.message);
-      setProducts([])
+      setProducts([]);
     });
   }, [selectedFilter, props.forWichProduct]);
 
   return (
     <Container>
-      <ProductFilter onGetFilterValue={getFilterValue} category={props.forWichProduct}/>
+      <ProductFilter
+        onGetFilterValue={getFilterValue}
+        category={props.forWichProduct}
+      />
 
       {/* // SHOW WHEN LOADING FROM DATABASE */}
       {isLoading && <SkeletonList />}
       {/* // SHOW WHEN ERROR OCCUR */}
-      {httpError && <ErrorAlert message={httpError}/>}
+      {httpError && <ErrorAlert message={httpError} />}
 
       <Grid container marginTop={0} spacing={3}>
         {products.map(product => (
