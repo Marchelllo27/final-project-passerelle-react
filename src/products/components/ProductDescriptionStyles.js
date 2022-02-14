@@ -13,9 +13,9 @@ export default {
     justifyContente: "Center",
     paddingTop: "2rem",
   },
-  backButton:{
-    paddingLeft :"2rem",
-    paddingTop:"-20px",
+  backButton: {
+    paddingLeft: "2rem",
+    paddingTop: "-20px",
   },
 
   card: {
@@ -37,7 +37,7 @@ export default {
   //   borderBottomLeftRadius: "10px",
   // },
   image: {
-    width: "50%",
+    width: "30%",
     // minHeight: "12rem",
     // maxHeight: "12rem",
     objectFit: "cover",
@@ -49,7 +49,7 @@ export default {
     outline: "6px solid transparent",
     outlineOffset: "-4px",
     "&:hover": {
-      transform: "scale(1.1)",
+      transform: "scale(1.01)",
       outline: "3px solid #78bf35",
     },
   },
@@ -82,10 +82,12 @@ export default {
   cardContent: {
     fontSize: "1rem",
     // height: "300px",
-    padding: "10px",
+    padding: "2rem",
+
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
+    alignItems: "center",
   },
   title: {
     fontSize: "2rem ! important",
@@ -96,6 +98,7 @@ export default {
   },
   description: {
     fontSize: "1rem ! important",
+    margin: "1rem",
   },
   cardActions: {
     paddingTop: "6rem",
@@ -106,7 +109,7 @@ export default {
     background: "white",
   },
   composants: {
-    with:"100%",
+    with: "100%",
     padding: "1rem",
     paddingTop: "2rem",
   },
@@ -115,12 +118,12 @@ export default {
     flexDirection: "column",
     alignItems: "center",
     padding: "2rem",
-    
+    fontSize: "1rem",
   },
-p:{
-    fontSize:"2rem",
-  
-    fontWeight:"300"
+  p: {
+    fontSize: "2rem",
+
+    fontWeight: "300",
   },
   ingredientsList: {
     // textDecoration: "wavy underline #78bf35",
@@ -132,7 +135,7 @@ p:{
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-
+    paddingTop: "1rem",
     color: "#78bf35",
     fontWeight: "bold",
     fontSize: "1rem",

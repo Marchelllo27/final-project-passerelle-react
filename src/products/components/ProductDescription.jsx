@@ -117,15 +117,15 @@ useEffect(() => {
         {httpError && <p>Error</p>}
         {productData && (
           <Card sx={{ maxWidth: 1200 }} className={classes.card}>
-            {/* <Paper  */}
-            {/* className={classes.paperImage} */}
-            {/* > */}
+            {/* <Paper  
+             className={classes.paperImage} 
+             > */}
             <img
               className={classes.image}
               src={`${process.env.REACT_APP_URL_API}/uploads/images/${props.imgUrl}/${productData.image}`}
               alt={productData.name}
             />
-            {/* </Paper> */}
+              {/* </Paper>   */}
             <Paper className={classes.main} elevation={20}>
               <CardContent className={classes.cardContent}>
                 <Typography component="div" className={classes.title}>
