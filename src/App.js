@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useContext} from "react";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 // import pages
@@ -16,17 +16,12 @@ import Footer from "./shared/components/Footer";
 import ProductDescription from "./products/components/ProductDescription";
 // import context
 import AuthContext from "./shared/context/auth-context";
+import { AuthContextProvider } from "./shared/context/auth-context";
+
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const login = useCallback(() => {
-    setIsLoggedIn(true);
-  }, []);
-
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-  }, []);
+  const authCtx = useContext(AuthContext);
+  let isLoggedIn = authCtx.isLoggedIn;
 
   let routes;
   if (isLoggedIn) {
@@ -102,11 +97,11 @@ function App() {
 
   return (
     <BrowserRouter>
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContextProvider>
         <MainHeader />
         <main>{routes}</main>
         <Footer />
-    </AuthContext.Provider>
+    </AuthContextProvider>
       </BrowserRouter>
   );
 }
