@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 });
 
 const MainHeader = props => {
-  const AuthCtx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
   const style = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -52,19 +52,42 @@ const MainHeader = props => {
 
   return (
     <header className={classes.mainHeader}>
+      {authCtx.isAdmin && authCtx.isLoggedIn && (
+        <p
+          style={{
+            color: "red",
+            position: "absolute",
+            left: "7rem",
+            top: "2.8rem",
+          }}
+        >
+          ADMIN
+        </p>
+      )}
+
+      {authCtx.isLoggedIn && !authCtx.isAdmin && <p
+          style={{
+            color: "red",
+            position: "absolute",
+            left: "7rem",
+            top: "2.8rem",
+          }}
+        >
+          USER
+        </p>}
+
       <Link className={classes.logoBox} to="/">
         <img src="/logo.png" alt="Eat Smart logo" />
       </Link>
       <Navigation />
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        {/* , height: "5rem" */}
         <Tooltip title="Panier" arrow>
           <Link to="/basket">
             <Basket />
           </Link>
         </Tooltip>
 
-        {AuthCtx.isLoggedIn && (
+        {authCtx.isLoggedIn && (
           <>
             <Tooltip title="Espace personnel" arrow>
               <AccountCircleIcon

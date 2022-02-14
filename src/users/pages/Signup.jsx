@@ -128,7 +128,7 @@ const Signup = () => {
           <span className={classes.span}> Connectez vous</span>
         </Link>
 
-        <Paper elevation="24" className={classes.paper}>
+        <Paper elevation={24} className={classes.paper}>
           <Avatar sx={{ m: 1, bgcolor: "green" }}>
             <AccountBoxIcon />
           </Avatar>
@@ -139,26 +139,22 @@ const Signup = () => {
           <form className={classes.root} onSubmit={handleSubmit(onFormSubmit)}>
             <TextField
               label="Votre prénom"
-              id="outlined-basic"
               variant="outlined"
               required
             />
             <TextField
               label="Votre nom"
-              id="outlined-basic"
               variant="outlined"
               required
             />
             <TextField
               label="Votre email"
-              id="outlined-basic"
               variant="outlined"
               type="email"
               required
             />
             <TextField
               label="Votre numéro de téléphone"
-              id="outlined-basic"
               variant="outlined"
               required
               inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}

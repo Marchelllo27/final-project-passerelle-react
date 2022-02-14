@@ -1,18 +1,18 @@
-import * as React from "react";
-import { useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-//import CssBaseline from '@mui/material/CssBaseline';
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-//import Card from "@mui/material/Card";
+import React, { useState, useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
-import Paper from "@mui/material/Paper";
+// MUI IMPORT
+import {
+  Avatar,
+  Button,
+  TextField,
+  Link,
+  Paper,
+  Typography,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
   FormControl,
   InputLabel,
@@ -20,218 +20,155 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
-import { spacing } from "@mui/system";
+import sendHttpRequest from "../../utils/sendHttpRequest";
+import loginStyles from "./LoginStyles";
+import AuthContext from "../../shared/context/auth-context";
 
-const useStyles = makeStyles({
-  root: {
-    //Css textField
-    "& .MuiTextField-root": {
-      margin: spacing(1),
-      width: "400px",
-      marginTop: "10%",
-    },
-    // "& .MuiButtonBase-root": {
-    //   margin: spacing(1),
-    // },
-
-    //text in green when click to write
-    "& label.Mui-focused": {
-      color: "green",
-    },
-    // "& .MuiInput-underline:after": {
-    //   borderBottomColor: "green",
-    // },
-    "& .MuiOutlinedInput-root": {
-      //border Green
-      "& fieldset": {
-        borderColor: "green",
-      },
-
-      //border Green when mouse in the box
-      "&:hover fieldset": {
-        borderColor: "green",
-      },
-      //border Green when mouse out the box
-
-      "&.Mui-focused fieldset": {
-        borderColor: "green",
-      },
-    },
-  },
-  container: {
-    padding: "5%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  liItem: {
-    color: "white",
-    fontWeight: "bold",
-    width: "100%",
-    justifyContent: "center",
-    transition: "0.5",
-  },
-  paper: {
-    //marginTop: "50%",
-    borderRadius: "15px",
-    padding: "1.5rem",
-    background: "#f5f5f5",
-    width: "500px",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  grid: {
-    justifyContent: "center",
-  },
-  link: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    fontSize: "1rem",
-    color: "black",
-  },
-  span: {
-    color: "green",
-    fontWeight: "bold",
-  },
-  // inputLabel: {},
-});
+const useStyles = makeStyles(loginStyles);
 
 export default function SignIn() {
-  const theme = createTheme();
   const classes = useStyles();
+  const history = useHistory();
 
-  const [values, setValues] = useState("");
+  const authContext = useContext(AuthContext);
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    setShowPassword(prevState => !prevState);
   };
 
-  const handleMouseDownPassword = (event) => {
+  const changePasswordHandler = event => {
+    setPassword(event.target.value);
+  };
+
+  const changeEmailHandler = event => {
+    setEmail(event.target.value);
+  };
+
+  const onSubmitHandler = async event => {
     event.preventDefault();
+
+    try {
+      const response = await sendHttpRequest(
+        `${process.env.REACT_APP_URL_API}/login`,
+        "POST",
+        JSON.stringify({ email, password }),
+        { "Content-Type": "application/json" }
+      );
+
+      authContext.login(response.token);
+      // if (response.role === "ADMIN") {
+      //   authContext.setAdmin();
+      // }
+
+      setEmail("");
+      setPassword("");
+      console.log("logged in");
+      // history.replace('/');
+    } catch (error) {
+      setError("Login ou mot de passe invalide, veuillez réessayer");
+    }
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   // eslint-disable-next-line no-console
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
+  // useEffect(() => {
+  //   console.log(authContext.isLoggedIn)
+  // }, [authContext.isLoggedIn])
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="div" maxWidth="xs" className={classes.container}>
-        <Paper
-          elevation="24"
-          className={classes.paper}
-          sx={{
-            // marginTop: 50,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+    <Paper
+      elevation={24}
+      className={classes.paper}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        maxWidth: "600px",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+    >
+      <Avatar sx={{ m: 1, bgcolor: "green" }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Connexion
+      </Typography>
+      <form className={classes.form} onSubmit={onSubmitHandler}>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Votre email "
+          name="email"
+          autoComplete="email"
+          autoFocus
+          sx={{ marginBottom: "1rem" }}
+          value={email}
+          onChange={changeEmailHandler}
+        />
+        <FormControl
+          sx={{ width: "400px" }}
+          variant="outlined"
+          id="validation-outlined-input"
         >
-          <Avatar sx={{ m: 1, bgcolor: "green" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Connexion
-          </Typography>
-          <Box
-            className={classes.root}
-            // component="form"
-            // onSubmit={handleSubmit}
-            // noValidate
-            sx={{ mt: 1 }}
+          <InputLabel className={classes.inputLabel}>Mot de passe</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            required
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={changePasswordHandler}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Mot de passe"
+          />
+        </FormControl>
+
+        {/* IF ERROR WHILE FETCH CREDENTIALS */}
+        {error && (
+          <small
+            style={{ textAlign: "center", color: "red", marginTop: "1rem" }}
           >
-            <Box className={classes.form}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Votre email "
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              {/* sx={{ width: "400px" }} variant="outlined" */}
-              <FormControl
-                sx={{ width: "400px" }}
-                variant="outlined"
-                id="validation-outlined-input"
-              >
-                <InputLabel className={classes.inputLabel}>
-                  Mot de passe
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleChange("password")}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  // with label"Mot de passe" take the necessary place
-                  label="Mot de passe"
-                />
-              </FormControl>
-              <Button
-                className={classes.liItem}
-                type="submit"
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                color="success"
-              >
-                Connexion
-              </Button>
-              <Grid container className={classes.grid}>
-                <Grid item>
-                  <Link
-                    href="/signup"
-                    variant="body2"
-                    underline="hover"
-                    className={classes.link}
-                  >
-                    Vous n'avez pas encore de compte ?
-                    <span className={classes.span}> Inscription</span>
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-        </Paper>
-      </Container>
-    </ThemeProvider>
+            {error}
+          </small>
+        )}
+
+        <Button
+          className={classes.liItem}
+          type="submit"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          color="success"
+        >
+          Connexion
+        </Button>
+        </form>
+        <Link
+          href="/signup"
+          variant="body2"
+          underline="hover"
+          className={classes.link}
+        >
+          Vous n'avez pas encore de compte ?
+          <span className={classes.span}> Inscription</span>
+        </Link>
+      
+    </Paper>
   );
 }
