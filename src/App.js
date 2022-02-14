@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext} from "react";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 // import pages
@@ -14,51 +14,95 @@ import Profile from "./users/pages/Profile";
 // import components
 import Footer from "./shared/components/Footer";
 import ProductDescription from "./products/components/ProductDescription";
+// import context
+import AuthContext from "./shared/context/auth-context";
+import { AuthContextProvider } from "./shared/context/auth-context";
+
 
 function App() {
+  const authCtx = useContext(AuthContext);
+  let isLoggedIn = authCtx.isLoggedIn;
+
+  let routes;
+  if (isLoggedIn) {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Accueil />
+        </Route>
+        <Route path="/dishes" exact>
+          <Dishes />
+        </Route>
+        <Route path="/desserts" exact>
+          <Desserts />
+        </Route>
+        <Route path="/drinks" exact>
+          <Drinks />
+        </Route>
+        <Route path="/dishes/:id" exact>
+          <ProductDescription productInUrl="dish" imgUrl="dishes" />
+        </Route>
+        <Route path="/desserts/:id" exact>
+          <ProductDescription productInUrl="dessert" imgUrl="desserts" />
+        </Route>
+        <Route path="/drinks/:id" exact>
+          <ProductDescription productInUrl="drink" imgUrl="drinks" />
+        </Route>
+        <Route path="/basket" exact>
+          <Basket />
+        </Route>
+        <Route path="/profile" exact>
+          <Profile />
+        </Route>
+        <Redirect to="/"></Redirect>
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Accueil />
+        </Route>
+        <Route path="/signup" exact>
+          <Signup />
+        </Route>
+        <Route path="/login" exact>
+          <Login />
+        </Route>
+        <Route path="/dishes" exact>
+          <Dishes />
+        </Route>
+        <Route path="/desserts" exact>
+          <Desserts />
+        </Route>
+        <Route path="/drinks" exact>
+          <Drinks />
+        </Route>
+        <Route path="/dishes/:id" exact>
+          <ProductDescription productInUrl="dish" imgUrl="dishes" />
+        </Route>
+        <Route path="/desserts/:id" exact>
+          <ProductDescription productInUrl="dessert" imgUrl="desserts" />
+        </Route>
+        <Route path="/drinks/:id" exact>
+          <ProductDescription productInUrl="drink" imgUrl="drinks" />
+        </Route>
+        <Route path="/basket" exact>
+          <Basket />
+        </Route>
+        <Redirect to="/"></Redirect>
+      </Switch>
+    );
+  }
+
   return (
     <BrowserRouter>
-      <MainHeader />
-      <main>
-        <Switch>
-          <Route path="/" exact>
-            <Accueil />
-          </Route>
-          <Route path="/signup" exact>
-            <Signup />
-          </Route>
-          <Route path="/login" exact>
-            <Login />
-          </Route>
-          <Route path="/dishes" exact>
-            <Dishes />
-          </Route>
-          <Route path="/desserts" exact>
-            <Desserts />
-          </Route>
-          <Route path="/drinks" exact>
-            <Drinks />
-          </Route>
-          <Route path="/dishes/:id" exact>
-            <ProductDescription productInUrl="dish" imgUrl="dishes"/>
-          </Route>
-          <Route path="/desserts/:id" exact>
-            <ProductDescription productInUrl="dessert" imgUrl="desserts"/>
-          </Route>
-          <Route path="/drinks/:id" exact>
-            <ProductDescription productInUrl="drink" imgUrl="drinks"/>
-          </Route>
-          <Route path="/basket" exact>
-            <Basket />
-          </Route>
-          <Route path="/profile" exact>
-            <Profile />
-          </Route>
-          <Redirect to="/"></Redirect>
-        </Switch>
-      </main>
-      <Footer />
-    </BrowserRouter>
+    <AuthContextProvider>
+        <MainHeader />
+        <main>{routes}</main>
+        <Footer />
+    </AuthContextProvider>
+      </BrowserRouter>
   );
 }
 

@@ -79,11 +79,9 @@ useEffect(() => {
     setProductData(resData);
 
     //  console.log(productData);
-  };
-  fetchProduct().catch((err) => {
-    return sethttpError(err.message);
-  });
-}, [id, props.productInUrl]);
+    }
+    fetchProduct().catch((err)=>{ return sethttpError(err.message)});
+  },[id, props.productInUrl])
   
   //state for productData changes
   useEffect(()=>{

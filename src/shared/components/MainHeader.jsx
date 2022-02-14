@@ -1,11 +1,14 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+
+// MUI
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Menu, MenuItem, Box, Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
+import AuthContext from "../context/auth-context";
 import Navigation from "./Navigation";
-import Basket from "./Basket";
+import Basket from "./Basket-icon";
 import classes from "./MainHeader.module.css";
 
 const useStyles = makeStyles({
@@ -35,6 +38,7 @@ const useStyles = makeStyles({
 });
 
 const MainHeader = props => {
+  const AuthCtx = useContext(AuthContext);
   const style = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -52,43 +56,46 @@ const MainHeader = props => {
         <img src="/logo.png" alt="Eat Smart logo" />
       </Link>
       <Navigation />
-      <Box sx={{ display: "flex", alignItems: "center", height: "5rem" }}>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        {/* , height: "5rem" */}
         <Tooltip title="Panier" arrow>
           <Link to="/basket">
             <Basket />
           </Link>
         </Tooltip>
-        <Box sx={{ height: "100%", display: "flex", alignItems: "center" }}>
-          <Tooltip title="Espace personnel" arrow>
-            <AccountCircleIcon
-              fontSize="large"
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-              className={style.accountIcon}
-              // {...props}
-            />
-          </Tooltip>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-              className: style.accountMenu,
-            }}
-          >
-            <Link to="/profile">
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-            </Link>
-            <Link to="/">
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Link>
-          </Menu>
-        </Box>
+
+        {AuthCtx.isLoggedIn && (
+          <>
+            <Tooltip title="Espace personnel" arrow>
+              <AccountCircleIcon
+                fontSize="large"
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                className={style.accountIcon}
+              />
+            </Tooltip>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+                className: style.accountMenu,
+              }}
+            >
+              <Link to="/profile">
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+              </Link>
+              <Link to="/">
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+              </Link>
+            </Menu>
+          </>
+        )}
       </Box>
     </header>
   );
