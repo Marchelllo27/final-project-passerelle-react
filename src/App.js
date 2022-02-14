@@ -16,42 +16,69 @@ import Footer from "./shared/components/Footer";
 import ProductDescription from "./products/components/ProductDescription";
 
 import AuthContext from "./shared/context/auth-context";
-import { AuthContextProvider } from "./shared/context/auth-context";
+// import { AuthContextProvider } from "./shared/context/auth-context";
 
 function App() {
-  const authCtx = useContext(AuthContext);
-  // const [routes, setRoutes] = useState();
+  const [token, setToken] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  console.log("HELLO FROM APP.JS");
-  console.log("->", authCtx.isLoggedIn);
+  const userIsLoggedIn = !!token;
+
+  const login = token => {
+    setToken(token);
+  };
+
+  const logout = () => {
+    setToken(null);
+    setIsAdmin(false);
+  };
+
+  const setAdmin = () => {
+    setIsAdmin(true);
+  };
+
+  // const unsetAdmin = () => {
+  //   setIsAdmin(false);
+  // };
+
+  const contextValue = {
+    token: token,
+    isAdmin: isAdmin,
+    isLoggedIn: userIsLoggedIn,
+    login,
+    logout,
+    setAdmin,
+    // unsetAdmin,
+  };
+
   let routes;
-  if (authCtx.isLoggedIn) {
+  if (userIsLoggedIn) {
     routes = (
       <Switch>
         <Route path="/" exact>
           <Accueil />
         </Route>
         <Route path="/dishes" exact>
-        <Dishes />
-      </Route>
-      <Route path="/desserts" exact>
-        <Desserts />
-      </Route>
-      <Route path="/drinks" exact>
-        <Drinks />
-      </Route>
-      <Route path="/dishes/:id" exact>
-        <ProductDescription productInUrl="dish" imgUrl="dishes" />
-      </Route>
-      <Route path="/desserts/:id" exact>
-        <ProductDescription productInUrl="dessert" imgUrl="desserts" />
-      </Route>
-      <Route path="/drinks/:id" exact>
-        <ProductDescription productInUrl="drink" imgUrl="drinks" />
-      </Route>
-      <Route path="/basket" exact>
-        <Basket />
-      </Route>
+          <Dishes />
+        </Route>
+        <Route path="/desserts" exact>
+          <Desserts />
+        </Route>
+        <Route path="/drinks" exact>
+          <Drinks />
+        </Route>
+        <Route path="/dishes/:id" exact>
+          <ProductDescription productInUrl="dish" imgUrl="dishes" />
+        </Route>
+        <Route path="/desserts/:id" exact>
+          <ProductDescription productInUrl="dessert" imgUrl="desserts" />
+        </Route>
+        <Route path="/drinks/:id" exact>
+          <ProductDescription productInUrl="drink" imgUrl="drinks" />
+        </Route>
+        <Route path="/basket" exact>
+          <Basket />
+        </Route>
         <Route path="/profile" exact>
           <Profile />
         </Route>
@@ -65,26 +92,26 @@ function App() {
           <Accueil />
         </Route>
         <Route path="/dishes" exact>
-        <Dishes />
-      </Route>
-      <Route path="/desserts" exact>
-        <Desserts />
-      </Route>
-      <Route path="/drinks" exact>
-        <Drinks />
-      </Route>
-      <Route path="/dishes/:id" exact>
-        <ProductDescription productInUrl="dish" imgUrl="dishes" />
-      </Route>
-      <Route path="/desserts/:id" exact>
-        <ProductDescription productInUrl="dessert" imgUrl="desserts" />
-      </Route>
-      <Route path="/drinks/:id" exact>
-        <ProductDescription productInUrl="drink" imgUrl="drinks" />
-      </Route>
-      <Route path="/basket" exact>
-        <Basket />
-      </Route>
+          <Dishes />
+        </Route>
+        <Route path="/desserts" exact>
+          <Desserts />
+        </Route>
+        <Route path="/drinks" exact>
+          <Drinks />
+        </Route>
+        <Route path="/dishes/:id" exact>
+          <ProductDescription productInUrl="dish" imgUrl="dishes" />
+        </Route>
+        <Route path="/desserts/:id" exact>
+          <ProductDescription productInUrl="dessert" imgUrl="desserts" />
+        </Route>
+        <Route path="/drinks/:id" exact>
+          <ProductDescription productInUrl="drink" imgUrl="drinks" />
+        </Route>
+        <Route path="/basket" exact>
+          <Basket />
+        </Route>
         <Route path="/signup" exact>
           <Signup />
         </Route>
@@ -98,46 +125,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AuthContextProvider>
+      <AuthContext.Provider value={contextValue}>
         <MainHeader />
         <main>{routes}</main>
         <Footer />
-      </AuthContextProvider>
+      </AuthContext.Provider>
     </BrowserRouter>
   );
 }
 
 export default App;
-
-// useEffect(() => {
-//   let rr;
-//   if (authCtx.isLoggedIn) {
-//     rr = (
-//       <Switch>
-//         <Route path="/profile" exact>
-//           <Profile />
-//         </Route>
-//         <CommonRoutes />
-//         <Redirect to="/"/>
-//       </Switch>
-//     );
-//   } else {
-//     rr = (
-//       <Switch>
-//         <Route path="/signup" exact>
-//           <Signup />
-//         </Route>
-//         <Route path="/login" exact>
-//           <Login />
-//         </Route>
-//         <CommonRoutes />
-//         <Route path="/profile" exact>
-//           <p>WRONG PLACE</p>
-//         </Route>
-//         <Redirect to="/"/>
-//       </Switch>
-//     );
-//   }
-//   console.log("here")
-//   setRoutes(rr);
-// }, [authCtx.isLoggedIn]);

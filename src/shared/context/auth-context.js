@@ -1,52 +1,53 @@
-import React, { createContext, useCallback, useState } from "react";
+// import React, { createContext, useCallback, useState } from "react";
+import { createContext } from "react";
 
 const AuthContext = createContext({
   token: "",
   isAdmin: false,
   isLoggedIn: false,
-  login: (token) => {},
+  login: token => {},
   logout: () => {},
   setAdmin: () => {},
   unsetAdmin: () => {},
 });
 
-export const AuthContextProvider = props => {
-  const [token, setToken] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+// export const AuthContextProvider = props => {
+//   const [token, setToken] = useState(null);
+//   const [isAdmin, setIsAdmin] = useState(false);
 
-  const userIsLoggedIn = !!token;
+//   const userIsLoggedIn = !!token;
 
-  const login = token => {
-    setToken(token);
-  };
+//   const login = token => {
+//     setToken(token);
+//   };
 
-  const logout = () => {
-    setToken(null);
-    setIsAdmin(false);
-  };
+//   const logout = () => {
+//     setToken(null);
+//     setIsAdmin(false);
+//   };
 
-  const setAdmin = () => {
-    setIsAdmin(true);
-  };
+//   const setAdmin = () => {
+//     setIsAdmin(true);
+//   };
 
-  const unsetAdmin = () => {
-    setIsAdmin(false);
-  };
-  const contextValue = {
-    token: token,
-    isAdmin: isAdmin,
-    isLoggedIn: userIsLoggedIn,
-    login,
-    logout,
-    setAdmin,
-    unsetAdmin,
-  };
+//   const unsetAdmin = () => {
+//     setIsAdmin(false);
+//   };
+//   const contextValue = {
+//     token: token,
+//     isAdmin: isAdmin,
+//     isLoggedIn: userIsLoggedIn,
+//     login,
+//     logout,
+//     setAdmin,
+//     unsetAdmin,
+//   };
 
-  return (
-    <AuthContext.Provider value={contextValue}>
-      {props.children}
-    </AuthContext.Provider>
-  );
-};
+//   return (
+//     <AuthContext.Provider value={contextValue}>
+//       {props.children}
+//     </AuthContext.Provider>
+//   );
+// };
 
 export default AuthContext;

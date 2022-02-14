@@ -63,9 +63,9 @@ export default function SignIn() {
       );
 
       authContext.login(response.token);
-      // if (response.role === "ADMIN") {
-      //   authContext.setAdmin();
-      // }
+      if (response.role === "ADMIN") {
+        authContext.setAdmin();
+      }
 
       setEmail("");
       setPassword("");
