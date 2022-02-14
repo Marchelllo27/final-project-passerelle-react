@@ -18,7 +18,7 @@ import ProductDescription from "./products/components/ProductDescription";
 import AuthContext from "./shared/context/auth-context";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -101,13 +101,13 @@ function App() {
   }
 
   return (
+    <BrowserRouter>
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
-      <BrowserRouter>
         <MainHeader />
-        <main>{isLoggedIn && routes}</main>
+        <main>{routes}</main>
         <Footer />
-      </BrowserRouter>
     </AuthContext.Provider>
+      </BrowserRouter>
   );
 }
 

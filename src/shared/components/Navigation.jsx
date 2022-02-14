@@ -120,7 +120,7 @@ const Navigation = props => {
             </NavLink>
           </Menu>
         </li>
-        {AuthCtx.isLoggedIn && (
+        {!AuthCtx.isLoggedIn && (
           <>
             <li>
               <Button
