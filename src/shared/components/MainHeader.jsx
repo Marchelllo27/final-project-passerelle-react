@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 // MUI
@@ -41,7 +41,7 @@ const MainHeader = props => {
   const authCtx = useContext(AuthContext);
   const style = useStyles();
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -49,6 +49,11 @@ const MainHeader = props => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const logOutHandler = () => {
+    setAnchorEl(null);
+    authCtx.logout(); 
+  }
 
   return (
     <header className={classes.mainHeader}>
@@ -114,7 +119,7 @@ const MainHeader = props => {
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
               </Link>
               <Link to="/">
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={logOutHandler}>Logout</MenuItem>
               </Link>
             </Menu>
           </>

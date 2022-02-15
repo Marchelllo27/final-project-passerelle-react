@@ -69,16 +69,12 @@ export default function SignIn() {
 
       setEmail("");
       setPassword("");
-      console.log("logged in");
-      // history.replace('/');
+
+      history.replace("/");
     } catch (error) {
       setError("Login ou mot de passe invalide, veuillez réessayer");
     }
   };
-
-  // useEffect(() => {
-  //   console.log(authContext.isLoggedIn)
-  // }, [authContext.isLoggedIn])
 
   return (
     <Paper
@@ -158,17 +154,16 @@ export default function SignIn() {
         >
           Connexion
         </Button>
-        </form>
-        <Link
-          href="/signup"
-          variant="body2"
-          underline="hover"
-          className={classes.link}
-        >
-          Vous n'avez pas encore de compte ?
-          <span className={classes.span}> Inscription</span>
-        </Link>
-      
+      </form>
+      <Link
+        href="/signup"
+        variant="body2"
+        underline="hover"
+        className={classes.link}
+      >
+        Vous n'avez pas encore de compte ?
+        <span className={classes.span}> Inscription</span>
+      </Link>
     </Paper>
   );
 }

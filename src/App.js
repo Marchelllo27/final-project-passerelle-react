@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 // import pages
@@ -22,24 +22,20 @@ function App() {
   const [token, setToken] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const userIsLoggedIn = !!token;
+  const userIsLoggedIn = !!token; //!!transform truthy or falsy value in true or false
 
-  const login = token => {
+  const login = useCallback(token => {
     setToken(token);
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setToken(null);
     setIsAdmin(false);
-  };
+  }, []);
 
-  const setAdmin = () => {
+  const setAdmin = useCallback(() => {
     setIsAdmin(true);
-  };
-
-  // const unsetAdmin = () => {
-  //   setIsAdmin(false);
-  // };
+  }, []);
 
   const contextValue = {
     token: token,
@@ -48,8 +44,7 @@ function App() {
     login,
     logout,
     setAdmin,
-    // unsetAdmin,
-  };
+  };  
 
   let routes;
   if (userIsLoggedIn) {
