@@ -31,12 +31,11 @@ const useStyles = makeStyles(loginStyles);
 export default function SignIn() {
   const classes = useStyles();
   const history = useHistory();
-
   const authContext = useContext(AuthContext);
 
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
 
   const handleClickShowPassword = () => {
@@ -51,6 +50,9 @@ export default function SignIn() {
     setEmail(event.target.value);
   };
 
+
+
+  // ON SUBMIT
   const onSubmitHandler = async event => {
     event.preventDefault();
 

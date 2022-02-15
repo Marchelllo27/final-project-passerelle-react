@@ -19,10 +19,8 @@ import AuthContext from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
 import getRightRoutes from "./utils/getRightRoutes";
 
-
 function App() {
-  
-  const {token, login, logout, contextValue, userIsLoggedIn} = useAuth();
+  const { contextValue, userIsLoggedIn } = useAuth();
 
   const routes = getRightRoutes(userIsLoggedIn);
 
