@@ -31,7 +31,7 @@ export default function BasicModal(props) {
     const { token } = JSON.parse(localStorage.getItem("userData"));
 
     try {
-      const response = await sendHttpRequest(
+      await sendHttpRequest(
         `${process.env.REACT_APP_URL_API}/admin/products/dessert/delete/${productId}`,
         "DELETE",
         null,
@@ -39,7 +39,6 @@ export default function BasicModal(props) {
           Authorization: "Bearer " + token,
         }
       );
-      console.log("reponse =>", response)
     } catch (error) {
       console.log(error.message);
       alert(error.message);
