@@ -52,8 +52,8 @@ const MainHeader = props => {
 
   const logOutHandler = () => {
     setAnchorEl(null);
-    authCtx.logout(); 
-  }
+    authCtx.logout();
+  };
 
   return (
     <header className={classes.mainHeader}>
@@ -70,7 +70,8 @@ const MainHeader = props => {
         </p>
       )}
 
-      {authCtx.isLoggedIn && !authCtx.isAdmin && <p
+      {authCtx.isLoggedIn && !authCtx.isAdmin && (
+        <p
           style={{
             color: "red",
             position: "absolute",
@@ -79,7 +80,8 @@ const MainHeader = props => {
           }}
         >
           USER
-        </p>}
+        </p>
+      )}
 
       <Link className={classes.logoBox} to="/">
         <img src="/logo.png" alt="Eat Smart logo" />

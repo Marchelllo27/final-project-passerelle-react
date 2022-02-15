@@ -58,8 +58,6 @@ export default {
     background: "#f5f5f5",
   },
   invalidFeedback: {
-    marginBottom: "2rem",
-    marginTop: "-0.5rem",
     color: "red",
   },
 }

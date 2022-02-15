@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 
 const ErrorAlert = (props) => {
   return (
-    <Stack sx={{ width: "80%", marginLeft: "auto", marginRight: "auto", marginTop: "1rem"}}>
+    <Stack sx={{ width: "100%", maxWidth: "40rem", marginLeft: "auto", marginRight: "auto", marginTop: "1rem", "& .MuiPaper-root": {justifyContent: "center"}}}>
       <Alert severity="error">
         <AlertTitle>Error</AlertTitle>
         {props.message}

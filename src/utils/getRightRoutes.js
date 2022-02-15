@@ -45,7 +45,7 @@ const getRightRoutes = (userIsLoggedIn) => {
         </Route>
         <Redirect to="/" />
       </Switch>
-    );
+    )
   } else {
     routes = (
       <Switch>
@@ -81,7 +81,7 @@ const getRightRoutes = (userIsLoggedIn) => {
         </Route>
         <Redirect to="/" />
       </Switch>
-    );
+    )
   }
 
 

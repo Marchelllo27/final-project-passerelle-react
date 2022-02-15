@@ -23,7 +23,9 @@ import {
 import { makeStyles } from "@mui/styles";
 
 import sendHttpRequest from "../../utils/sendHttpRequest";
+import SuccessSnackbar from "../../shared/UIElements/SuccessSnackbar"
 import loginStyles from "./LoginStyles";
+import BackDropSpinner from "../../shared/UIElements/BackDropSpinner";
 import AuthContext from "../../shared/context/auth-context";
 
 const useStyles = makeStyles(loginStyles);
@@ -37,6 +39,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(prevState => !prevState);
@@ -55,6 +58,7 @@ export default function SignIn() {
   // ON SUBMIT
   const onSubmitHandler = async event => {
     event.preventDefault();
+    setIsLoading(true)
 
     try {
       const response = await sendHttpRequest(
@@ -64,21 +68,28 @@ export default function SignIn() {
         { "Content-Type": "application/json" }
       );
 
+      setIsLoading(false);
+
       setEmail("");
       setPassword("");
 
-      authContext.login(response.token);
-      if (response.role === "ADMIN") {
-        authContext.setAdmin();
-      }
+      authContext.login(response.token, response.role);
 
       history.replace("/");
     } catch (error) {
+      setIsLoading(false);
       setError("Login ou mot de passe invalide, veuillez réessayer");
     }
   };
 
+  const closeSuccess = data => {
+    authContext.hideSuccessModal()
+  }
+
   return (
+    <>
+    {isLoading && <BackDropSpinner />}
+    { authContext.showSuccess && <SuccessSnackbar closeModal={closeSuccess}/>}
     <Paper
       elevation={24}
       className={classes.paper}
@@ -167,5 +178,6 @@ export default function SignIn() {
         <span className={classes.span}> Inscription</span>
       </Link>
     </Paper>
+    </>
   );
 }
