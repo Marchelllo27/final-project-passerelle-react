@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 // MUI IMPORT
@@ -62,13 +62,13 @@ export default function SignIn() {
         { "Content-Type": "application/json" }
       );
 
+      setEmail("");
+      setPassword("");
+
       authContext.login(response.token);
       if (response.role === "ADMIN") {
         authContext.setAdmin();
       }
-
-      setEmail("");
-      setPassword("");
 
       history.replace("/");
     } catch (error) {
