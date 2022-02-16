@@ -10,13 +10,15 @@ import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
 import classes from "./ProductItem.module.css";
 import ProductItemStyles from "./ProductItemStyles";
-import AuthContext from "../../shared/context/auth-context";
 import Modal from "../../shared/UIElements/Modal";
+import AuthContext from "../../shared/context/auth-context";
+import BasketContext from "../../shared/context/basket-context";
 
 const useStyles = makeStyles(ProductItemStyles);
 
 const ProductItem = props => {
   const authCtx = useContext(AuthContext);
+  const basketCtx = useContext(BasketContext);
   const [showModal, setShowModal] = useState(false);
 
   const { _id: id, name, image, weight, price } = props.product;
@@ -24,7 +26,7 @@ const ProductItem = props => {
   // ADD PRODUCT TO THE BASKET
   const addProductHandler = event => {
     event.preventDefault();
-
+    basketCtx.addProduct({id, name, price, quantity: 1})
   };
 
   const onDeleteHandler = event => {
@@ -34,7 +36,7 @@ const ProductItem = props => {
 
   const closeModal = () => {
     setShowModal(false);
-  }
+  };
 
   const onUpdateHandler = event => {
     event.preventDefault();
@@ -43,13 +45,16 @@ const ProductItem = props => {
 
   const style = useStyles();
 
-
-  
-
   return (
     <>
       <Grid item xs={12} sm={6} md={3}>
-      {showModal && <Modal show={showModal} closeModal={closeModal} BackdropProps={{productId: id}}/>}
+        {showModal && (
+          <Modal
+            show={showModal}
+            closeModal={closeModal}
+            BackdropProps={{ productId: id }}
+          />
+        )}
         <Link to={`/${props.forWichProduct}/${id}`}>
           <Paper
             className={style.productItem}

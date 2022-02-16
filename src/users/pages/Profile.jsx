@@ -117,7 +117,7 @@ const Profile = (props) => {
         <span className={classes.span}>Informations personnels</span>
         {/* </Link> */}
 
-        <Paper elevation="24" className={classes.paper}>
+        <Paper elevation={24} className={classes.paper}>
           <form className={classes.root} onSubmit={handleSubmit(onFormSubmit)}>
             <TextField
               label="Votre prénom"

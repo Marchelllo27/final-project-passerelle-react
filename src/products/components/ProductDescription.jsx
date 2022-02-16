@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 
 //Theme & Style
@@ -34,10 +34,14 @@ import TableRow from "@mui/material/TableRow";
 //Translation
 import { useTranslation } from "react-i18next";
 
+import BasketContext from "../../shared/context/basket-context";
 import ErrorAlert from "../../shared/UIElements/ErrorAlert"
 
 const useStyles = makeStyles(stylesDescription);
+
+
 export default function ProductDescription(props) {
+  const basketCtx = useContext(BasketContext);
   const { id } = useParams();
   const classes = useStyles();
   //Translation
@@ -50,7 +54,12 @@ export default function ProductDescription(props) {
 
 
   const onAddProductButton = () => {
-    console.log(itemCount);
+    basketCtx.addProduct({
+      id: productData._id, 
+      name: productData.name, 
+      price: productData.price, 
+      quantity: +itemCount, 
+    })
   }
 
 

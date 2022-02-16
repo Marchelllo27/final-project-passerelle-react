@@ -2,8 +2,6 @@ import * as React from "react";
 
 import { Paper, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import classes from "./ProductItemHome.module.css";
@@ -41,10 +39,6 @@ const useStyles = makeStyles({
 });
 
 const ProductItem = (props) => {
-  const addProductHandler = (event) => {
-    event.preventDefault();
-  };
-
   const style = useStyles();
 
   const { _id: id, name, image, weight, price } = props.product;
@@ -72,11 +66,6 @@ const ProductItem = (props) => {
               {/* price and add button */}
               <div className={classes.actionControl}>
                 <span className={classes.price}>{price}€</span>
-                <Tooltip title="Ajouter au panier" arrow>
-                  <div className={style.addToBasketBox}>
-                    <ShoppingCartIcon onClick={addProductHandler} />
-                  </div>
-                </Tooltip>
               </div>
             </div>
           </article>

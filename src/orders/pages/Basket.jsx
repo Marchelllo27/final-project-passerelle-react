@@ -1,9 +1,11 @@
-import * as React from "react";
+import React, { useContext } from "react";
 
 import Box from "@mui/material/Box";
 
 import classes from "./Basket.module.css";
 import BasketModal from "../components/BasketModal";
+import BasketContext from "../../shared/context/basket-context";
+import BasketItem from "../components/BasketItem";
 
 const style = {
   position: "absolute",
@@ -18,10 +20,29 @@ const style = {
 };
 
 const Basket = props => {
-  const productItems = [
-    { id: "c1", name: "Sushi", amount: 2, price: 12.99 },
-    { id: "c2", name: "Soupe", amount: 4, price: 22.3 },
-  ].map((item, index) => <li key={index}>{item.name}</li>);
+  const basketCtx = useContext(BasketContext);
+
+  const totalPrice = `${basketCtx.totalPrice.toFixed(2)} €`;
+  const hasProductsInBasket = basketCtx.products.length > 0;
+
+  const productItemRemoveHandler = id => {
+
+  }
+
+  const addProductItemHandler = product => {
+
+  }
+
+  const productItems = basketCtx.products.map(product => (
+    <BasketItem
+      key={product.id}
+      name={product.name}
+      quantity={product.quantity}
+      price={product.price}
+      onRemove={productItemRemoveHandler.bind(null, product.id)}
+      onAdd={addProductItemHandler.bind(null, product)}
+    />
+  ));
 
   return (
     <BasketModal show={props.onShow} onBackdropClick={props.onClose}>
@@ -29,11 +50,15 @@ const Basket = props => {
         <ul>{productItems}</ul>
         <div className={classes.total}>
           <span>Total Amount</span>
-          <span>35.62</span>
+          <span>{totalPrice}</span>
         </div>
         <div className={classes.actions}>
-          <button className={classes["button--alt"]} onClick={props.onClose}>Fermer</button>
-          <button className={classes.button}>Commander</button>
+          <button className={classes["button--alt"]} onClick={props.onClose}>
+            Fermer
+          </button>
+          {hasProductsInBasket && (
+            <button className={classes.button}>Commander</button>
+          )}
         </div>
       </Box>
     </BasketModal>

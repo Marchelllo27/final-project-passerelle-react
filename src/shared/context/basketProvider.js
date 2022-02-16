@@ -8,7 +8,7 @@ const defaultBasketState = {
 
 const basketReducer = (state, action) => {
   if (action.type === "ADD") {
-    const updatedProducts = state.products.concat(action.product);
+    const updatedProducts = state.products.concat(action.product); //concat like push but create completely new array
     const updatedTotalPrice =
       state.totalPrice + action.product.price * action.product.quantity;
       return {
