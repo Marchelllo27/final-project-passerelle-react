@@ -81,9 +81,11 @@ const useStyles = makeStyles({
     padding: "1rem",
     alignItems: "center",
     background: "linear-gradient( #deebdd75 0%, #bbdbbe 74%)",
-    animation:
-      "flipInX" /* referring directly to the animation's @keyframe declaration */,
-    animationDuration: "2s" /* don't forget to set a duration! */,
+    // animation:
+    //   "flipInX" /* referring directly to the animation's @keyframe declaration */,
+    // animationDuration: "2s" /* don't forget to set a duration! */,
+    // animationFillMode: "both",
+    // animationDelay: "0.5s",
   },
   aboutUs: {
     width: "70%",

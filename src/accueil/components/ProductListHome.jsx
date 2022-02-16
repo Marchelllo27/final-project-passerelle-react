@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 
 import ProductItem from "./ProductItemHome";
-import { Container, Grid,Link } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import SkeletonList from "../../shared/UIElements/SkeletonList";
 import ErrorAlert from "../../shared/UIElements/ErrorAlert";
 import sendHttpRequest from "../../utils/sendHttpRequest";
@@ -59,12 +59,12 @@ const ProductsList = (props) => {
           />
         ))}
       </Grid>
-      <Link
+      {/* <Link
         to={`/${props.imgUrl}`}
         // underline="hover"
       >
         Retour à la page précédente
-      </Link>
+      </Link> */}
     </Container>
   );
 };
