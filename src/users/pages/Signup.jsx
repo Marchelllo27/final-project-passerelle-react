@@ -88,7 +88,7 @@ const Signup = () => {
 
         <form className={classes.root} onSubmit={formik.handleSubmit}>
           <TextField
-            value={formik.values.firstName}
+            initialValue={formik.values.firstName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="firstName"
@@ -103,7 +103,7 @@ const Signup = () => {
             </small>
           )}
           <TextField
-            value={formik.values.lastName}
+            initialValue={formik.values.lastName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="lastName"
@@ -118,7 +118,7 @@ const Signup = () => {
             </small>
           )}
           <TextField
-            value={formik.values.email}
+            initialValue={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="email"
@@ -134,7 +134,7 @@ const Signup = () => {
             </small>
           )}
           <TextField
-            value={formik.values.phoneNumber}
+            initialValue={formik.values.phoneNumber}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="phoneNumber"
@@ -156,7 +156,7 @@ const Signup = () => {
           )}
 
           <TextField
-            value={formik.values.password}
+            initialValue={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="password"
@@ -173,7 +173,7 @@ const Signup = () => {
             </small>
           )}
           <TextField
-            value={formik.values.confirmPassword}
+            initialValue={formik.values.confirmPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="confirmPassword"
@@ -191,7 +191,7 @@ const Signup = () => {
           )}
           <span className={classes.span}>Votre adresse</span>
           <TextField
-            value={formik.values.street}
+            initialValue={formik.values.street}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="street"
@@ -206,7 +206,7 @@ const Signup = () => {
             </small>
           )}
           <TextField
-            value={formik.values.postalCode}
+            initialValue={formik.values.postalCode}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="postalCode"
@@ -227,7 +227,7 @@ const Signup = () => {
             </small>
           )}
           <TextField
-            value={formik.values.city}
+            initialValue={formik.values.city}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="city"

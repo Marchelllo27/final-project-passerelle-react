@@ -53,7 +53,6 @@ export default function ProductDescription(props) {
   //Add & substract
   const [itemCount, setItemCount] = useState(1);
   const [productData, setProductData] = useState(null);
-  const [ingredient, setIngredient] = useState(null);
   const [httpError, sethttpError] = useState(null);
 
   //Accordion
