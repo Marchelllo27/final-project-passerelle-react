@@ -11,7 +11,7 @@ export const AuthContextProvider = props => {
   const [token, setToken] = useState(null);
 
   const userIsLoggedIn = !!token; 
-
+  // const userIsLoggedIn = true; 
   const login = useCallback(token => {
     setToken(token);
   }, []);

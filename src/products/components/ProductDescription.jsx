@@ -67,6 +67,7 @@ export default function ProductDescription(props) {
 //Translation
 const { t } = useTranslation("nutrients");
 
+//state
 useEffect(() => {
   const fetchProduct = async () => {
     const response = await fetch(
@@ -98,9 +99,10 @@ useEffect(() => {
 
   return (
     <div>
-      <Button 
-      className={classes.backButton}
-      startIcon={<ArrowBackIosIcon color="action" />}>
+      <Button
+        className={classes.backButton}
+        startIcon={<ArrowBackIosIcon color="action" />}
+      >
         <Link
           to={`/${props.imgUrl}`}
           // underline="hover"
@@ -123,10 +125,10 @@ useEffect(() => {
               src={`${process.env.REACT_APP_URL_API}/uploads/images/${props.imgUrl}/${productData.image}`}
               alt={productData.name}
             />
-              {/* </Paper>   */}
+            {/* </Paper>   */}
             <Paper className={classes.main} elevation={20}>
               <CardContent className={classes.cardContent}>
-                <Typography component="div" className={classes.title}>
+                <Typography  className={classes.title}>
                   {productData.name}
                 </Typography>
                 <Typography
@@ -206,10 +208,13 @@ useEffect(() => {
                   </Accordion>
                 </div>
                 <div className={classes.priceWeight}>
-                  <Typography>Prix : {productData.price}$</Typography>
-                  <Typography>
-                    Poids :{productData.weight}
-                    Gr
+                  <Typography className={classes.price}>
+                    <strong className={classes.stPriceWeight}>Prix :</strong>{" "}
+                    {productData.price} €
+                  </Typography>
+                  <Typography className={classes.weight}>
+                    <strong className={classes.stPriceWeight}>Poids :</strong>{" "}
+                    {productData.weight} g
                   </Typography>
                 </div>
               </CardContent>

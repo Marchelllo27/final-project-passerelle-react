@@ -6,8 +6,6 @@ import {
   Container,
   Box,
   Paper,
-  Link,
-  Alert,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 // import classes from "./Signup.module.css";
