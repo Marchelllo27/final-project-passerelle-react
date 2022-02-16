@@ -12,8 +12,8 @@ import AuthContext from "./../../shared/context/auth-context";
 import useHttpUser from "./../../shared/hooks/http-hook";
 //validation password
 import { useForm } from "./../../shared/hooks/form-hook";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as Yup from "yup";
 
 const useStyles = makeStyles({
   root: {
@@ -84,8 +84,9 @@ const Profile = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpUser();
   const [loadedUser,setLoadedUser]=useState();
-  const { id}=useParams();
-  console.log(id)
+  // const {userId}=useParams().userId;
+  const { userId } = useParams();
+   console.log(userId);
   const history = useHistory();
   
   //Submit
@@ -141,11 +142,18 @@ const Profile = (props) => {
      
   useEffect(() => {
     const fetchUser = async()=>{
+      const { token } = JSON.parse(localStorage.getItem("userData"));
+      console.log(token)
       try{
         const responseData = await sendRequest(
-          // `${process.env.REACT_APP_URL_API}/admin/user/${userid}`
-          `${process.env.REACT_APP_URL_API}/auth-user/${id}`
+          // `${process.env.REACT_APP_URL_API}/admin/user/${userId}`
+          `${process.env.REACT_APP_URL_API}/auth-user/auth-user/${userId}`,
+          "GET",
+          null,
+          { Authorization: "Bearer " + token }
         );
+        // const string =JSON.stringify(responseData);
+
         console.log(responseData);
         setLoadedUser(responseData.user);
         setFormData({
@@ -185,11 +193,11 @@ const Profile = (props) => {
 
       },true);
       }catch(err){
-
+          console.log(err)
       }
     };
     fetchUser();
-  }, [sendRequest, id, setFormData]);
+  }, [sendRequest, userId, setFormData]);
 
   // function onFormSubmit(data) {
   //   console.log(JSON.stringify(data, null, 4));
@@ -199,7 +207,7 @@ const Profile = (props) => {
     event.preventDefault();
     try {
       await sendRequest(
-        `${process.env.REACT_APP_URL_API}/auth-user/update/${id}`,
+        `${process.env.REACT_APP_URL_API}/auth-user/update/${userId}`,
         `PUT`,
         JSON.stringify({
           // password: formState.inputs.password.value,
@@ -208,7 +216,7 @@ const Profile = (props) => {
           "content-type": "application/json",
         }
       );
-      history.put("/" + auth.userid + "/update");
+      history.put("/" + auth.userId + "/update");
     } catch (err) {}
   };
   
