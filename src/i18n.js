@@ -23,7 +23,7 @@ const options = {
   defaultNS: "common",
   keySeparator: false,
   react: {
-    wait: true,
+    useSuspense: true,
     bindI18n: "languageChanged loaded",
     bindStore: "added removed",
     nsMode: "default",

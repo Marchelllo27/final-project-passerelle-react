@@ -34,29 +34,34 @@ import TableRow from "@mui/material/TableRow";
 //Translation
 import { useTranslation } from "react-i18next";
 
+import ErrorAlert from "../../shared/UIElements/ErrorAlert"
+
 const useStyles = makeStyles(stylesDescription);
 export default function ProductDescription(props) {
   const { id } = useParams();
-
-  //Styles
   const classes = useStyles();
+  //Translation
+  const { t } = useTranslation("nutrients");
 
   //Add & substract
   const [itemCount, setItemCount] = useState(1);
   const [productData, setProductData] = useState(null);
   const [httpError, sethttpError] = useState(null);
 
-  //Translation
-  const { t } = useTranslation("nutrients");
 
-  //state
+  const onAddProductButton = () => {
+    console.log(itemCount);
+  }
+
+
+  //FETCH PRODUCT FROM API
   useEffect(() => {
     const fetchProduct = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_URL_API}/products/${props.productInUrl}/${id}`
       );
       if (!response.ok) {
-        throw new Error("Error !");
+        throw new Error("Une erreur s'est produite lors du chargement de la description du produit!");
       }
       const resData = await response.json();
       setProductData(resData);
@@ -75,7 +80,7 @@ export default function ProductDescription(props) {
         <Link to={`/${props.imgUrl}`}>Retour à la page précédente</Link>
       </Button>
       <Container fixed>
-        {httpError && <p>Error</p>}
+        {httpError && <ErrorAlert message={httpError}/>}
         {productData && (
           <Card sx={{ maxWidth: 1200 }} className={classes.card}>
             <img
@@ -173,7 +178,8 @@ export default function ProductDescription(props) {
                       variant="outlined"
                       className={classes.button}
                       onClick={() => {
-                        setItemCount(Math.max(itemCount - 1, 0));
+                        if (itemCount === 1) return;
+                        setItemCount(prevCount => prevCount - 1);
                       }}
                     >
                       <RemoveIcon fontSize="small" />
@@ -186,7 +192,7 @@ export default function ProductDescription(props) {
                       className={classes.button}
                       variant="outlined"
                       onClick={() => {
-                        setItemCount(itemCount + 1);
+                        setItemCount(prevCount => prevCount + 1);
                       }}
                     >
                       <AddIcon fontSize="small" />
@@ -197,6 +203,7 @@ export default function ProductDescription(props) {
                   className={classes.button}
                   variant="outlined"
                   startIcon={<AddShoppingCartIcon color="action" />}
+                  onClick={onAddProductButton}
                 >
                   Ajouter au panier
                 </Button>
