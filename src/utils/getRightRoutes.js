@@ -6,7 +6,7 @@ import Drinks from "../products/pages/Drinks";
 import Dishes from "../products/pages/Dishes";
 import Desserts from "../products/pages/Desserts";
 import ProductDescription from "../products/components/ProductDescription";
-import Basket from "../orders/pages/Basket";
+// import Basket from "../orders/pages/Basket";
 import Profile from "../users/pages/Profile";
 import Signup from "../users/pages/Signup";
 import Login from "../users/pages/Login"
@@ -37,9 +37,9 @@ const getRightRoutes = (userIsLoggedIn) => {
         <Route path="/drinks/:id" exact>
           <ProductDescription productInUrl="drink" imgUrl="drinks" />
         </Route>
-        <Route path="/basket" exact>
+        {/* <Route path="/basket" exact>
           <Basket />
-        </Route>
+        </Route> */}
         <Route path="/profile" exact>
           <Profile />
         </Route>
@@ -70,9 +70,9 @@ const getRightRoutes = (userIsLoggedIn) => {
         <Route path="/drinks/:id" exact>
           <ProductDescription productInUrl="drink" imgUrl="drinks" />
         </Route>
-        <Route path="/basket" exact>
+        {/* <Route path="/basket" exact>
           <Basket />
-        </Route>
+        </Route> */}
         <Route path="/signup" exact>
           <Signup />
         </Route>

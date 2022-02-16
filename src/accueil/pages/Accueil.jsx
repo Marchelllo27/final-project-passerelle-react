@@ -8,9 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 import ImageSlider from "../components/ImageSlider";
-import { Button, Paper } from "@mui/material";
-
-import { Container } from "@mui/material";
+import { Button,Container } from "@mui/material";
 //Icons
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
@@ -18,7 +16,6 @@ import Filter7Icon from "@mui/icons-material/Filter7";
 //Theme & Style
 import { makeStyles } from "@mui/styles";
 import frame from "./separateur-1-1-e1560496517774.png";
-// import stylesDescription from "./Accueil.module";
 import img from "./item-slider.png";
 import "animate.css";
 
@@ -97,9 +94,9 @@ const useStyles = makeStyles({
     fontFamily: "inherit",
   },
   productList: {
-    display:"flex",
-    flexDirection:"column",
-    paddingTop:"3rem"
+    display: "flex",
+    flexDirection: "column",
+    paddingTop: "3rem",
   },
   // benefits: {
   //   width: "150px",
@@ -108,16 +105,16 @@ const useStyles = makeStyles({
   textAlign: {
     texAalign: "center",
   },
-  frame:{
+  frame: {
     // height:"150px",
   },
-  seeMore:{
-    fontSize:"larger",
-    paddingTop:"2rem",
-  }
+  seeMore: {
+    fontSize: "larger",
+    paddingTop: "2rem",
+  },
 });
 
-const Accueil = (props) => {
+const Accueil = props => {
   //Styles
   const classes = useStyles();
 
@@ -160,7 +157,7 @@ const Accueil = (props) => {
         <ImageSlider />
 
         <div className={classes.blocks}>
-          <Typography className={classes.aboutUs}>
+          <Typography component="div" className={classes.aboutUs}>
             <p align="center">CUISINE DU JOUR BONJOUR</p>
             <p align="center">
               Oui comme des poules au plein air, c’est à l’aube qu’on
@@ -178,9 +175,12 @@ const Accueil = (props) => {
 
           <Typography align="center" className={classes.aboutUs}>
             Tous nos déchets alimentaires sont compostés et recyclés pour
-            fertiliser les sols d’Ile-de-France 🌱
+            fertiliser les sols d’Ile-de-France{" "}
+            <span role="img" aria-label="tree leaf">
+              🌱
+            </span>
           </Typography>
-          <img src={frame} className={classes.frame} />
+          <img src={frame} className={classes.frame} alt="separation line" />
           <Box>
             <div className={classes.productList}>
               <Typography
@@ -200,7 +200,11 @@ const Accueil = (props) => {
                 Voir plus ...
               </Button>
 
-              <img src={frame} className={classes.frame} />
+              <img
+                src={frame}
+                className={classes.frame}
+                alt="separation line"
+              />
             </div>
             <div className={classes.productList}>
               <Typography
@@ -218,7 +222,11 @@ const Accueil = (props) => {
               <Button href="/desserts" className={classes.seeMore}>
                 Voir plus ...
               </Button>
-              <img src={frame} className={classes.frame} />
+              <img
+                src={frame}
+                className={classes.frame}
+                alt="separation line"
+              />
             </div>
 
             <div className={classes.productList}>
