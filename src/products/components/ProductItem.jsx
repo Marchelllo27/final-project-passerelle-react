@@ -21,14 +21,20 @@ const ProductItem = props => {
 
   const { _id: id, name, image, weight, price } = props.product;
 
+  // ADD PRODUCT TO THE BASKET
   const addProductHandler = event => {
     event.preventDefault();
+
   };
 
   const onDeleteHandler = event => {
     event.preventDefault();
     setShowModal(true);
   };
+
+  const closeModal = () => {
+    setShowModal(false);
+  }
 
   const onUpdateHandler = event => {
     event.preventDefault();
@@ -38,9 +44,7 @@ const ProductItem = props => {
   const style = useStyles();
 
 
-  const closeModal = () => {
-    setShowModal(false);
-  }
+  
 
   return (
     <>
