@@ -37,14 +37,14 @@ export default {
   //   borderBottomLeftRadius: "10px",
   // },
   image: {
-    width: "30%",
+    width: "40%",
     // minHeight: "12rem",
     // maxHeight: "12rem",
     objectFit: "cover",
     // margin: "5%",
     borderRadius: "15px",
     // padding: "1.5rem",
-    border: "solid 5px #78bf35",
+    border: "solid 5px #f5f5f5",
     transition: "all 0.2s linear",
     outline: "6px solid transparent",
     outlineOffset: "-4px",
@@ -71,6 +71,7 @@ export default {
   main: {
     borderRadius: "35px",
     marginTop: "20px",
+    width: "100%",
     // transition: "all 0.2s linear",
     // outline: "6px solid transparent",
     // outlineOffset: "-4px",
@@ -80,20 +81,22 @@ export default {
     // },
   },
   cardContent: {
+    // background: "linear-gradient( #deebdd 0%, #bbdbbe 74%)",
+
     fontSize: "1rem",
     // height: "300px",
     padding: "2rem",
 
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
-    alignItems: "center",
+    // alignItems: "flex-start",
+    // alignItems: "center",
   },
   title: {
     fontSize: "2rem ! important",
     padding: "1rem",
     fontWeight: "bold",
-    color: "#616161",
+    color: "#cd5c5c",
     alignSelf: "center",
   },
   description: {
@@ -101,12 +104,16 @@ export default {
     margin: "1rem",
   },
   cardActions: {
+    background: "linear-gradient( #deebdd 0%, #bbdbbe 74%)",
+
     paddingTop: "6rem",
+    paddingBottom: "3rem",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around",
     background: "white",
+    borderRadius: "15px",
   },
   composants: {
     with: "100%",
@@ -134,13 +141,19 @@ export default {
   priceWeight: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "flex-start",
     paddingTop: "1rem",
-    color: "#78bf35",
+    color: "#616161",
     fontWeight: "bold",
     fontSize: "1rem",
     alignSelf: "flex-end",
     paddingRight: "1rem",
+  },
+  price: {
+    paddingBottom: "1rem",
+  },
+  stPriceWeight: {
+    color: "#cd5c5c",
   },
   buttonGroup: {
     display: "flex",
@@ -150,8 +163,9 @@ export default {
     color: "#616161",
   },
   button: {
-    marginTop: "1rem",
+    marginTop: "1.5rem",
     color: "#78bf35",
+    border: "2px solid",
     borderColor: "#78bf35",
     "&:hover ": {
       borderColor: "#78bf35",
