@@ -97,9 +97,9 @@ const useStyles = makeStyles({
     fontFamily: "inherit",
   },
   productList: {
-    display:"flex",
-    flexDirection:"column",
-    paddingTop:"3rem"
+    display: "flex",
+    flexDirection: "column",
+    paddingTop: "3rem",
   },
   // benefits: {
   //   width: "150px",
@@ -108,16 +108,16 @@ const useStyles = makeStyles({
   textAlign: {
     texAalign: "center",
   },
-  frame:{
+  frame: {
     // height:"150px",
   },
-  seeMore:{
-    fontSize:"larger",
-    paddingTop:"2rem",
-  }
+  seeMore: {
+    fontSize: "larger",
+    paddingTop: "2rem",
+  },
 });
 
-const Accueil = (props) => {
+const Accueil = props => {
   //Styles
   const classes = useStyles();
 
@@ -160,7 +160,7 @@ const Accueil = (props) => {
         <ImageSlider />
 
         <div className={classes.blocks}>
-          <Typography className={classes.aboutUs}>
+          <Typography component="div" className={classes.aboutUs}>
             <p align="center">CUISINE DU JOUR BONJOUR</p>
             <p align="center">
               Oui comme des poules au plein air, c’est à l’aube qu’on

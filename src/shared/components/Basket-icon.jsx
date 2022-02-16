@@ -1,8 +1,10 @@
-import * as React from "react";
+import React, {useContext} from "react";
+
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import BasketContext from "../context/basket-context";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -14,10 +16,18 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
+
+
 export default function CustomizedBadges(props) {
+  const basketCtx = useContext(BasketContext);
+
+  const numberOfBasketProducts = basketCtx.products.reduce((curNumber, product) => {
+    return curNumber + product.quantity
+  }, 0)
+
   return (
-    <IconButton sx={{ mx: "1.5rem" }} aria-label="cart">
-      <StyledBadge badgeContent={4} color="secondary">
+    <IconButton sx={{ mx: "1.5rem" }} aria-label="cart" onClick={props.onClick}>
+      <StyledBadge badgeContent={numberOfBasketProducts} color="secondary">
         <ShoppingCartIcon />
       </StyledBadge>
     </IconButton>

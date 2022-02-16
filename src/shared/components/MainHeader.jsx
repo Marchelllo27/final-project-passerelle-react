@@ -8,7 +8,7 @@ import { makeStyles } from "@mui/styles";
 
 import AuthContext from "../context/auth-context";
 import Navigation from "./Navigation";
-import Basket from "./Basket-icon";
+import BasketIcon from "./Basket-icon";
 import classes from "./MainHeader.module.css";
 
 const useStyles = makeStyles({
@@ -88,11 +88,11 @@ const MainHeader = props => {
       </Link>
       <Navigation />
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Tooltip title="Panier" arrow>
-          <Link to="/basket">
-            <Basket />
-          </Link>
-        </Tooltip>
+        {/* <Tooltip title="Panier" arrow>
+          <div>
+            <BasketIcon onClick={props.onShowBasket} />
+          </div>
+        </Tooltip> */}
 
         {authCtx.isLoggedIn && (
           <>

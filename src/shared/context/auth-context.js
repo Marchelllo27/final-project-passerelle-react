@@ -1,4 +1,3 @@
-// import React, { createContext, useCallback, useState } from "react";
 import { createContext } from "react";
 
 const AuthContext = createContext({
