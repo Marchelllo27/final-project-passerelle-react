@@ -8,7 +8,6 @@ import { makeStyles } from "@mui/styles";
 
 import AuthContext from "../context/auth-context";
 import Navigation from "./Navigation";
-import BasketIcon from "./Basket-icon";
 import classes from "./MainHeader.module.css";
 
 const useStyles = makeStyles({

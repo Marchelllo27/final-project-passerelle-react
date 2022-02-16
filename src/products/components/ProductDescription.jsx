@@ -1,9 +1,5 @@
-//wad in product
-
-import * as React from "react";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 
 //Theme & Style
 import { makeStyles } from "@mui/styles";
@@ -14,10 +10,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 //Components
-// import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -37,11 +31,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-//Translation 
+//Translation
 import { useTranslation } from "react-i18next";
-
-
-
 
 const useStyles = makeStyles(stylesDescription);
 export default function ProductDescription(props) {
@@ -53,49 +44,27 @@ export default function ProductDescription(props) {
   //Add & substract
   const [itemCount, setItemCount] = useState(1);
   const [productData, setProductData] = useState(null);
-  const [ingredient, setIngredient] = useState(null);
   const [httpError, sethttpError] = useState(null);
 
-  //Accordion
+  //Translation
+  const { t } = useTranslation("nutrients");
 
-  const [expanded, setExpanded] = useState(false);
-
-  const handleChange = panel => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  }
-
-//Translation
-const { t } = useTranslation("nutrients");
-
-//state
-useEffect(() => {
-  const fetchProduct = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_URL_API}/products/${props.productInUrl}/${id}`
-    );
-    if (!response.ok) {
-      throw new Error("Error !");
-    }
-    const resData = await response.json();
-    setProductData(resData);
-
-    //  console.log(productData);
-    }
-    fetchProduct().catch((err)=>{ return sethttpError(err.message)});
-  },[id, props.productInUrl])
-  
-  //state for productData changes
-  useEffect(()=>{
-    if(productData){
-      
-      console.log(productData.nutrients);
-      console.log(productData.ingredients);
-  }
-},[productData]);
-
-
-
-  // console.log(productData);
+  //state
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_URL_API}/products/${props.productInUrl}/${id}`
+      );
+      if (!response.ok) {
+        throw new Error("Error !");
+      }
+      const resData = await response.json();
+      setProductData(resData);
+    };
+    fetchProduct().catch(err => {
+      return sethttpError(err.message);
+    });
+  }, [id, props.productInUrl]);
 
   return (
     <div>
@@ -103,32 +72,20 @@ useEffect(() => {
         className={classes.backButton}
         startIcon={<ArrowBackIosIcon color="action" />}
       >
-        <Link
-          to={`/${props.imgUrl}`}
-          // underline="hover"
-        >
-          Retour à la page précédente
-        </Link>
+        <Link to={`/${props.imgUrl}`}>Retour à la page précédente</Link>
       </Button>
-      <Container
-        // className={classes.container}
-        fixed
-      >
+      <Container fixed>
         {httpError && <p>Error</p>}
         {productData && (
           <Card sx={{ maxWidth: 1200 }} className={classes.card}>
-            {/* <Paper  
-             className={classes.paperImage} 
-             > */}
             <img
               className={classes.image}
               src={`${process.env.REACT_APP_URL_API}/uploads/images/${props.imgUrl}/${productData.image}`}
               alt={productData.name}
             />
-            {/* </Paper>   */}
             <Paper className={classes.main} elevation={20}>
               <CardContent className={classes.cardContent}>
-                <Typography  className={classes.title}>
+                <Typography className={classes.title}>
                   {productData.name}
                 </Typography>
                 <Typography
@@ -154,15 +111,11 @@ useEffect(() => {
                   </Typography>
 
                   {/* Accodion for nutriments */}
-                  <Accordion onChange={handleChange("panel1")}>
+                  <Accordion>
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
-                      // aria-controls="panel1bh-content"
                       id="panel1bh-header"
                     >
-                      {/* <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                      Nutriments :
-                    </Typography> */}
                       <Typography sx={{ color: "success" }}>
                         <strong className={classes.ingredientsList}>
                           Nutriments
@@ -179,14 +132,9 @@ useEffect(() => {
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {productData.nutrients.map((nutrient) => (
-                              // let nutrientNAme =()=>{
-                              //    if(nutrient.name){
-                              //   let name = nutrient.name;
-                              //   t(name) }
-                              //                           }
+                            {productData.nutrients.map(nutrient => (
                               <TableRow
-                                kkey={nutrient._id}
+                                key={nutrient._id}
                                 sx={{
                                   "&:last-child td, &:last-child th": {
                                     border: 0,
@@ -228,11 +176,10 @@ useEffect(() => {
                         setItemCount(Math.max(itemCount - 1, 0));
                       }}
                     >
-                      {" "}
                       <RemoveIcon fontSize="small" />
                     </Button>
                     <Badge className={classes.number} badgeContent={itemCount}>
-                      <ShoppingBasketIcon color="action" />{" "}
+                      <ShoppingBasketIcon color="action" />
                     </Badge>
 
                     <Button
@@ -242,7 +189,6 @@ useEffect(() => {
                         setItemCount(itemCount + 1);
                       }}
                     >
-                      {" "}
                       <AddIcon fontSize="small" />
                     </Button>
                   </div>
@@ -255,7 +201,6 @@ useEffect(() => {
                   Ajouter au panier
                 </Button>
               </CardActions>
-              {/* <CardContent></CardContent> */}
             </Paper>
           </Card>
         )}
