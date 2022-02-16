@@ -88,10 +88,10 @@ const ProductItem = props => {
                 </div>
                 {/* price and add button */}
                 <div className={classes.actionControl}>
-                  <span className={classes.price}>{price}€</span>
+                  <span className={classes.price}>{price.toFixed(2)}€</span>
                   <Tooltip title="Ajouter au panier" arrow>
-                    <div className={style.addToBasketBox}>
-                      <ShoppingCartIcon onClick={addProductHandler} />
+                    <div className={style.addToBasketBox} onClick={addProductHandler}>
+                      <ShoppingCartIcon />
                     </div>
                   </Tooltip>
                 </div>

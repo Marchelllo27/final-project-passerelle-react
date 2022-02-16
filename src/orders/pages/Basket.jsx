@@ -12,7 +12,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 600,
+  maxWidth: 800,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -26,12 +27,12 @@ const Basket = props => {
   const hasProductsInBasket = basketCtx.products.length > 0;
 
   const productItemRemoveHandler = id => {
-
-  }
+    basketCtx.removeProduct(id);
+  };
 
   const addProductItemHandler = product => {
-
-  }
+    basketCtx.addProduct({ ...product, quantity: 1 });
+  };
 
   const productItems = basketCtx.products.map(product => (
     <BasketItem
@@ -47,7 +48,10 @@ const Basket = props => {
   return (
     <BasketModal show={props.onShow} onBackdropClick={props.onClose}>
       <Box sx={style}>
-        <ul>{productItems}</ul>
+        {!hasProductsInBasket && (
+          <h2 style={{ textAlign: "center" }}>Le panier est vide...</h2>
+        )}
+        <ul className={classes.itemList}>{productItems}</ul>
         <div className={classes.total}>
           <span>Total Amount</span>
           <span>{totalPrice}</span>
