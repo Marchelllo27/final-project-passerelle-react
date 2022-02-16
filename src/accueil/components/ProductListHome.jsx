@@ -59,12 +59,12 @@ const ProductsList = (props) => {
           />
         ))}
       </Grid>
-      <Link
+      {/* <Link
         to={`/${props.imgUrl}`}
         // underline="hover"
       >
         Retour à la page précédente
-      </Link>
+      </Link> */}
     </Container>
   );
 };
