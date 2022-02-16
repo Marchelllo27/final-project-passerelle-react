@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 // MUI
@@ -38,10 +38,10 @@ const useStyles = makeStyles({
 });
 
 const MainHeader = props => {
-  const AuthCtx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
   const style = useStyles();
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -50,21 +50,51 @@ const MainHeader = props => {
     setAnchorEl(null);
   };
 
+  const logOutHandler = () => {
+    setAnchorEl(null);
+    authCtx.logout();
+  };
+
   return (
     <header className={classes.mainHeader}>
+      {authCtx.isAdmin && authCtx.isLoggedIn && (
+        <p
+          style={{
+            color: "red",
+            position: "absolute",
+            left: "7rem",
+            top: "2.8rem",
+          }}
+        >
+          ADMIN
+        </p>
+      )}
+
+      {authCtx.isLoggedIn && !authCtx.isAdmin && (
+        <p
+          style={{
+            color: "red",
+            position: "absolute",
+            left: "7rem",
+            top: "2.8rem",
+          }}
+        >
+          USER
+        </p>
+      )}
+
       <Link className={classes.logoBox} to="/">
         <img src="/logo.png" alt="Eat Smart logo" />
       </Link>
       <Navigation />
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        {/* , height: "5rem" */}
         <Tooltip title="Panier" arrow>
           <Link to="/basket">
             <Basket />
           </Link>
         </Tooltip>
 
-        {AuthCtx.isLoggedIn && (
+        {authCtx.isLoggedIn && (
           <>
             <Tooltip title="Espace personnel" arrow>
               <AccountCircleIcon
@@ -91,7 +121,7 @@ const MainHeader = props => {
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
               </Link>
               <Link to="/">
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={logOutHandler}>Logout</MenuItem>
               </Link>
             </Menu>
           </>
