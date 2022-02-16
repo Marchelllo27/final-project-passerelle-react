@@ -147,7 +147,7 @@ const Profile = (props) => {
       try{
         const responseData = await sendRequest(
           // `${process.env.REACT_APP_URL_API}/admin/user/${userId}`
-          `${process.env.REACT_APP_URL_API}/auth-user/auth-user/${userId}`,
+          `${process.env.REACT_APP_URL_API}/auth-user/auth-user`,
           "GET",
           null,
           { Authorization: "Bearer " + token }
