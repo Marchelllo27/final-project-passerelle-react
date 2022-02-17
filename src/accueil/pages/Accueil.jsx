@@ -1,5 +1,4 @@
-//react
-import * as React from "react";
+import React, {useContext} from "react";
 import ProductsListHome from "./../components/ProductListHome";
 //Mui
 import Box from "@mui/material/Box";
@@ -18,6 +17,9 @@ import { makeStyles } from "@mui/styles";
 import frame from "./separateur-1-1-e1560496517774.png";
 import img from "./item-slider.png";
 import "animate.css";
+
+import AuthContext from "../../shared/context/auth-context";
+import SuccessSnackbar from "../../shared/UIElements/SuccessSnackbar";
 
 const useStyles = makeStyles({
   container: {
@@ -115,11 +117,17 @@ const useStyles = makeStyles({
 });
 
 const Accueil = props => {
-  //Styles
+  const authCtx = useContext(AuthContext)
+
   const classes = useStyles();
+
+  const closeSuccess = data => {
+    authCtx.hideSuccessModal()
+  }
 
   return (
     <>
+     { authCtx.showSuccess && <SuccessSnackbar message="Votre commande a été transmise" closeModal={closeSuccess}/>}
       <Container className={classes.container}>
         <Card className={classes.slider1}>
           <img src={img} alt="fruit orange" className={classes.img} />

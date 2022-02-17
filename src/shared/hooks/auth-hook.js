@@ -18,13 +18,9 @@ export const useAuth = () => {
 
   const userIsLoggedIn = !!token; //!!transform truthy or falsy value in true or false
 
-  const setAdmin = useCallback(() => {
-    setIsAdmin(true);
-  }, []);
-
   const login = useCallback((userToken, role, existingExpirationDate) => {
     if (role === "ADMIN") {
-      setAdmin();
+      setIsAdmin(true);
     }
     setToken(userToken);
     // generate current date + 1hour      curDate in millisec  second min  hour
@@ -40,7 +36,7 @@ export const useAuth = () => {
       })
       // toISO to not lose any data during stringify and parse back to new Date object
     );
-  }, [setAdmin]);
+  }, []);
 
   const logout = useCallback(() => {
     setToken(null);
@@ -82,7 +78,6 @@ export const useAuth = () => {
     hideSuccessModal,
     login,
     logout,
-    setAdmin,
   };
 
   return {

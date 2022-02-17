@@ -1,20 +1,22 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import Accueil from "../accueil/pages/Accueil";
-import Drinks from "../products/pages/Drinks";
-import Dishes from "../products/pages/Dishes";
-import Desserts from "../products/pages/Desserts";
 import ProductDescription from "../products/components/ProductDescription";
-// import Basket from "../orders/pages/Basket";
-import Profile from "../users/pages/Profile";
-import Signup from "../users/pages/Signup";
-import Login from "../users/pages/Login"
+import BackDropSpinner from "../shared/UIElements/BackDropSpinner";
 
-const getRightRoutes = (userIsLoggedIn) => {
+const Drinks = React.lazy(() => import("../products/pages/Drinks"));
+const Dishes = React.lazy(() => import("../products/pages/Dishes"));
+const Desserts = React.lazy(() => import("../products/pages/Desserts"));
+const Profile = React.lazy(() => import("../users/pages/Profile"));
+const Signup = React.lazy(() => import("../users/pages/Signup"));
+const Login = React.lazy(() => import("../users/pages/Login"));
+
+const getRightRoutes = userIsLoggedIn => {
   let routes;
   if (userIsLoggedIn) {
     routes = (
+      <Suspense fallback={<BackDropSpinner/>}>
       <Switch>
         <Route path="/" exact>
           <Accueil />
@@ -37,17 +39,16 @@ const getRightRoutes = (userIsLoggedIn) => {
         <Route path="/drinks/:id" exact>
           <ProductDescription productInUrl="drink" imgUrl="drinks" />
         </Route>
-        {/* <Route path="/basket" exact>
-          <Basket />
-        </Route> */}
         <Route path="/profile" exact>
           <Profile />
         </Route>
         <Redirect to="/" />
       </Switch>
-    )
+      </Suspense>
+    );
   } else {
     routes = (
+      <Suspense fallback={<BackDropSpinner/>}>
       <Switch>
         <Route path="/" exact>
           <Accueil />
@@ -70,9 +71,6 @@ const getRightRoutes = (userIsLoggedIn) => {
         <Route path="/drinks/:id" exact>
           <ProductDescription productInUrl="drink" imgUrl="drinks" />
         </Route>
-        {/* <Route path="/basket" exact>
-          <Basket />
-        </Route> */}
         <Route path="/signup" exact>
           <Signup />
         </Route>
@@ -81,11 +79,11 @@ const getRightRoutes = (userIsLoggedIn) => {
         </Route>
         <Redirect to="/" />
       </Switch>
-    )
+      </Suspense>
+    );
   }
 
-
   return routes;
-}
+};
 
 export default getRightRoutes;

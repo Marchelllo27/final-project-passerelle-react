@@ -38,27 +38,34 @@ const basketReducer = (state, action) => {
   }
 
   if (action.type === "REMOVE") {
-
-    const productIndex = state.products.findIndex(product => product.id === action.id);
+    const productIndex = state.products.findIndex(
+      product => product.id === action.id
+    );
     const productToRemove = state.products[productIndex];
 
     let updatedProducts;
     if (productToRemove.quantity === 1) {
-      updatedProducts = state.products.filter(product => product.id !== action.id)
+      updatedProducts = state.products.filter(
+        product => product.id !== action.id
+      );
     } else {
-      const updatedProduct = {...productToRemove, quantity: productToRemove.quantity - 1}
+      const updatedProduct = {
+        ...productToRemove,
+        quantity: productToRemove.quantity - 1,
+      };
       updatedProducts = [...state.products];
       updatedProducts[productIndex] = updatedProduct;
     }
 
-    const updatedTotalPrice =
-    state.totalPrice - productToRemove.price;
+    const updatedTotalPrice = state.totalPrice - productToRemove.price;
 
     return {
       products: updatedProducts,
-      totalPrice: updatedTotalPrice
-    }
+      totalPrice: updatedTotalPrice,
+    };
   }
+
+  if (action.type === "CLEAR") return defaultBasketState
 
   return defaultBasketState;
 };
@@ -77,11 +84,16 @@ const BasketProvider = props => {
     dispatchBasketAction({ type: "REMOVE", id: id });
   };
 
+  const clearBasket = () => {
+    dispatchBasketAction({ type: "CLEAR" });
+  };
+
   const basketContextValue = {
     products: basketState.products,
     totalPrice: basketState.totalPrice,
     addProduct: addProductToCartHandler,
     removeProduct: removeProductFromCartHandler,
+    clearBasket: clearBasket,
   };
 
   return (
