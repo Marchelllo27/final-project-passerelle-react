@@ -1,23 +1,45 @@
 import React from "react";
-
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 import { Button, Container, Box, Paper, Input } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ProfileStyles from "./ProfileStyles";
+import sendHttpRequest from "../../utils/sendHttpRequest";
 
 const useStyles = makeStyles(ProfileStyles);
 
 const ProfileForm = props => {
   const classes = useStyles();
+  const history = useHistory();
 
   const { register, handleSubmit } = useForm({
     defaultValues: props.preloadedValues,
   });
 
-  const onSubmitHandler = data => {
-    //TODO: SUBMIT LOGIC 
-    console.log(data);
+  const onSubmitHandler = updatedUserData => {
+    const { token } = JSON.parse(localStorage.getItem("userData"));
+
+    const updateUserData = async () => {
+      await sendHttpRequest(
+        `${process.env.REACT_APP_URL_API}/auth-user/update`,
+        "PUT",
+        JSON.stringify(updatedUserData),
+        {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        }
+      );
+    };
+
+    updateUserData()
+      .then(() => {
+        history.push("/");
+        console.log("USER FINALLY UPDATED!");
+      })
+      .catch(err => {
+        alert(err.message);
+      });
   };
 
   return (
