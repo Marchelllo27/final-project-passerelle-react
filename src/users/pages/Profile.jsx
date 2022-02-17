@@ -3,15 +3,17 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 // import { useForm } from '../../shared/hooks/form-hook';
 //UI
-import { TextField, Button, Container, Box, Paper } from "@mui/material";
+import { TextField, Button, Container, Box, Paper, Input } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import BackDropSpinner from "../../shared/UIElements/BackDropSpinner";
+
 // import classes from "./Signup.module.css";
 import { spacing } from "@mui/system";
 //For Update
-import AuthContext from "./../../shared/context/auth-context";
-import useHttpUser from "./../../shared/hooks/http-hook";
+import AuthContext from "../../shared/context/auth-context";
+import sendHttpRequest from "../../utils/sendHttpRequest";
 //validation password
-import { useForm } from "./../../shared/hooks/form-hook";
+import { useForm } from "../../shared/hooks/form-hook";
 // import { yupResolver } from "@hookform/resolvers/yup";
 // import * as Yup from "yup";
 
@@ -82,22 +84,27 @@ const Profile = (props) => {
   const classes = useStyles();
   //Update
   const auth = useContext(AuthContext);
-  const { isLoading, error, sendRequest, clearError } = useHttpUser();
-  const [loadedUser,setLoadedUser]=useState();
-  // const {userId}=useParams().userId;
+  // const { sendRequest } = sendHttpRequest();
+  // console.log(sendRequest);
+  const [loadedUser, setLoadedUser] = useState();
+  const { isLoading, setIsLoading } = useState();
+  // const { street, setStreet } = useState();
+  const changeStreetHandler = (event) => {
+    console.log(event.target.value);
+  };
+
   const { userId } = useParams();
-   console.log(userId);
   const history = useHistory();
-  
+
   //Submit
-    // const { register, handleSubmit, reset, formState } = useForm(validationOpt);
+  // const { register, handleSubmit, reset, formState } = useForm(validationOpt);
   //Validation
   // const validationOpt = { resolver: yupResolver(formSchema) };
 
   // const { errors } = formState;
   const [formState, inputHandler, setFormData] = useForm(
     {
-      initialValues: {
+      placeholders: {
         firstName: {
           value: "",
           isValid: false,
@@ -106,98 +113,104 @@ const Profile = (props) => {
           value: "",
           isValid: false,
         },
-        email: {
-          value: "",
-          isValid: false,
-        },
+        // email: {
+        //   value: "",
+        //   isValid: false,
+        // },
         phoneNumber: {
           value: "",
           isValid: false,
         },
-        password: {
-          value: "",
-          isValid: false,
-        },
-        confirmPassword: {
-          value: "",
-          isValid: false,
-        },
-        street: {
-          value: "",
-          isValid: false,
-        },
-        postalCode: {
-          value: "",
-          isValid: false,
-        },
-        city: {
-          value: "",
-          isValid: false,
+        // password: {
+        //   value: "",
+        //   isValid: false,
+        // },
+        // confirmPassword: {
+        //   value: "",
+        //   isValid: false,
+        // },
+        addres: {
+          street: {
+            value: "",
+            isValid: false,
+          },
+          postalCode: {
+            value: "",
+            isValid: false,
+          },
+          city: {
+            value: "",
+            isValid: false,
+          },
         },
       },
     },
     false
   );
-       
-     
+
   useEffect(() => {
-    const fetchUser = async()=>{
+    const fetchUser = async () => {
       const { token } = JSON.parse(localStorage.getItem("userData"));
-      console.log(token)
-      try{
-        const responseData = await sendRequest(
+      // console.log(token);
+      try {
+        const responseData = await sendHttpRequest(
           // `${process.env.REACT_APP_URL_API}/admin/user/${userId}`
-          `${process.env.REACT_APP_URL_API}/auth-user/auth-user`,
+          `${process.env.REACT_APP_URL_API}/auth-user/user-info`,
           "GET",
           null,
           { Authorization: "Bearer " + token }
         );
         // const string =JSON.stringify(responseData);
 
-        console.log(responseData);
-        setLoadedUser(responseData.user);
-        setFormData({
-         firstName: {
-            value: responseData.user.firstName,
-            isValid: false,
-          },
-          lastName: {
-            value: responseData.user.lastName,
-            isValid: false,
-          },
+        // console.log(responseData);
+        // console.log(responseData.address.city);
+        setLoadedUser(responseData);
+        // setLoadedUser(responseData.user);
+        setFormData(
+          {
+            firstName: {
+              value: responseData.firstName,
+              isValid: true,
+            },
+            lastName: {
+              value: responseData.lastName,
+              isValid: true,
+            },
 
-          email: {
-            value: responseData.user.email,
-            isValid: false,
-          },
+            email: {
+              value: responseData.email,
+              isValid: true,
+            },
 
-          phoneNumber: {
-            value: responseData.user.phoneNumber,
-            isValid: false,
-          },
+            phoneNumber: {
+              value: responseData.phoneNumber,
+              isValid: true,
+            },
+            address: {
+              street: {
+                value: responseData.street,
+                isValid: true,
+              },
 
-          street: {
-            value: responseData.user.street,
-            isValid: false,
-          },
+              postalCode: {
+                value: responseData.postalCode,
+                isValid: true,
+              },
 
-          postalCode: {
-            value: responseData.user.postalCode,
-            isValid: false,
+              city: {
+                value: responseData.city,
+                isValid: true,
+              },
+            },
           },
-
-          city: {
-            value: responseData.user.city,
-            isValid: false,
-          },
-
-      },true);
-      }catch(err){
-          console.log(err)
+          true
+        );
+      } catch (err) {
+        // console.log(err);
       }
     };
     fetchUser();
-  }, [sendRequest, userId, setFormData]);
+  }, [userId, setFormData]);
 
   // function onFormSubmit(data) {
   //   console.log(JSON.stringify(data, null, 4));
@@ -205,34 +218,72 @@ const Profile = (props) => {
   // }
   const userUpdateSubmitHandler = async (event) => {
     event.preventDefault();
+    const { token } = JSON.parse(localStorage.getItem("userData"));
+    // console.log(token);
     try {
-      await sendRequest(
-        `${process.env.REACT_APP_URL_API}/auth-user/update/${userId}`,
-        `PUT`,
-        JSON.stringify({
-          // password: formState.inputs.password.value,
-        }),
+      const sendData = await fetch(
+        `${process.env.REACT_APP_URL_API}/auth-user/update/`,
         {
-          "content-type": "application/json",
+          method: `PUT`,
+
+          body: JSON.stringify({
+            //  firstName: formState.firstName.value,
+            //  lastName: formState.lastName.value,
+            //  email: formState.email.value,
+            //  phoneNumber: formState.phoneNumber.value,
+            //  street: formState.street.value,
+            //  postalCode: formState.postalCode.value,
+            //  city: formState.city.value,
+
+            firstName: formState.Inputs.firstName.value,
+            //  lastName: formState.inputs.lastName.value,
+            // //  email: formState.inputs.email.value,
+            //  phoneNumber: formState.inputs.phoneNumber.value,
+            // //  street: event.target.value,
+            //  postalCode: formState.inputs.postalCode.value,
+            //  city: formState.inputs.city.value,
+          }),
+
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
         }
       );
-      history.put("/" + auth.userId + "/update");
-    } catch (err) {}
-  };
-  
-  //Validation password
-  // const formSchema = Yup.object().shape({
-  //   password: Yup.string()
-  //     .required("Veuillez entrer votre mot de passe")
-  //     .min(4, "Le mot de passe doit contenir au moins 4 caractéres"),
-  //   passwordConfirm: Yup.string()
-  //     .required("La confirmation de votre mot de passe est requise")
-  //     .oneOf(
-  //       [Yup.ref("password")],
-  //       "La validation du mot de passe est incorrecte"
-  //     ),
-  // });
 
+      // console.log("datasent : ",{firstName: formState.Inputs.firstName.value});
+
+      console.log({
+        firstName: formState.inputs.firstName.value,
+        lastName: formState.inputs.lastName.value,
+        phoneNumber: formState.inputs.phoneNumber.value,
+        street: formState.inputs.street.value,
+        postalCode: formState.inputs.postalCode.value,
+        city: formState.inputs.city.value,
+      });
+      console.log(formState);
+      // history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="">
+  //       <BackDropSpinner />
+  //     </div>
+  //   );
+  // }
+  // if (!loadedPlace && !error) {
+  //   return (
+  //     <div className="">
+  //       <Card>
+  //         <h2>Utilisateur introuvable</h2>
+  //       </Card>
+  //     </div>
+  //   );
+  // }
   return (
     <Container className={classes.container}>
       <Box className={classes.box}>
@@ -246,64 +297,48 @@ const Profile = (props) => {
         {/* </Link> */}
 
         <Paper elevation={24} className={classes.paper}>
-          {!isLoading && loadedUser && (
+          {loadedUser && (
             <form className={classes.root} onSubmit={userUpdateSubmitHandler}>
-              <TextField
+              <Input
                 component={"div"}
-                initialValue={loadedUser.firstName}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
+                defaultValue={loadedUser.firstName}
                 name="firstName"
                 id="firstName"
                 label="Votre prénom"
                 variant="outlined"
                 required
+                onInput={inputHandler}
               />
-              {/* {formik.touched.firstName && formik.errors.firstName && (
-              <small className={classes.invalidFeedback}>
-                {formik.errors.firstName}
-              </small>
-            )} */}
-              <TextField
-                initialValue={loadedUser.lastName}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
+
+              <Input
+                defaultValue={loadedUser.lastName}
                 name="lastName"
                 id="lastName"
                 label="Votre nom"
                 variant="outlined"
                 required
+                onInput={inputHandler}
               />
-              {/* {formik.touched.lastName && formik.errors.lastName && (
-              <small className={classes.invalidFeedback}>
-                {formik.errors.lastName}
-              </small>
-            )} */}
-              <TextField
-                initialValue={loadedUser.email}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
+
+              <Input
+                defaultValue={loadedUser.email}
                 name="email"
                 id="email"
                 type="email"
                 required
                 label="Votre email"
                 variant="outlined"
+                onInput={inputHandler}
               />
-              {/* {formik.touched.email && formik.errors.email && (
-              <small className={classes.invalidFeedback}>
-                {formik.errors.email}
-              </small>
-            )} */}
-              <TextField
-                initialValue={loadedUser.phoneNumber}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
+
+              <Input
+                defaultValue={loadedUser.phoneNumber}
                 name="phoneNumber"
                 id="phoneNumber"
                 required
                 label="Votre numéro de téléphone"
                 variant="outlined"
+                onInput={inputHandler}
                 inputProps={{
                   inputMode: "numeric",
                   pattern: "[0-9]*",
@@ -311,37 +346,27 @@ const Profile = (props) => {
                   maxLength: 10,
                 }}
               />
-              {/* {formik.touched.phoneNumber && formik.errors.phoneNumber && (
-              <small className={classes.invalidFeedback}>
-                {formik.errors.phoneNumber}
-              </small>
-            )} */}
 
               <span className={classes.span}>Votre adresse</span>
-              <TextField
-                initialValue={loadedUser.street}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
+              <Input
+                defaultValue={loadedUser.address.street}
                 name="street"
                 id="street"
                 required
                 label="Nom et Numéro de rue"
                 variant="outlined"
+                onInput={inputHandler}
+                // onChange={changeStreetHandler}
               />
-              {/* {formik.touched.street && formik.errors.street && (
-              <small className={classes.invalidFeedback}>
-                {formik.errors.street}
-              </small>
-            )} */}
-              <TextField
-                initialValue={loadedUser.postalCode}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
+
+              <Input
+                defaultValue={loadedUser.address.postalCode}
                 name="postalCode"
                 id="postalCode"
                 required
                 label="Code Postal"
                 variant="outlined"
+                onInput={inputHandler}
                 inputProps={{
                   inputMode: "numeric",
                   pattern: "[0-9]*",
@@ -349,33 +374,24 @@ const Profile = (props) => {
                   maxLength: 5,
                 }}
               />
-              {/* {formik.touched.postalCode && formik.errors.postalCode && (
-              <small className={classes.invalidFeedback}>
-                {formik.errors.postalCode}
-              </small>
-            )} */}
-              <TextField
-                initialValue={loadedUser.city}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
+
+              <Input
+                defaultValue={loadedUser.address.city}
+                onInput={inputHandler}
                 name="city"
                 id="city"
                 required
                 label="Ville"
                 variant="outlined"
               />
-              {/* {formik.touched.city && formik.errors.city && (
-              <small className={classes.invalidFeedback}>
-                {formik.errors.city}
-              </small>
-            )} */}
+
               <Button
                 color="success"
                 type="submit"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Inscription
+                Soumettre
               </Button>
             </form>
           )}
