@@ -28,7 +28,7 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
-    initialValues: {
+  initialValues: {
       firstName: "",
       lastName: "",
       email: "",
