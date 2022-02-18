@@ -42,7 +42,7 @@ const ProductFilter = props => {
   return (
     <FormControl
       sx={{
-        width: 400,
+        width: "60%",
         display: "flex",
         marginLeft: "auto",
         marginRight: "auto",

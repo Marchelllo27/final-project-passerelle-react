@@ -13,14 +13,6 @@ article {
   object-fit: cover;
 }
 
-.gram {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: var(--main-color);
-  padding: 0.5rem 1rem;
-  border-bottom-left-radius: 10px;
-}
 
 .description {
   width: 100%;
@@ -43,11 +35,6 @@ article {
   margin: 0;
 }
 
-.price {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: #78bf35;
-}
 
 .actionControl {
   display: flex;

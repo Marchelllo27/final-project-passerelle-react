@@ -8,7 +8,7 @@ export default {
   },
   backButton: {
     paddingLeft: "2rem",
-    paddingTop: "-20px",
+    paddingBottom:"2rem"
   },
 
   card: {

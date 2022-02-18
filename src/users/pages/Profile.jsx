@@ -1,16 +1,15 @@
 import * as React from "react";
-import { useEffect, useState, useContext } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 // import { useForm } from '../../shared/hooks/form-hook';
 //UI
-import { TextField, Button, Container, Box, Paper, Input } from "@mui/material";
+import { Button, Container, Box, Paper, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import BackDropSpinner from "../../shared/UIElements/BackDropSpinner";
 
 // import classes from "./Signup.module.css";
 import { spacing } from "@mui/system";
 //For Update
-import AuthContext from "../../shared/context/auth-context";
 import sendHttpRequest from "../../utils/sendHttpRequest";
 //validation password
 import { useForm } from "../../shared/hooks/form-hook";
@@ -82,29 +81,20 @@ const useStyles = makeStyles({
 
 const Profile = (props) => {
   const classes = useStyles();
-  //Update
-  const auth = useContext(AuthContext);
-  // const { sendRequest } = sendHttpRequest();
-  // console.log(sendRequest);
+ 
+  
   const [loadedUser, setLoadedUser] = useState();
   const { isLoading, setIsLoading } = useState();
-  // const { street, setStreet } = useState();
-  const changeStreetHandler = (event) => {
-    console.log(event.target.value);
-  };
+  // const changeStreetHandler = (event) => {
+  //   console.log(event.target.value);
+  // };
 
   const { userId } = useParams();
-  const history = useHistory();
 
-  //Submit
-  // const { register, handleSubmit, reset, formState } = useForm(validationOpt);
-  //Validation
-  // const validationOpt = { resolver: yupResolver(formSchema) };
 
-  // const { errors } = formState;
   const [formState, inputHandler, setFormData] = useForm(
     {
-      placeholders: {
+      values: {
         firstName: {
           value: "",
           isValid: false,
@@ -113,22 +103,10 @@ const Profile = (props) => {
           value: "",
           isValid: false,
         },
-        // email: {
-        //   value: "",
-        //   isValid: false,
-        // },
         phoneNumber: {
           value: "",
           isValid: false,
         },
-        // password: {
-        //   value: "",
-        //   isValid: false,
-        // },
-        // confirmPassword: {
-        //   value: "",
-        //   isValid: false,
-        // },
         addres: {
           street: {
             value: "",
@@ -151,7 +129,6 @@ const Profile = (props) => {
   useEffect(() => {
     const fetchUser = async () => {
       const { token } = JSON.parse(localStorage.getItem("userData"));
-      // console.log(token);
       try {
         const responseData = await sendHttpRequest(
           // `${process.env.REACT_APP_URL_API}/admin/user/${userId}`
@@ -160,12 +137,8 @@ const Profile = (props) => {
           null,
           { Authorization: "Bearer " + token }
         );
-        // const string =JSON.stringify(responseData);
 
-        // console.log(responseData);
-        // console.log(responseData.address.city);
         setLoadedUser(responseData);
-        // setLoadedUser(responseData.user);
         setFormData(
           {
             firstName: {
@@ -205,21 +178,15 @@ const Profile = (props) => {
           },
           true
         );
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchUser();
-  }, [userId, setFormData]);
+  }, [setIsLoading,userId, setFormData]);
 
-  // function onFormSubmit(data) {
-  //   console.log(JSON.stringify(data, null, 4));
-  //   return false;
-  // }
+ 
   const userUpdateSubmitHandler = async (event) => {
     event.preventDefault();
     const { token } = JSON.parse(localStorage.getItem("userData"));
-    // console.log(token);
     try {
       const sendData = await fetch(
         `${process.env.REACT_APP_URL_API}/auth-user/update/`,
@@ -227,21 +194,12 @@ const Profile = (props) => {
           method: `PUT`,
 
           body: JSON.stringify({
-            //  firstName: formState.firstName.value,
-            //  lastName: formState.lastName.value,
-            //  email: formState.email.value,
-            //  phoneNumber: formState.phoneNumber.value,
-            //  street: formState.street.value,
-            //  postalCode: formState.postalCode.value,
-            //  city: formState.city.value,
-
             firstName: formState.Inputs.firstName.value,
-            //  lastName: formState.inputs.lastName.value,
-            // //  email: formState.inputs.email.value,
-            //  phoneNumber: formState.inputs.phoneNumber.value,
-            // //  street: event.target.value,
-            //  postalCode: formState.inputs.postalCode.value,
-            //  city: formState.inputs.city.value,
+            lastName: formState.inputs.lastName.value,
+            phoneNumber: formState.inputs.phoneNumber.value,
+            street: formState.inputs.street.value,
+            postalCode: formState.inputs.postalCode.value,
+            city: formState.inputs.city.value,
           }),
 
           headers: {
@@ -250,56 +208,34 @@ const Profile = (props) => {
           },
         }
       );
-
-      // console.log("datasent : ",{firstName: formState.Inputs.firstName.value});
-
+        sendData();
       console.log({
         firstName: formState.inputs.firstName.value,
-        lastName: formState.inputs.lastName.value,
-        phoneNumber: formState.inputs.phoneNumber.value,
-        street: formState.inputs.street.value,
-        postalCode: formState.inputs.postalCode.value,
-        city: formState.inputs.city.value,
+       
       });
       console.log(formState);
-      // history.push("/");
     } catch (err) {
       console.log(err);
     }
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="">
-  //       <BackDropSpinner />
-  //     </div>
-  //   );
-  // }
-  // if (!loadedPlace && !error) {
-  //   return (
-  //     <div className="">
-  //       <Card>
-  //         <h2>Utilisateur introuvable</h2>
-  //       </Card>
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <div className="">
+        <BackDropSpinner />
+      </div>
+    );
+  }
+ 
   return (
     <Container className={classes.container}>
       <Box className={classes.box}>
-        {/* <Link
-          href="/login"
-          variant="body2"
-          underline="hover"
-          className={classes.connexion}
-        > */}
         <span className={classes.span}>Informations personnels</span>
-        {/* </Link> */}
 
         <Paper elevation={24} className={classes.paper}>
-          {loadedUser && (
+          {!isLoading && loadedUser && (
             <form className={classes.root} onSubmit={userUpdateSubmitHandler}>
-              <Input
+              <TextField
                 component={"div"}
                 defaultValue={loadedUser.firstName}
                 name="firstName"
@@ -307,20 +243,20 @@ const Profile = (props) => {
                 label="Votre prénom"
                 variant="outlined"
                 required
-                onInput={inputHandler}
+                onChange={inputHandler}
               />
 
-              <Input
+              <TextField
                 defaultValue={loadedUser.lastName}
                 name="lastName"
                 id="lastName"
                 label="Votre nom"
                 variant="outlined"
                 required
-                onInput={inputHandler}
+                onChange={inputHandler}
               />
 
-              <Input
+              <TextField
                 defaultValue={loadedUser.email}
                 name="email"
                 id="email"
@@ -328,56 +264,45 @@ const Profile = (props) => {
                 required
                 label="Votre email"
                 variant="outlined"
-                onInput={inputHandler}
+                onChange={inputHandler}
               />
 
-              <Input
+              <TextField
                 defaultValue={loadedUser.phoneNumber}
                 name="phoneNumber"
                 id="phoneNumber"
                 required
                 label="Votre numéro de téléphone"
                 variant="outlined"
-                onInput={inputHandler}
-                inputProps={{
-                  inputMode: "numeric",
-                  pattern: "[0-9]*",
-                  minLength: 10,
-                  maxLength: 10,
-                }}
+                onChange={inputHandler}
+                
               />
 
               <span className={classes.span}>Votre adresse</span>
-              <Input
+              <TextField
                 defaultValue={loadedUser.address.street}
                 name="street"
                 id="street"
                 required
                 label="Nom et Numéro de rue"
                 variant="outlined"
-                onInput={inputHandler}
-                // onChange={changeStreetHandler}
+                onChange={inputHandler}
               />
 
-              <Input
+              <TextField
                 defaultValue={loadedUser.address.postalCode}
                 name="postalCode"
                 id="postalCode"
                 required
                 label="Code Postal"
                 variant="outlined"
-                onInput={inputHandler}
-                inputProps={{
-                  inputMode: "numeric",
-                  pattern: "[0-9]*",
-                  minLength: 5,
-                  maxLength: 5,
-                }}
+                onChange={inputHandler}
+                
               />
 
-              <Input
+              <TextField
                 defaultValue={loadedUser.address.city}
-                onInput={inputHandler}
+                onChange={inputHandler}
                 name="city"
                 id="city"
                 required

@@ -75,6 +75,7 @@ const useStyles = makeStyles({
     padding: "1rem",
   },
   blocks: {
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
