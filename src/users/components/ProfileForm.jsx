@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
-import { Button, Container, Box, Paper, Input } from "@mui/material";
+import { Button, Container, Box, Paper, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ProfileStyles from "./ProfileStyles";
 import sendHttpRequest from "../../utils/sendHttpRequest";
@@ -54,7 +54,7 @@ const ProfileForm = props => {
             className={classes.root}
             onSubmit={handleSubmit(onSubmitHandler)}
           >
-            <Input
+            <TextField
               {...register("firstName")}
               name="firstName"
               id="firstName"
@@ -63,7 +63,7 @@ const ProfileForm = props => {
               required
             />
 
-            <Input
+            <TextField
               {...register("lastName")}
               name="lastName"
               id="lastName"
@@ -72,7 +72,7 @@ const ProfileForm = props => {
               required
             />
 
-            <Input
+            <TextField
               {...register("email")}
               name="email"
               id="email"
@@ -82,7 +82,7 @@ const ProfileForm = props => {
               variant="outlined"
             />
 
-            <Input
+            <TextField
               {...register("phoneNumber")}
               name="phoneNumber"
               id="phoneNumber"
@@ -98,7 +98,7 @@ const ProfileForm = props => {
             />
 
             <span className={classes.span}>Votre adresse</span>
-            <Input
+            <TextField
               {...register("street")}
               name="street"
               id="street"
@@ -107,7 +107,7 @@ const ProfileForm = props => {
               variant="outlined"
             />
 
-            <Input
+            <TextField
               {...register("postalCode")}
               name="postalCode"
               id="postalCode"
@@ -122,7 +122,7 @@ const ProfileForm = props => {
               }}
             />
 
-            <Input
+            <TextField
               {...register("city")}
               name="city"
               id="city"

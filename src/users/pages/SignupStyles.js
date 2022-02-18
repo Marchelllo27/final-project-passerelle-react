@@ -10,7 +10,7 @@ export default {
     padding: spacing(2),
     //Css textField
     "& .MuiTextField-root": {
-      width: "400px",
+      width: "320px",
       margin: "10px",
     },
     "& .MuiButtonBase-root": {
@@ -49,7 +49,7 @@ export default {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    maxWidth: "30rem",
+    maxWidth: "23rem",
     marginRight: "auto",
     marginLeft: "auto",
     marginTop: "2%",

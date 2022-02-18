@@ -41,7 +41,7 @@ const useStyles = makeStyles({
 const ProductItem = (props) => {
   const style = useStyles();
 
-  const { _id: id, name, image, weight, price } = props.product;
+  const { _id: id, name, image } = props.product;
 
   return (
     <Grid item xs={12} sm={6} md={3}>
@@ -52,7 +52,6 @@ const ProductItem = (props) => {
           elevation={3}
         >
           <article >
-            <div className={classes.gram}>{`${weight}g`}</div>
             <img
               src={`https://final-project-la-passerelle.herokuapp.com/uploads/images/${props.forWichProduct}/${image}`}
               alt={name}
@@ -65,7 +64,6 @@ const ProductItem = (props) => {
               </div>
               {/* price and add button */}
               <div className={classes.actionControl}>
-                <span className={classes.price}>{price}€</span>
               </div>
             </div>
           </article>

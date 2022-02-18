@@ -91,7 +91,9 @@ export default function ProductDescription(props) {
       <Container fixed>
         {httpError && <ErrorAlert message={httpError}/>}
         {productData && (
-          <Card sx={{ maxWidth: 1200 }} className={classes.card}>
+          <div sx={{ maxWidth: 1200 }} 
+          // className={classes.card}
+          >
             <img
               className={classes.image}
               src={`${process.env.REACT_APP_URL_API}/uploads/images/${props.imgUrl}/${productData.image}`}
@@ -138,11 +140,11 @@ export default function ProductDescription(props) {
                     </AccordionSummary>
                     <AccordionDetails>
                       <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <Table sx={{ minWidth: 100 }} aria-label="simple table">
                           <TableHead>
                             <TableRow>
                               <TableCell>Nutriments</TableCell>
-                              <TableCell align="right">Pour 100g </TableCell>
+                              <TableCell align="right">mg Pour 100g </TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
@@ -218,7 +220,7 @@ export default function ProductDescription(props) {
                 </Button>
               </CardActions>
             </Paper>
-          </Card>
+          </div>
         )}
       </Container>
     </div>

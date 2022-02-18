@@ -75,6 +75,7 @@ const useStyles = makeStyles({
     padding: "1rem",
   },
   blocks: {
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
@@ -125,17 +126,29 @@ const Accueil = props => {
 
   return (
     <>
-     { authCtx.showSuccess && <SuccessSnackbar message="Votre commande a été transmise" closeModal={closeSuccess}/>}
+      {authCtx.showSuccess && (
+        <SuccessSnackbar
+          message="Votre commande a été transmise"
+          closeModal={closeSuccess}
+        />
+      )}
       <Container className={classes.container}>
         <Card className={classes.slider1}>
-          <img src="/item-slider.png" alt="fruit orange" className={classes.img} />
+          <img
+            src="/item-slider.png"
+            alt="fruit orange"
+            className={classes.img}
+          />
           <div className={classes.slider1Content}>
             <Typography variant="h4">Goutez à la qualité supérieur </Typography>
             <Typography>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-              nulla delectus autem facilis blanditiis doloremque. Adipisci
-              doloribus odio autem. Illum dicta porro accusamus ipsa iusto
-              quaerat laborum sapiente quasi corporis?
+               Des œufs de poules élevées en
+              plein air, pour assurer le bien-être animal Un saumon label ASC,
+              pour une méthode d’élevage durable Bœuf, agneau, et poulet origine
+              France, pour soutenir nos éleveurs bleu-blanc-rouge<br/> LIVRAISON
+              ÉTHIQUE Ne sont-ils pas beaux nos vélos et triporteurs électriques
+              , sillonnant Paris ? Nous, on les adore et nos employés aussi. Car
+              oui, nos livreurs sont salariés et nous en sommes fiers.
             </Typography>
           </div>
         </Card>
@@ -186,7 +199,11 @@ const Accueil = props => {
               🌱
             </span>
           </Typography>
-          <img src="/frame.png" className={classes.frame} alt="separation line" />
+          <img
+            src="/frame.png"
+            className={classes.frame}
+            alt="separation line"
+          />
           <Box>
             <div className={classes.productList}>
               <Typography
