@@ -52,6 +52,27 @@
   
 }
 
+@media (max-width: 20rem) {
+  .mainHeader {
+    padding: 0 1rem;
+  }
+
+  .mobileMenuIcon {
+    font-size: 1.4rem;
+  }
+
+  .logoBox {
+    height: 2rem;
+  }
+}
+
+@media (max-width: 10rem) {
+
+  .logoBox {
+    height: 1.5rem;
+  }
+}
+
 @keyframes bump {
   0% {
     transform: scale(1);

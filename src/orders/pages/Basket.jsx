@@ -15,12 +15,16 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 600,
-  maxWidth: 800,
+  width: "90%",
+  margin: "0 0.2rem",
+  maxWidth: 600,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  '@media(max-width: 25rem)': {
+    p:1
+  }
 };
 
 const Basket = props => {

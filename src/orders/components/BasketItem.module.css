@@ -35,13 +35,6 @@
 
 .actions {
   display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 768px) {
-  .actions {
-    flex-direction: row;
-  }
 }
 
 .cart-item button {
@@ -63,4 +56,39 @@
 .cart-item button:active {
   background-color: #8a2b06;
   color: white;
+}
+
+@media (max-width: 25rem) {
+  .cart-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cart-item h2 {
+   font-size: 1.3rem;
+  }
+
+  .summary {
+    padding: 0 0.2rem;
+    width: auto;
+  }
+  .actions {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 15rem) {
+  .cart-item h2 {
+    font-size: 0.8rem;
+   }
+
+   .summary {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .actions {
+
+    flex-direction: column;
+  }
 }

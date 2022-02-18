@@ -116,7 +116,7 @@ export default function SignIn() {
         <form className={classes.form} onSubmit={onSubmitHandler}>
           <div>
             <TextField
-              sx={{ width: "22rem" }}
+              sx={{ width: "22rem", marginBottom: "1rem" }}
               margin="normal"
               required
               fullWidth
@@ -125,7 +125,6 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
-              sx={{ marginBottom: "1rem" }}
               value={email}
               onChange={changeEmailHandler}
             />

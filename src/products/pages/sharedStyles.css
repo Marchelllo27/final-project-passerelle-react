@@ -1,5 +1,12 @@
 @media (max-width: 20rem) {
   .main-title-filter {
     font-size: 1.5rem;
+    margin: 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 10rem) {
+  .main-title-filter {
+    font-size: 1.2rem ;
   }
 }

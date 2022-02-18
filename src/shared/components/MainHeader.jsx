@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // MUI
-import {Box, Tooltip } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 
 import AuthContext from "../context/auth-context";
 import BasketContext from "../context/basket-context";
@@ -12,7 +12,7 @@ import AccountIcon from "./Account-Icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import MobileMenu from "./MobileMenu";
-import BackDrop from "../UIElements/BackDrop"
+import BackDrop from "../UIElements/BackDrop";
 import classes from "./MainHeader.module.css";
 
 const MainHeader = props => {
@@ -44,13 +44,14 @@ const MainHeader = props => {
     setMobileMenu(state => !state);
   };
 
+  const onCloseMobileMenu = () => {
+    setMobileMenu(false)
+  }
   return (
     <>
-      <BackDrop />
+      {mobileMenuOpen && <BackDrop onClick={onCloseMobileMenu}/>}
       {mobileMenuOpen && (
-        <MobileMenu>
-          <nav></nav>
-        </MobileMenu>
+        <MobileMenu onClose={onCloseMobileMenu} onShowBasket={props.onShowBasket}/>
       )}
 
       <header className={classes.mainHeader}>
@@ -63,7 +64,7 @@ const MainHeader = props => {
           className={classes.icons}
         >
           <Tooltip title="Panier" arrow>
-            <div className={basketIsHighlighted && `${classes.bump}`}>
+            <div style={{marginRight: "1rem"}} className={basketIsHighlighted && `${classes.bump}`}>
               <BasketIcon onClick={props.onShowBasket} />
             </div>
           </Tooltip>
