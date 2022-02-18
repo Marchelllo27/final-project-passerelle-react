@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import BasketContext from "./basket-context";
 
 const defaultBasketState = {
@@ -65,7 +65,14 @@ const basketReducer = (state, action) => {
     };
   }
 
-  if (action.type === "CLEAR") return defaultBasketState
+  if (action.type === "REPLACE") {
+    return {
+      products: action.products,
+      totalPrice: action.totalPrice,
+    };
+  }
+
+  if (action.type === "CLEAR") return defaultBasketState;
 
   return defaultBasketState;
 };
@@ -87,6 +94,32 @@ const BasketProvider = props => {
   const clearBasket = () => {
     dispatchBasketAction({ type: "CLEAR" });
   };
+
+  useEffect(() => {
+    const storedBasketData = JSON.parse(localStorage.getItem("basketData"));
+
+    if (
+      storedBasketData &&
+      storedBasketData.products &&
+      storedBasketData.totalPrice
+    ) {
+      dispatchBasketAction({
+        type: "REPLACE",
+        products: storedBasketData.products,
+        totalPrice: storedBasketData.totalPrice,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "basketData",
+      JSON.stringify({
+        products: basketState.products,
+        totalPrice: basketState.totalPrice,
+      })
+    );
+  }, [basketState]);
 
   const basketContextValue = {
     products: basketState.products,
