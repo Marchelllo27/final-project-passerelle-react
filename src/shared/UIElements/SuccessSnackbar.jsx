@@ -21,7 +21,7 @@ export default function CustomizedSnackbars(props) {
     <Stack spacing={2} sx={{ width: "100%" }}>
       <Snackbar open={true} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Votre compte a été bien crée!
+          {props.message}
         </Alert>
       </Snackbar>
     </Stack>

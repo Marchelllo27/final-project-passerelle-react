@@ -89,7 +89,7 @@ export default function SignIn() {
   return (
     <>
     {isLoading && <BackDropSpinner />}
-    { authContext.showSuccess && <SuccessSnackbar closeModal={closeSuccess}/>}
+    { authContext.showSuccess && <SuccessSnackbar message="Votre compte a été bien créé" closeModal={closeSuccess}/>}
     <Paper
       elevation={24}
       className={classes.paper}

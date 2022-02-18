@@ -1,5 +1,4 @@
-//react
-import * as React from "react";
+import React, {useContext} from "react";
 import ProductsListHome from "./../components/ProductListHome";
 //Mui
 import Box from "@mui/material/Box";
@@ -15,9 +14,10 @@ import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import Filter7Icon from "@mui/icons-material/Filter7";
 //Theme & Style
 import { makeStyles } from "@mui/styles";
-import frame from "./separateur-1-1-e1560496517774.png";
-import img from "./item-slider.png";
 import "animate.css";
+
+import AuthContext from "../../shared/context/auth-context";
+import SuccessSnackbar from "../../shared/UIElements/SuccessSnackbar";
 
 const useStyles = makeStyles({
   container: {
@@ -116,14 +116,20 @@ const useStyles = makeStyles({
 });
 
 const Accueil = props => {
-  //Styles
+  const authCtx = useContext(AuthContext)
+
   const classes = useStyles();
+
+  const closeSuccess = data => {
+    authCtx.hideSuccessModal()
+  }
 
   return (
     <>
+     { authCtx.showSuccess && <SuccessSnackbar message="Votre commande a été transmise" closeModal={closeSuccess}/>}
       <Container className={classes.container}>
         <Card className={classes.slider1}>
-          <img src={img} alt="fruit orange" className={classes.img} />
+          <img src="/item-slider.png" alt="fruit orange" className={classes.img} />
           <div className={classes.slider1Content}>
             <Typography variant="h4">Goutez à la qualité supérieur </Typography>
             <Typography>
@@ -181,7 +187,7 @@ const Accueil = props => {
               🌱
             </span>
           </Typography>
-          <img src={frame} className={classes.frame} alt="separation line" />
+          <img src="/frame.png" className={classes.frame} alt="separation line" />
           <Box>
             <div className={classes.productList}>
               <Typography
@@ -202,7 +208,7 @@ const Accueil = props => {
               </Button>
 
               <img
-                src={frame}
+                src="/frame.png"
                 className={classes.frame}
                 alt="separation line"
               />
@@ -224,7 +230,7 @@ const Accueil = props => {
                 Voir plus ...
               </Button>
               <img
-                src={frame}
+                src="/frame.png"
                 className={classes.frame}
                 alt="separation line"
               />

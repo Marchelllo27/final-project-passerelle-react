@@ -1,8 +1,6 @@
 //react
 import * as React from "react";
 
-// import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
 import imagePlat from "./salade-de-concombres-creme.jpeg";
 import imageDessert from "./opera.jpg";
 import imageBoisson from "./jus-de-pamplemousse-a-base-de-concentre.jpeg";
@@ -10,7 +8,6 @@ import imageBoisson from "./jus-de-pamplemousse-a-base-de-concentre.jpeg";
 //mui
 import Carousel from "react-material-ui-carousel";
 import {
-  Link,
   Button,
   Container,
   ImageList,
@@ -19,7 +16,6 @@ import {
 } from "@mui/material";
 //Theme & Style
 import { makeStyles } from "@mui/styles";
-// import stylesDescription from "./ImageSlideCss"
 
 const useStyle = makeStyles({
   container: {
@@ -55,38 +51,6 @@ const ImageSlider = (props) => {
   //Styles
   const classes = useStyle();
 
-  //Add & substract
-  // const [productData, setProductData] = useState(null);
-  // const [ingredient, setIngredient] = useState(null);
-  // const [httpError, sethttpError] = useState(null);
-  // const { id } = useParams();
-
-  // //state
-  // useEffect(() => {
-  //   const fetchProduct = async () => {
-  //     const response = await fetch(
-  //       `${process.env.REACT_APP_URL_API}/products/${props.productInUrl}/${id}`
-  //     );
-  //     if (!response.ok) {
-  //       throw new Error("Error !");
-  //     }
-  //     const resData = await response.json();
-  //     setProductData(resData);
-
-  //     //  console.log(productData);
-  //   };
-  //   fetchProduct().catch((err) => {
-  //     return sethttpError(err.message);
-  //   });
-  // }, [id, props.productInUrl]);
-  // //state for productData changes
-  // useEffect(() => {
-  //   if (productData) {
-  //     console.log(productData.nutrients);
-  //     console.log(productData.ingredients);
-  //   }
-  // }, [productData]);
-
   let items = [
     {
       name: "Nos plat",
@@ -107,19 +71,10 @@ const ImageSlider = (props) => {
   ];
   function Item(props) {
     return (
-      // <Paper className={classes.paper}>
-      //   <h2>{props.item.name}</h2>
-      //   <p>{props.item.description}</p>
-      //   <img src={`${props.item.image}`} />
-      //   {/* <p>{`${process.env.REACT_APP_URL_API}/uploads/images/${props.imgUrl}/${productData.image}`}</p> */}
-
-      //   <Button className="CheckButton">Voir plus ...</Button>
-      // </Paper>
 
       //+++++++ImageListItem
       <ImageList
         className={classes.paper}
-        // sx={{ width: 500, height: 450 }}
       >
         <ImageListItem key={props.item.image}>
           <Button href="{props.item.redirect}"></Button>
@@ -130,25 +85,12 @@ const ImageSlider = (props) => {
             alt={props.item.name}
             loading="lazy"
           />
-          <Link
-            // href={`/${props.item.redirect}`}
-            // href="/dishes"
-          >
-
+         
           <ImageListItemBar
             className={classes.item}
             title={props.item.name}
-            // subtitle={item.author}
-            // actionIcon={
-            //   <IconButton
-            //     sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-            //     aria-label={`info about ${props.item.name}`}
-            //   >
-            //     <InfoIcon />
-            //   </IconButton>
-            // }
           />
-          </Link>
+        
         </ImageListItem>
       </ImageList>
     );
@@ -156,20 +98,13 @@ const ImageSlider = (props) => {
   }
   return (
     <Container className={classes.container}>
-      {/* {httpError && <p>Error</p>}
-      {productData && (
-        <> */}
       <Carousel
         className={classes.slide}
-        // NextIcon={<RandomIcon />}
-        // PrevIcon={<RandomIcon />}
       >
         {items.map((item, i) => (
           <Item key={i} item={item} />
         ))}
       </Carousel>
-      {/* </>
-      )} */}
     </Container>
   );
 }
