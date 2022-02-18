@@ -40,7 +40,7 @@ export default {
     borderRadius: "15px",
     padding: "1.5rem",
     background: "#f5f5f5",
-    width: "500px",
+    maxWidth: "23rem ",
   },
   form: {
     display: "flex",
