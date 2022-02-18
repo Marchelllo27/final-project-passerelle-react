@@ -32,6 +32,8 @@ const ProfileForm = props => {
       );
     };
 
+    console.log(updatedUserData);
+
     updateUserData()
       .then(() => {
         history.push("/");
