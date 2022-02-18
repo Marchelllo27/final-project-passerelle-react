@@ -6,81 +6,77 @@ import {Box, Tooltip } from "@mui/material";
 
 import AuthContext from "../context/auth-context";
 import BasketContext from "../context/basket-context";
-import BasketIcon from "./Basket-icon"
+import BasketIcon from "./Basket-icon";
 import Navigation from "./Navigation";
-import classes from "./MainHeader.module.css";
 import AccountIcon from "./Account-Icon";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import MobileMenu from "./MobileMenu";
+import BackDrop from "../UIElements/BackDrop"
+import classes from "./MainHeader.module.css";
 
 const MainHeader = props => {
   const [basketIsHighlighted, setBasketIsHighlighted] = useState(false);
+  const [mobileMenuOpen, setMobileMenu] = useState(false);
   const authCtx = useContext(AuthContext);
   const basketCtx = useContext(BasketContext);
 
-  const {products} = basketCtx;
+  const { products } = basketCtx;
 
   useEffect(() => {
     if (products.length === 0) {
-      return
+      return;
     }
     setBasketIsHighlighted(true);
 
     const timer = setTimeout(() => {
-      setBasketIsHighlighted(false)
-    }, 300)
+      setBasketIsHighlighted(false);
+    }, 300);
 
-    // it's not required here but still good practice clean up side effects like timer 
+    // it's not required here but still good practice clean up side effects like timer
     //because if element was removed timer will be ongoing
     return () => {
       clearTimeout(timer);
-    }
-
+    };
   }, [products]);
 
+  const onMobileMenuHandler = () => {
+    setMobileMenu(state => !state);
+  };
+
   return (
-    <header className={classes.mainHeader}>
-      {authCtx.isAdmin && authCtx.isLoggedIn && (
-        <p
-          style={{
-            color: "red",
-            position: "absolute",
-            left: "7rem",
-            top: "2.8rem",
-          }}
-        >
-          ADMIN
-        </p>
+    <>
+      <BackDrop />
+      {mobileMenuOpen && (
+        <MobileMenu>
+          <nav></nav>
+        </MobileMenu>
       )}
 
-      {authCtx.isLoggedIn && !authCtx.isAdmin && (
-        <p
-          style={{
-            color: "red",
-            position: "absolute",
-            left: "7rem",
-            top: "2.8rem",
-          }}
+      <header className={classes.mainHeader}>
+        <Link className={classes.logoBox} to="/">
+          <img src="/logo.png" alt="Eat Smart logo" />
+        </Link>
+        <Navigation />
+        <Box
+          sx={{ display: "flex", alignItems: "center" }}
+          className={classes.icons}
         >
-          USER
-        </p>
-      )}
+          <Tooltip title="Panier" arrow>
+            <div className={basketIsHighlighted && `${classes.bump}`}>
+              <BasketIcon onClick={props.onShowBasket} />
+            </div>
+          </Tooltip>
 
-      <Link className={classes.logoBox} to="/">
-        <img src="/logo.png" alt="Eat Smart logo" />
-      </Link>
-      <Navigation />
-      <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Tooltip title="Panier" arrow>
-          <div className={ basketIsHighlighted &&  `${classes.bump}`}>
-            <BasketIcon onClick={props.onShowBasket} />
-          </div>
-        </Tooltip>
-
-        {authCtx.isLoggedIn && (
-         <AccountIcon onLogout={authCtx.logout}/>
-        )}
-      </Box>
-    </header>
+          {authCtx.isLoggedIn && <AccountIcon onLogout={authCtx.logout} />}
+        </Box>
+        <FontAwesomeIcon
+          icon={faUtensils}
+          className={classes.mobileMenuIcon}
+          onClick={onMobileMenuHandler}
+        />
+      </header>
+    </>
   );
 };
 

@@ -26,7 +26,7 @@ export default function CustomizedBadges(props) {
   }, 0)
 
   return (
-    <IconButton sx={{ mx: "1.5rem" }} aria-label="cart" onClick={props.onClick}>
+    <IconButton sx={{ mx: "1.5rem", margin: 0 }} aria-label="cart" onClick={props.onClick}>
       <StyledBadge badgeContent={numberOfBasketProducts} color="secondary">
         <ShoppingCartIcon />
       </StyledBadge>

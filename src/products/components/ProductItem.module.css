@@ -58,7 +58,29 @@ article {
 
 @media (max-width: 48rem) {
   .actionControl {
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 15rem) {
+  article {
+    height: auto;
+  }
+
+  .description {
+    width: 100%;
+    height: auto;
+    padding: 0.5rem 0.3rem;
+  }
+
+  .price {
+    margin: 1rem 0;
+  }
+
+  .actionControl {
+    padding: 0;
+    flex-direction: column;
     justify-content: center;
-    gap: 3rem;
+    gap: 0;
   }
 }

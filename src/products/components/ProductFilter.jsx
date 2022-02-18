@@ -43,6 +43,7 @@ const ProductFilter = props => {
     <FormControl
       sx={{
         width: 400,
+        maxWidth: "100%",
         display: "flex",
         marginLeft: "auto",
         marginRight: "auto",

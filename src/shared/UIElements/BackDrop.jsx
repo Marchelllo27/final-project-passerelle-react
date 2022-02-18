@@ -1,21 +1,18 @@
-import React, {useState} from 'react';
-import Backdrop from '@mui/material/Backdrop';
-
-// import Button from '@mui/material/Button';
+import React from "react";
+import ReactDOM from "react-dom";
+import Backdrop from "@mui/material/Backdrop";
 
 export default function SimpleBackdrop(props) {
-
   const handleClose = () => {
-    props.onBackdropClick()
+    props.onBackdropClick();
   };
 
-  return (
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={props.showBackDrop}
-        onClick={handleClose}
-      >
-        {/* {props.children} */}
-      </Backdrop>
+  return ReactDOM.createPortal(
+    <Backdrop
+      sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1, opacity: 1, visibility: "visible"}}
+      open={props.showBackDrop}
+      onClick={handleClose}
+    />,
+    document.getElementById("backdrop")
   );
 }
