@@ -43,7 +43,20 @@ const useStyles = makeStyles({
     "&:active": {
       color: "#78bf35",
     },
+    "@media (max-width: 15rem)": {
+      fontSize: "0.7rem"
+    },
+    
   },
+  logoutBtn: {
+    "&:hover": {
+      color: "red"
+    },
+    "@media (max-width: 15rem)": {
+      fontSize: "0.6rem",
+      textAlign: "center",
+    },
+  }
 });
 
 const MobileMenu = props => {
@@ -138,7 +151,7 @@ const MobileMenu = props => {
 
           {AuthCtx.isLoggedIn && (
             <>
-              <li>
+              <li className={classes.connectionButtons}>
                 <Button
                   to="/profile"
                   color="inherit"
@@ -148,19 +161,19 @@ const MobileMenu = props => {
                   component={NavLink}
                   onClick={onCloseMobileMenu}
                 >
-                  Profile
+                  Profil
                 </Button>
               </li>
               <li>
                 <Button
                   to="/"
                   color="inherit"
-                  className={style.navLinks}
+                  className={`${style.navLinks} ${style.logoutBtn}`}
                   size="small"
                   component={NavLink}
                   onClick={onLogoutClick}
                 >
-                  Logout
+                  Se déconnecter
                 </Button>
               </li>
             </>

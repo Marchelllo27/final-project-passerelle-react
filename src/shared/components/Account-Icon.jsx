@@ -72,10 +72,10 @@ const AccountIcon = (props) => {
         }}
       >
         <Link to="/profile">
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>Profil</MenuItem>
         </Link>
         <Link to="/">
-          <MenuItem onClick={logOutHandler}>Logout</MenuItem>
+          <MenuItem onClick={logOutHandler}>Se déconnecter</MenuItem>
         </Link>
       </Menu>
     </>
