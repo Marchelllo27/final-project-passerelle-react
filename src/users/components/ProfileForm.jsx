@@ -32,8 +32,6 @@ const ProfileForm = props => {
       );
     };
 
-    console.log(updatedUserData);
-
     updateUserData()
       .then(() => {
         history.push("/");
@@ -136,6 +134,7 @@ const ProfileForm = props => {
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              className={classes.submitButton}
             >
               Soumettre
             </Button>

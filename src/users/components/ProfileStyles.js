@@ -1,4 +1,4 @@
-import { spacing } from "@mui/system";
+import { margin, spacing } from "@mui/system";
 
 export default {
   root: {
@@ -10,9 +10,10 @@ export default {
     padding: spacing(2),
     //Css textField
     "& .MuiTextField-root": {
-      minWidth: "300px",
+      width: "100%",
       margin: "10px",
     },
+
     "& .MuiButtonBase-root": {
       margin: spacing(2),
     },
@@ -51,14 +52,26 @@ export default {
     fontWeight: "bold",
   },
   paper: {
+    width: "25rem",
+    maxWidth: "100%",
     marginTop: "2%",
     borderRadius: "15px",
     padding: "1rem",
     background: "#f5f5f5",
+    "@media (max-width: 380px)": {
+      width: "100%",
+    },
   },
   invalidFeedback: {
     marginBottom: "2rem",
     marginTop: "-0.5rem",
     color: "red",
   },
-}
+  submitButton: {
+    "@media (max-width: 380px)": {
+      margin: "0.5rem 0",
+      padding: "0.5rem 0.7rem",
+      fontSize: "0.6rem",
+    },
+  }
+};
