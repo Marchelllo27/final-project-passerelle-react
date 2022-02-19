@@ -9,7 +9,7 @@ const Desserts = props => {
       <h1 style={{ textAlign: "center" }} className="main-title-filter">
         Choisissez les desserts selon vos préférences
       </h1>
-      <ProductsList product="all-desserts" forWichProduct="desserts" />
+      <ProductsList product="all-desserts" pluralProductWord="desserts" singularProductWord="dessert"/>
     </>
   );
 };

@@ -26,7 +26,7 @@ const ProductItem = props => {
   // ADD PRODUCT TO THE BASKET
   const addProductHandler = event => {
     event.preventDefault();
-    basketCtx.addProduct({id, name, price, quantity: 1})
+    basketCtx.addProduct({ id, name, price, quantity: 1 });
   };
 
   const onDeleteHandler = event => {
@@ -47,15 +47,20 @@ const ProductItem = props => {
 
   return (
     <>
+    {/* ----- MODAL FOR DELETE PRODUCT */}
+      {showModal && (
+        <Modal
+          show={showModal}
+          closeModal={closeModal}
+          BackdropProps={{ productId: id }}
+          typeOfProduct={props.singularProductWord}
+          refreshProducts={props.onRefreshProducts}
+        />
+      )}
+     
+      {/* PRODUCT ITEM */}
       <Grid item xs={12} sm={6} md={3}>
-        {showModal && (
-          <Modal
-            show={showModal}
-            closeModal={closeModal}
-            BackdropProps={{ productId: id }}
-          />
-        )}
-        <Link to={`/${props.forWichProduct}/${id}`}>
+        <Link to={`/${props.pluralProductWord}/${id}`}>
           <Paper
             className={style.productItem}
             sx={{ overflow: "hidden" }}
@@ -77,7 +82,7 @@ const ProductItem = props => {
               )}
               <div className={classes.gram}>{`${weight}g`}</div>
               <img
-                src={`https://final-project-la-passerelle.herokuapp.com/uploads/images/${props.forWichProduct}/${image}`}
+                src={`https://final-project-la-passerelle.herokuapp.com/uploads/images/${props.pluralProductWord}/${image}`}
                 alt={name}
                 className={classes.productImage}
               />
@@ -90,7 +95,10 @@ const ProductItem = props => {
                 <div className={classes.actionControl}>
                   <span className={classes.price}>{price.toFixed(2)}€</span>
                   <Tooltip title="Ajouter au panier" arrow>
-                    <div className={style.addToBasketBox} onClick={addProductHandler}>
+                    <div
+                      className={style.addToBasketBox}
+                      onClick={addProductHandler}
+                    >
                       <ShoppingCartIcon />
                     </div>
                   </Tooltip>

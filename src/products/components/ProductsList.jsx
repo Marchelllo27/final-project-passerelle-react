@@ -13,11 +13,14 @@ const ProductsList = props => {
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState("");
+  const [needToRefreshListProducts, setNeedToRefreshListProducts] =
+    useState(false);
 
   const getFilterValue = data => {
     setSelectedFilter(data);
   };
 
+  // SEARCH ALL PRODUCTS
   useEffect(() => {
     setIsLoading(true);
 
@@ -34,14 +37,19 @@ const ProductsList = props => {
       setIsLoading(false);
       setHttpError(error.message);
     });
-  }, [props.product]);
 
+    return () => {
+      setNeedToRefreshListProducts(false);
+    };
+  }, [props.product, needToRefreshListProducts]);
+
+  // SEARCH FILTERED PRODUCTS
   useEffect(() => {
     setHttpError(false);
     setIsLoading(true);
     const fetchProducts = async () => {
       const responseData = await sendHttpRequest(
-        `${process.env.REACT_APP_URL_API}/products/${props.forWichProduct}?filters[]=${selectedFilter}`
+        `${process.env.REACT_APP_URL_API}/products/${props.pluralProductWord}?filters[]=${selectedFilter}`
       );
       setProducts(responseData);
       setIsLoading(false);
@@ -52,13 +60,17 @@ const ProductsList = props => {
       setHttpError(error.message);
       setProducts([]);
     });
-  }, [selectedFilter, props.forWichProduct]);
+  }, [selectedFilter, props.pluralProductWord]);
+
+  const onRefreshProducts = () => {
+    setNeedToRefreshListProducts(true);
+  };
 
   return (
     <Container>
       <ProductFilter
         onGetFilterValue={getFilterValue}
-        category={props.forWichProduct}
+        category={props.pluralProductWord}
       />
 
       {/* // SHOW WHEN LOADING FROM DATABASE */}
@@ -71,7 +83,9 @@ const ProductsList = props => {
           <ProductItem
             key={product._id}
             product={product}
-            forWichProduct={props.forWichProduct}
+            singularProductWord={props.singularProductWord}
+            pluralProductWord={props.pluralProductWord}
+            onRefreshProducts={onRefreshProducts}
           />
         ))}
       </Grid>

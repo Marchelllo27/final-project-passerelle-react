@@ -18,6 +18,27 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  textAlign: "center",
+  "& .MuiTypography-root": {
+    marginBottom: "1rem",
+  },
+  "@media (max-width:30rem)": {
+    width: "80%",
+    p: 2,
+  },
+};
+
+const buttonsStyle = {
+  display: "flex",
+  justifyContent: "flex-end",
+
+  "@media (max-width: 30rem)": {
+    "& .MuiButton-root:last-child": {
+      marginLeft: "0",
+      marginTop: "0.5rem",
+    },
+    flexDirection: "column",
+  },
 };
 
 export default function BasicModal(props) {
@@ -32,15 +53,18 @@ export default function BasicModal(props) {
 
     try {
       await sendHttpRequest(
-        `${process.env.REACT_APP_URL_API}/admin/products/dessert/delete/${productId}`,
+        `${process.env.REACT_APP_URL_API}/admin/products/${props.typeOfProduct}/delete/${productId}`,
         "DELETE",
         null,
         {
           Authorization: "Bearer " + token,
         }
       );
+
+      props.refreshProducts()
+      console.log("product deleted!");
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
       alert(error.message);
     }
 
@@ -59,7 +83,7 @@ export default function BasicModal(props) {
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Voulez-vous vraiment supprimé le produit ?
         </Typography>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box sx={buttonsStyle}>
           <Button
             variant="outlined"
             color="error"
@@ -76,7 +100,7 @@ export default function BasicModal(props) {
           >
             Oui!
           </Button>
-        </div>
+        </Box>
       </Box>
     </Modal>
   );
