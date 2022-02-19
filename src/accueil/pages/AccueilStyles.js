@@ -89,6 +89,7 @@ export default {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
+    marginBottom: "-2rem",
     padding: "1rem",
     alignItems: "center",
     background: "linear-gradient( #deebdd75 0%, #bbdbbe 74%)",
