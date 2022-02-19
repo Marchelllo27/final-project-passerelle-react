@@ -63,7 +63,7 @@ const Accueil = props => {
           </div>
         </Card>
 
-        <div sx={{ minWidth: 275 }} className={classes.serviceLayout}>
+        <div className={classes.serviceLayout}>
           <CardContent className={classes.serviceLayoutContain}>
             <CreditScoreIcon />
             <Typography align="center" variant="h5">

@@ -5,6 +5,7 @@ export default {
     flexDirection: "column",
     alignItems: "center",
     minWidth: "100%",
+    marginTop: "-2rem"
   },
 
   slider1: {

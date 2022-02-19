@@ -28,7 +28,7 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
-  initialValues: {
+    initialValues: {
       firstName: "",
       lastName: "",
       email: "",
@@ -76,7 +76,6 @@ const Signup = () => {
         Vous avez déja un compte?
         <span className={classes.span}> Connectez vous</span>
       </Link>
-
       <Paper elevation={24} className={classes.paper}>
         <Avatar sx={{ m: 1, bgcolor: "green" }}>
           <AccountBoxIcon />
