@@ -15,7 +15,8 @@
 }
 
 .logoBox {
-  height: 3rem;
+  /* height: 3rem; */
+  width: 6rem;
 }
 
 .logoBox img {
@@ -49,7 +50,6 @@
   .mobileMenuIcon:active {
     color: rgb(133, 133, 133);
   }
-  
 }
 
 @media (max-width: 20rem) {
@@ -60,16 +60,11 @@
   .mobileMenuIcon {
     font-size: 1.4rem;
   }
-
-  .logoBox {
-    height: 2rem;
-  }
 }
 
 @media (max-width: 10rem) {
-
   .logoBox {
-    height: 1.5rem;
+    width: 4rem;
   }
 }
 

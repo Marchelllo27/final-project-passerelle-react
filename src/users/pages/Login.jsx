@@ -116,7 +116,7 @@ export default function SignIn() {
         <form className={classes.form} onSubmit={onSubmitHandler}>
           <div>
             <TextField
-              sx={{ width: "22rem", marginBottom: "1rem" }}
+              sx={{ width: "100%", marginBottom: "1rem" }}
               margin="normal"
               required
               fullWidth
@@ -129,7 +129,7 @@ export default function SignIn() {
               onChange={changeEmailHandler}
             />
             <FormControl
-              sx={{ width: "22rem" }}
+              sx={{ width: "100%" }}
               variant="outlined"
               id="validation-outlined-input"
             >

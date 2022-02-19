@@ -5,7 +5,6 @@ export default {
     //Css textField
     "& .MuiTextField-root": {
       margin: spacing(1),
-      width: "400px",
       marginTop: "10%",
     },
     //text in green when click to write
@@ -40,7 +39,10 @@ export default {
     borderRadius: "15px",
     padding: "1.5rem",
     background: "#f5f5f5",
-    maxWidth: "23rem ",
+    maxWidth: "25rem",
+    "@media (max-width: 380px)": {
+      width: "90%",
+    },
   },
   form: {
     display: "flex",
