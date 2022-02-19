@@ -56,7 +56,7 @@ export default {
     maxWidth: "100%",
     marginTop: "2%",
     borderRadius: "15px",
-    padding: "1rem",
+    padding: "1.5rem",
     background: "#f5f5f5",
     "@media (max-width: 380px)": {
       width: "100%",
