@@ -11,13 +11,12 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   grid: {
     display: "flex",
-    justifyContent: "space-evenly",
-    
+    justifyContent: "center",
   },
 });
 
-const ProductsList = (props) => {
-   const classes = useStyles();
+const ProductsList = props => {
+  const classes = useStyles();
 
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,28 +29,26 @@ const ProductsList = (props) => {
       const responseData = await sendHttpRequest(
         `${process.env.REACT_APP_URL_API}/products/${props.product}`
       );
-        const homeData= responseData.slice(0,4)
+      const homeData = responseData.slice(0, 4);
       setProducts(homeData);
       setIsLoading(false);
     };
 
-    fetchProducts().catch((error) => {
+    fetchProducts().catch(error => {
       setIsLoading(false);
       setHttpError(error.message);
     });
   }, [props.product]);
 
-
-
   return (
-    <Container>
+    <Container sx={{ "@media (max-width: 20rem)": { padding: "0" } }}>
       {/* // SHOW WHEN LOADING FROM DATABASE */}
       {isLoading && <SkeletonList />}
       {/* // SHOW WHEN ERROR OCCUR */}
       {httpError && <ErrorAlert message={httpError} />}
 
       <Grid className={classes.grid} container marginTop={0} spacing={8}>
-        {products.map((product) => (
+        {products.map(product => (
           <ProductItem
             key={product._id}
             product={product}
@@ -59,12 +56,6 @@ const ProductsList = (props) => {
           />
         ))}
       </Grid>
-      {/* <Link
-        to={`/${props.imgUrl}`}
-        // underline="hover"
-      >
-        Retour à la page précédente
-      </Link> */}
     </Container>
   );
 };

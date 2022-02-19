@@ -1,0 +1,33 @@
+.containerSlide {
+  width: 70%;
+  margin-top: 5rem;
+}
+
+.eachSlide {
+  height: 25rem;
+  width: 100%;
+}
+
+.containerSlide img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 64rem) {
+
+  .containerSlide {
+    width: 100%;
+  }
+}
+
+@media (max-width: 30rem) {
+
+  .containerSlide {
+    width: 100%;
+  }
+
+  .eachSlide {
+    height: 15rem;
+  }
+}

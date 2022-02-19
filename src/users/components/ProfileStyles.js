@@ -1,4 +1,4 @@
-import { margin, spacing } from "@mui/system";
+import { spacing } from "@mui/system";
 
 export default {
   root: {
