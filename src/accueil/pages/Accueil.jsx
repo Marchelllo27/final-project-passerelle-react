@@ -132,7 +132,7 @@ const Accueil = props => {
 
               <img
                 src="/frame.png"
-                className={classes.frame}
+                style={{width: "100%"}}
                 alt="separation line"
               />
             </div>
