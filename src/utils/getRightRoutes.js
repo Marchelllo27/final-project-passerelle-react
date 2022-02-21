@@ -11,74 +11,117 @@ const Desserts = React.lazy(() => import("../products/pages/Desserts"));
 const Profile = React.lazy(() => import("../users/pages/Profile"));
 const Signup = React.lazy(() => import("../users/pages/Signup"));
 const Login = React.lazy(() => import("../users/pages/Login"));
+const UpdateProductPage = React.lazy(() => import("../admin/pages/UpdateProductPage"));
+const AddProductPage = React.lazy(() => import("../admin/pages/AddProductPage"));
 
-const getRightRoutes = userIsLoggedIn => {
+const getRightRoutes = (userIsLoggedIn, isAdmin) => {
   let routes;
-  if (userIsLoggedIn) {
+  if (userIsLoggedIn && !isAdmin) {
     routes = (
-      <Suspense fallback={<BackDropSpinner/>}>
-      <Switch>
-        <Route path="/" exact>
-          <Accueil />
-        </Route>
-        <Route path="/dishes" exact>
-          <Dishes />
-        </Route>
-        <Route path="/desserts" exact>
-          <Desserts />
-        </Route>
-        <Route path="/drinks" exact>
-          <Drinks />
-        </Route>
-        <Route path="/dishes/:id" exact>
-          <ProductDescription productInUrl="dish" imgUrl="dishes" />
-        </Route>
-        <Route path="/desserts/:id" exact>
-          <ProductDescription productInUrl="dessert" imgUrl="desserts" />
-        </Route>
-        <Route path="/drinks/:id" exact>
-          <ProductDescription productInUrl="drink" imgUrl="drinks" />
-        </Route>
-        <Route path="/profile" exact>
-          <Profile />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
+      <Suspense fallback={<BackDropSpinner />}>
+        <Switch>
+          <Route path="/" exact>
+            <Accueil />
+          </Route>
+          <Route path="/dishes" exact>
+            <Dishes />
+          </Route>
+          <Route path="/desserts" exact>
+            <Desserts />
+          </Route>
+          <Route path="/drinks" exact>
+            <Drinks />
+          </Route>
+          <Route path="/dishes/:id" exact>
+            <ProductDescription productInUrl="dish" imgUrl="dishes" />
+          </Route>
+          <Route path="/desserts/:id" exact>
+            <ProductDescription productInUrl="dessert" imgUrl="desserts" />
+          </Route>
+          <Route path="/drinks/:id" exact>
+            <ProductDescription productInUrl="drink" imgUrl="drinks" />
+          </Route>
+          <Route path="/profile" exact>
+            <Profile />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+      </Suspense>
+    );
+  } else if (userIsLoggedIn && isAdmin) {
+    routes = (
+      <Suspense fallback={<BackDropSpinner />}>
+        <Switch>
+          <Route path="/" exact>
+            <Accueil />
+          </Route>
+          <Route path="/dishes" exact>
+            <Dishes />
+          </Route>
+          <Route path="/desserts" exact>
+            <Desserts />
+          </Route>
+          <Route path="/drinks" exact>
+            <Drinks />
+          </Route>
+          <Route path="/dishes/:id" exact>
+            <ProductDescription productInUrl="dish" imgUrl="dishes" />
+          </Route>
+          <Route path="/desserts/:id" exact>
+            <ProductDescription productInUrl="dessert" imgUrl="desserts" />
+          </Route>
+          <Route path="/drinks/:id" exact>
+            <ProductDescription productInUrl="drink" imgUrl="drinks" />
+          </Route>
+
+          <Route path="/admin/product/update/:id" exact>
+            <UpdateProductPage />
+          </Route>
+
+          <Route path="/admin/product/add" exact>
+            <AddProductPage />
+          </Route>
+
+          <Route path="/profile" exact>
+            <Profile />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
       </Suspense>
     );
   } else {
     routes = (
-      <Suspense fallback={<BackDropSpinner/>}>
-      <Switch>
-        <Route path="/" exact>
-          <Accueil />
-        </Route>
-        <Route path="/dishes" exact>
-          <Dishes />
-        </Route>
-        <Route path="/desserts" exact>
-          <Desserts />
-        </Route>
-        <Route path="/drinks" exact>
-          <Drinks />
-        </Route>
-        <Route path="/dishes/:id" exact>
-          <ProductDescription productInUrl="dish" imgUrl="dishes" />
-        </Route>
-        <Route path="/desserts/:id" exact>
-          <ProductDescription productInUrl="dessert" imgUrl="desserts" />
-        </Route>
-        <Route path="/drinks/:id" exact>
-          <ProductDescription productInUrl="drink" imgUrl="drinks" />
-        </Route>
-        <Route path="/signup" exact>
-          <Signup />
-        </Route>
-        <Route path="/login" exact>
-          <Login />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
+      <Suspense fallback={<BackDropSpinner />}>
+        <Switch>
+          <Route path="/" exact>
+            <Accueil />
+          </Route>
+          <Route path="/dishes" exact>
+            <Dishes />
+          </Route>
+          <Route path="/desserts" exact>
+            <Desserts />
+          </Route>
+          <Route path="/drinks" exact>
+            <Drinks />
+          </Route>
+          <Route path="/dishes/:id" exact>
+            <ProductDescription productInUrl="dish" imgUrl="dishes" />
+          </Route>
+          <Route path="/desserts/:id" exact>
+            <ProductDescription productInUrl="dessert" imgUrl="desserts" />
+          </Route>
+          <Route path="/drinks/:id" exact>
+            <ProductDescription productInUrl="drink" imgUrl="drinks" />
+          </Route>
+          <Route path="/signup" exact>
+            <Signup />
+          </Route>
+          <Route path="/login" exact>
+            <Login />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
       </Suspense>
     );
   }

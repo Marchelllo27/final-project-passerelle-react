@@ -11,7 +11,7 @@ import BasketProvider from "./shared/context/basketProvider";
 
 function App() {
   const [basketIsShown, setBasketIsShown] = useState(false);
-  const { contextValue, userIsLoggedIn } = useAuth();
+  const { contextValue, userIsLoggedIn, isAdmin } = useAuth();
 
   const showBasketHandler = () => {
     setBasketIsShown(true);
@@ -21,7 +21,7 @@ function App() {
     setBasketIsShown(false);
   };
 
-  const routes = getRightRoutes(userIsLoggedIn);
+  const routes = getRightRoutes(userIsLoggedIn, isAdmin);
 
   return (
     <BrowserRouter>

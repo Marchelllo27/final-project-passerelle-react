@@ -83,6 +83,7 @@ export const useAuth = () => {
   return {
     token,
     userIsLoggedIn,
+    isAdmin,
     login,
     logout,
     contextValue,
