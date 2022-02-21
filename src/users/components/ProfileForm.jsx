@@ -19,7 +19,9 @@ const ProfileForm = props => {
 
   const onSubmitHandler = updatedUserData => {
     const { token } = JSON.parse(localStorage.getItem("userData"));
-
+    console.log(token)
+    console.log(updatedUserData)
+    console.log( `${process.env.REACT_APP_URL_API}/auth-user/update`)
     const updateUserData = async () => {
       await sendHttpRequest(
         `${process.env.REACT_APP_URL_API}/auth-user/update`,
@@ -38,7 +40,8 @@ const ProfileForm = props => {
         console.log("USER FINALLY UPDATED!");
       })
       .catch(err => {
-        alert(err.message);
+        console.log("hey there")
+        alert(err);
       });
   };
 
