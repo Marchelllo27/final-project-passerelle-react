@@ -25,7 +25,7 @@ describe("Check titles of pages", () => {
     expect(drinksTitle).toBeInTheDocument();
   });
 
-  test("render Dishes page and check title", () => {
+  test("render Dishes page and check title!", () => {
     render(<Desserts />);
     const dessertsTitle = screen.getByText(/Choisissez les desserts selon vos préférences/i);
     expect(dessertsTitle).toBeInTheDocument();
