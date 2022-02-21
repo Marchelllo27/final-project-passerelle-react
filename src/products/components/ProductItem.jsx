@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { Paper, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -21,6 +22,8 @@ const ProductItem = props => {
   const basketCtx = useContext(BasketContext);
   const [showModal, setShowModal] = useState(false);
 
+  const history = useHistory();
+
   const { _id: id, name, image, weight, price } = props.product;
 
   // ADD PRODUCT TO THE BASKET
@@ -40,6 +43,7 @@ const ProductItem = props => {
 
   const onUpdateHandler = event => {
     event.preventDefault();
+    history.push(`/admin/product/update/${id}`)
     console.log(id);
   };
 
@@ -75,8 +79,8 @@ const ProductItem = props => {
                     onClick={onDeleteHandler}
                   />
                   <ChangeCircleIcon
-                    className={style.updateButton}
-                    onClick={onUpdateHandler}
+                  className={style.updateButton}
+                  onClick={onUpdateHandler}
                   />
                 </div>
               )}
