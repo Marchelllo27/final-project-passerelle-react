@@ -6,7 +6,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-import SlideShow from "../components/SlideShow";
+// import SlideShow from "../components/SlideShow";
 import { Button, Container } from "@mui/material";
 //Icons
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
