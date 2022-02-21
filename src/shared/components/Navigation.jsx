@@ -152,13 +152,11 @@ const Navigation = props => {
 
       {AuthCtx.isAdmin && (
         <Button
-          to="/admin/product/add"
+          href="/admin/product/add"
           color="inherit"
-          activeClassName="active-link"
           className={style.navLinks}
           size="small"
         >
-          {" "}
           Ajoutez un produits
         </Button>
       )}
