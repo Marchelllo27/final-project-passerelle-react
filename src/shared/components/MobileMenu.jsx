@@ -79,7 +79,8 @@ const MobileMenu = props => {
 
   const sideMenu = (
     <aside className={classes.mobileMenu}>
-      <BasketIcon onClick={onBasketClick}/>
+      <BasketIcon onClick={onBasketClick} />
+      <p style={{textAlign: "center"}} className={style.productLinks}>Panier</p>
       <nav className={classes.navigation}>
         <ul className={classes.ulList}>
           <NavLink

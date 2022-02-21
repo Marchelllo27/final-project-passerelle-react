@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 // MUI
 import { makeStyles } from "@mui/styles";
@@ -48,6 +48,7 @@ const useStyles = makeStyles({
 });
 
 const Navigation = props => {
+  const history =useHistory();
   const AuthCtx = useContext(AuthContext);
   const style = useStyles();
 
@@ -59,6 +60,9 @@ const Navigation = props => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const onAddClick =()=>{
+    history.push("/admin/product/add");
+  }
 
   return (
     <nav className={classes.navigation}>
@@ -152,12 +156,14 @@ const Navigation = props => {
 
       {AuthCtx.isAdmin && (
         <Button
-          href="/admin/product/add"
+        onClick={onAddClick}
+          
           color="inherit"
+          // activeClassName="active-link"
           className={style.navLinks}
           size="small"
         >
-          Ajoutez un produits
+          Ajoutez un produit
         </Button>
       )}
     </nav>

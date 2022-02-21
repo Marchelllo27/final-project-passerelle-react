@@ -1,7 +1,7 @@
 import React from "react";
 
 const AddProductPage = props => {
-  return <p>Ajouter Produit!</p>;
+  return <p>Ajoutez un Produit!</p>;
 };
 
 export default AddProductPage;
