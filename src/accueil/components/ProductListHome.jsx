@@ -52,7 +52,7 @@ const ProductsList = props => {
           <ProductItem
             key={product._id}
             product={product}
-            forWichProduct={props.forWichProduct}
+            pluralProductWord={props.pluralProductWord}
           />
         ))}
       </Grid>

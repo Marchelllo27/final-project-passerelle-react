@@ -84,7 +84,7 @@ const Accueil = props => {
           </CardContent>
         </div>
 
-        <SlideShow />
+        {/* <SlideShow /> */}
 
         <div className={classes.blocks}>
           <Typography component="div" className={classes.aboutUs}>
@@ -124,7 +124,7 @@ const Accueil = props => {
               <ProductsListHome
                 alignItems="center"
                 product="all-dishes"
-                forWichProduct="dishes"
+                pluralProductWord="dishes"
               />
               <Button href="/dishes" className={classes.seeMore}>
                 Voir plus ...
@@ -147,7 +147,7 @@ const Accueil = props => {
               </Typography>
               <ProductsListHome
                 product="all-desserts"
-                forWichProduct="desserts"
+                pluralProductWord="desserts"
               />
               <Button href="/desserts" className={classes.seeMore}>
                 Voir plus ...
@@ -168,7 +168,7 @@ const Accueil = props => {
               >
                 Nos Boissons
               </Typography>
-              <ProductsListHome product="all-drinks" forWichProduct="drinks" />
+              <ProductsListHome product="all-drinks" pluralProductWord="drinks" />
               <Button href="/drinks" className={classes.seeMore}>
                 Voir plus ...
               </Button>

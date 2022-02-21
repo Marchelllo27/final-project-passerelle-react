@@ -45,7 +45,7 @@ const ProductItem = (props) => {
 
   return (
     <Grid item xs={12} sm={6} md={3}>
-      <Link to={`/${props.forWichProduct}/${id}`}>
+      <Link to={`/${props.pluralProductWord}/${id}`}>
         <Paper
           className={style.productItem}
           sx={{ overflow: "hidden" }}
@@ -53,7 +53,7 @@ const ProductItem = (props) => {
         >
           <article >
             <img
-              src={`https://final-project-la-passerelle.herokuapp.com/uploads/images/${props.forWichProduct}/${image}`}
+              src={`https://final-project-la-passerelle.herokuapp.com/uploads/images/${props.pluralProductWord}/${image}`}
               alt={name}
               className={classes.productImage}
             />
