@@ -163,7 +163,7 @@ const Navigation = props => {
           className={style.navLinks}
           size="small"
         >
-          Ajoutez un produits
+          Ajoutez un produit
         </Button>
       )}
     </nav>
