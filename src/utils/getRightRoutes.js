@@ -4,8 +4,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Accueil from "../accueil/pages/Accueil";
 import ProductDescription from "../products/components/ProductDescription";
 import BackDropSpinner from "../shared/UIElements/BackDropSpinner";
-import UpdateProductPage from "../admin/pages/UpdateProductPage";
-import AddProductPage from "../admin/pages/AddProductPage"
 
 const Drinks = React.lazy(() => import("../products/pages/Drinks"));
 const Dishes = React.lazy(() => import("../products/pages/Dishes"));
@@ -13,11 +11,12 @@ const Desserts = React.lazy(() => import("../products/pages/Desserts"));
 const Profile = React.lazy(() => import("../users/pages/Profile"));
 const Signup = React.lazy(() => import("../users/pages/Signup"));
 const Login = React.lazy(() => import("../users/pages/Login"));
+const UpdateProductPage = React.lazy(() => import("../admin/pages/UpdateProductPage"));
+const AddProductPage = React.lazy(() => import("../admin/pages/AddProductPage"));
 
 const getRightRoutes = (userIsLoggedIn, isAdmin) => {
   let routes;
   if (userIsLoggedIn && !isAdmin) {
-
     routes = (
       <Suspense fallback={<BackDropSpinner />}>
         <Switch>
@@ -50,7 +49,6 @@ const getRightRoutes = (userIsLoggedIn, isAdmin) => {
       </Suspense>
     );
   } else if (userIsLoggedIn && isAdmin) {
-    console.log("admin routes")
     routes = (
       <Suspense fallback={<BackDropSpinner />}>
         <Switch>
@@ -92,7 +90,6 @@ const getRightRoutes = (userIsLoggedIn, isAdmin) => {
       </Suspense>
     );
   } else {
-
     routes = (
       <Suspense fallback={<BackDropSpinner />}>
         <Switch>
