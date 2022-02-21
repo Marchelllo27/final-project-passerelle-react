@@ -1,6 +1,9 @@
 export default {
   root: {},
   container: {
+    "@media (max-width: 48rem)": {
+      width: "100%",
+    },
     display: "flex",
     alignItems: "center",
     justifyContente: "Center",
@@ -8,7 +11,7 @@ export default {
   },
   backButton: {
     paddingLeft: "2rem",
-    paddingBottom:"2rem"
+    paddingBottom: "2rem",
   },
 
   card: {
@@ -32,6 +35,10 @@ export default {
       transform: "scale(1.01)",
       outline: "3px solid #78bf35",
     },
+    "@media (max-width: 48rem)": {
+      width: "100%",
+      minHeight: "12rem",
+    },
   },
   main: {
     borderRadius: "35px",
@@ -41,9 +48,11 @@ export default {
   cardContent: {
     fontSize: "1rem",
     padding: "2rem",
-
     display: "flex",
     flexDirection: "column",
+    "@media (max-width: 614px)": {
+      maxWidth: "100%",
+    },
   },
   title: {
     fontSize: "2rem ! important",
@@ -51,10 +60,12 @@ export default {
     fontWeight: "bold",
     color: "#cd5c5c",
     alignSelf: "center",
+    "@media (max-width: 414px)": {
+      fontSize: "1.5rem ! important",
+    },
   },
   description: {
     fontSize: "1rem ! important",
-    margin: "1rem",
   },
   cardActions: {
     paddingTop: "6rem",
@@ -70,6 +81,11 @@ export default {
     with: "100%",
     padding: "1rem",
     paddingTop: "2rem",
+    "@media (max-width: 48rem)": {
+      width: "100%",
+      padding: 0,
+      overflowWrap: "anywhere",
+    },
   },
   ingredientsTypo: {
     display: "flex",
@@ -77,6 +93,13 @@ export default {
     alignItems: "center",
     padding: "2rem",
     fontSize: "1rem",
+    margin: "1rem",
+    "@media (max-width: 48rem)": {
+      width: "100%",
+      padding: 0,
+      paddingTop: "2rem",
+      margin: 0,
+    },
   },
   p: {
     fontSize: "2rem",
@@ -110,6 +133,11 @@ export default {
     width: "180px",
     alignItems: "flex-end",
     color: "#616161",
+    "@media (max-width: 18rem)": {
+      width: "100%",
+      flexDirection: "column",
+      alignItems: "center",
+    },
   },
   button: {
     marginTop: "1.5rem",
@@ -120,9 +148,33 @@ export default {
       borderColor: "#78bf35",
       background: "#eeeeee",
     },
-    number: {
-      color: "green",
-      background: "green",
+  },
+
+  buttonTop: {
+    marginTop: "1.5rem",
+    color: "#78bf35",
+    border: "2px solid",
+    borderColor: "#78bf35",
+    "&:hover ": {
+      borderColor: "#78bf35",
+      background: "#eeeeee",
+    },
+    "@media (max-width: 18rem)": {
+      marginBottom: "1.5rem !important",
+    },
+  },
+  buttonAddTobasket: {
+    marginTop: "1.5rem",
+    color: "#78bf35",
+    border: "2px solid",
+    borderColor: "#78bf35",
+    "&:hover ": {
+      borderColor: "#78bf35",
+      background: "#eeeeee",
+    },
+    "@media (max-width: 18rem)": {
+      marginBottom: "1.5rem !important",
+      flexDirection:"column",
     },
   },
 };

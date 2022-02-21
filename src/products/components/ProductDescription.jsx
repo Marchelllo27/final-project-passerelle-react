@@ -185,8 +185,10 @@ export default function ProductDescription(props) {
                 <div>
                   <div className={classes.buttonGroup}>
                     <Button
+                    
+                    
                       variant="outlined"
-                      className={classes.button}
+                      className={classes.buttonTop}
                       onClick={() => {
                         if (itemCount === 1) return;
                         setItemCount(prevCount => prevCount - 1);
@@ -194,7 +196,7 @@ export default function ProductDescription(props) {
                     >
                       <RemoveIcon fontSize="small" />
                     </Button>
-                    <Badge className={classes.number} badgeContent={itemCount}>
+                    <Badge  className={classes.number} badgeContent={itemCount}>
                       <ShoppingBasketIcon color="action" />
                     </Badge>
 
@@ -210,7 +212,7 @@ export default function ProductDescription(props) {
                   </div>
                 </div>
                 <Button
-                  className={classes.button}
+                  className={classes.buttonAddTobasket}
                   variant="outlined"
                   startIcon={<AddShoppingCartIcon color="action" />}
                   onClick={onAddProductButton}
