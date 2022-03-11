@@ -51,7 +51,7 @@ const Accueil = props => {
               <br /> LIVRAISON ÉTHIQUE Ne sont-ils pas beaux nos vélos et
               triporteurs électriques , sillonnant Paris ? Nous, on les adore et
               nos employés aussi. Car oui, nos livreurs sont salariés et nous en
-              sommes fiers.
+              sommes fiers!
             </Typography>
           </div>
           <div className={classes.imgContainer}>
