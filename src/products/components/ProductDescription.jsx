@@ -143,7 +143,7 @@ export default function ProductDescription(props) {
                           <TableHead>
                             <TableRow>
                               <TableCell>Nutriments</TableCell>
-                              <TableCell align="right">mg Pour 100g </TableCell>
+                              <TableCell align="right">mg/100g </TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>

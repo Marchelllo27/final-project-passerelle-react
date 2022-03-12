@@ -1,0 +1,42 @@
+.form input,
+.form textarea {
+  border-radius: 5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  background-color: rgb(191, 227, 221);
+  width: 80%;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.form .formControl {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+/* .form .formControl label {
+  width: 10rem;
+} */
+
+.form .nutrients input {
+  outline: none;
+  border: 1px solid black;
+  max-width: 3rem;
+  padding: 0.2rem 0.5rem;
+}
