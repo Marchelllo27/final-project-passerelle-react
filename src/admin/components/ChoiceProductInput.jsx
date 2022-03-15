@@ -1,10 +1,10 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { makeStyles } from '@mui/styles';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   productList: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     "& .MuiList-root": {
       display: "flex",
       flexDirection: "column",
-      padding: 0
+      padding: 0,
     },
     "& .MuiList-root li": {
       width: "100%",
@@ -24,25 +24,20 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BasicSelect() {
-  const [product, setProduct] = React.useState('');
-
+export default function BasicSelect(props) {
   const styles = useStyles();
-
-  const handleChange = (event) => {
-    setProduct(event.target.value);
-  };
 
   return (
     <Box>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Produit</InputLabel>
+        <InputLabel id="product-label">Produit</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={product}
+          value={props.value}
+          labelId="product-label"
+          id="product"
+          name="product"
           label="Produit"
-          onChange={handleChange}
+          onChange={props.onChange}
           MenuProps={{ className: styles.productList }}
         >
           <MenuItem value="dish">Plat</MenuItem>

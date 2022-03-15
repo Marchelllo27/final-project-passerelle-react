@@ -30,13 +30,13 @@ input::-webkit-inner-spin-button {
   margin-bottom: 1rem;
 }
 
-/* .form .formControl label {
-  width: 10rem;
-} */
-
 .form .nutrients input {
   outline: none;
   border: 1px solid black;
   max-width: 3rem;
   padding: 0.2rem 0.5rem;
+}
+
+.invalidFeedback {
+  color: red;
 }

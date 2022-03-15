@@ -1,0 +1,19 @@
+import * as Yup from "yup";
+
+export const addNewProductValidationForm = Yup.object({
+  name: Yup.string("Doit être une chaîne de caractère")
+    .max(45, "Doit contenir 45 caractères ou moins")
+    .required("Nom du produit est requis"),
+  weight: Yup.string("Doit être une chaîne de caractère").required(
+    "Poids est requis"
+  ),
+  description: Yup.string("Doit être une chaîne de caractère")
+    .max(100, "Doit contenir 100 caractères ou moins")
+    .required("Description est requis"),
+  ingredients: Yup.string("Doit être une chaîne de caractère").required(
+    "Ingrédients est requis"
+  ),
+  price: Yup.string("Doit être une chaîne de caractère").required(
+    "Prénom est requis"
+  ),
+})
