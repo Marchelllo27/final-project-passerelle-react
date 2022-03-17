@@ -42,7 +42,7 @@ const Accueil = props => {
       <Container className={classes.container}>
         <Card className={classes.slider1}>
           <div className={classes.slider1Content}>
-            <Typography variant="h4">Goutez à la qualité supérieur </Typography>
+            <Typography variant="h4">Goûtez à la qualité supérieure </Typography>
             <Typography>
               Des œufs de poules élevées en plein air, pour assurer le bien-être
               animal Un saumon label ASC, pour une méthode d'élevage durable
