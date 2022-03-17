@@ -9,7 +9,7 @@ import Desserts from "./products/pages/Desserts";
 describe("Check titles of pages", () => {
   test("render Accueil page and check title", () => {
     render(<Accueil />);
-    const accueilTitle = screen.getByText(/goutez à la qualité supérieur/i);
+    const accueilTitle = screen.getByText(/Goûtez à la qualité supérieure/i);
     expect(accueilTitle).toBeInTheDocument();
   });
 
