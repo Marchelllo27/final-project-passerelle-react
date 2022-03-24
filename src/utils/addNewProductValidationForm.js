@@ -8,7 +8,7 @@ export const addNewProductValidationForm = Yup.object({
     "Poids est requis"
   ),
   description: Yup.string("Doit être une chaîne de caractère")
-    .max(100, "Doit contenir 100 caractères ou moins")
+    .max(400, "Doit contenir 400 caractères ou moins")
     .required("Description est requis"),
   ingredients: Yup.string("Doit être une chaîne de caractère").required(
     "Ingrédients est requis"

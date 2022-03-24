@@ -156,10 +156,8 @@ const Navigation = props => {
 
       {AuthCtx.isAdmin && (
         <Button
-        onClick={onAddClick}
-          
+          onClick={onAddClick}
           color="inherit"
-          // activeClassName="active-link"
           className={style.navLinks}
           size="small"
         >

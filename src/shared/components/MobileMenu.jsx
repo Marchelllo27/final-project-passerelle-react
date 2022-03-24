@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ReactDOM from "react-dom";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 // MUI
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
@@ -9,7 +9,7 @@ import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
 import CakeIcon from "@mui/icons-material/Cake";
 
-import BasketIcon from "../components/Basket-icon"
+import BasketIcon from "../components/Basket-icon";
 import AuthContext from "../context/auth-context";
 import classes from "./MobileMenu.module.css";
 
@@ -44,24 +44,24 @@ const useStyles = makeStyles({
       color: "#78bf35",
     },
     "@media (max-width: 15rem)": {
-      fontSize: "0.7rem"
+      fontSize: "0.7rem",
     },
-    
   },
   logoutBtn: {
     "&:hover": {
-      color: "red"
+      color: "red",
     },
     "@media (max-width: 15rem)": {
       fontSize: "0.6rem",
       textAlign: "center",
     },
-  }
+  },
 });
 
 const MobileMenu = props => {
   const AuthCtx = useContext(AuthContext);
   const style = useStyles();
+  const history = useHistory();
 
   const onCloseMobileMenu = () => {
     props.onClose();
@@ -75,12 +75,19 @@ const MobileMenu = props => {
   const onBasketClick = () => {
     props.onShowBasket();
     props.onClose();
-  }
+  };
+
+  const onAddProductClickHandler = () => {
+    props.onClose();
+    history.push("/admin/product/add");
+  };
 
   const sideMenu = (
     <aside className={classes.mobileMenu}>
       <BasketIcon onClick={onBasketClick} />
-      <p style={{textAlign: "center"}} className={style.productLinks}>Panier</p>
+      <p style={{ textAlign: "center" }} className={style.productLinks}>
+        Panier
+      </p>
       <nav className={classes.navigation}>
         <ul className={classes.ulList}>
           <NavLink
@@ -116,6 +123,13 @@ const MobileMenu = props => {
               Desserts
               <CakeIcon />
             </MenuItem>
+          </NavLink>
+          <NavLink
+            to="/admin/product/add"
+            onClick={onAddProductClickHandler}
+            className={style.productLinks}
+          >
+            <MenuItem>Ajouter Produit !</MenuItem>
           </NavLink>
           <hr className={classes.separator}></hr>
           {!AuthCtx.isLoggedIn && (
@@ -191,40 +205,3 @@ const MobileMenu = props => {
 };
 
 export default MobileMenu;
-
-// <nav>
-// <ul className={classes.ulList}>
-//   <NavLink
-//     activeClassName="active-link"
-//     className={style.productLinks}
-//     to="/dishes"
-//   >
-//     <MenuItem>
-//       Plats
-//       <DinnerDiningIcon />
-//     </MenuItem>
-//   </NavLink>
-
-//   <NavLink
-//     activeClassName="active-link"
-//     className={style.productLinks}
-//     to="/drinks"
-//   >
-//     <MenuItem>
-//       Boissons
-//       <LocalBarIcon />
-//     </MenuItem>
-//   </NavLink>
-
-//   <NavLink
-//     activeClassName="active-link"
-//     className={style.productLinks}
-//     to="/desserts"
-//   >
-//     <MenuItem>
-//       Desserts
-//       <CakeIcon />
-//     </MenuItem>
-//   </NavLink>
-// </ul>
-// </nav>

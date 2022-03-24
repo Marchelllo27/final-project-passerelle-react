@@ -25,21 +25,21 @@ input::-webkit-inner-spin-button {
 .form .formControl {
   display: flex;
   flex-direction: column;
-  text-align: left;
   margin-bottom: 1rem;
 }
 
 .form .nutrients input {
+  text-align: center;
   outline: none;
   border: 1px solid black;
   max-width: 3rem;
-  padding: 0.2rem 0.5rem;
+  /* padding: 0.2rem 0.5rem; */
 }
 
 .nutrientBox {
   display: flex;
   flex-direction: column;
-  max-width: 7rem;
+  width: 7rem;
 }
 
 .invalidFeedback {
