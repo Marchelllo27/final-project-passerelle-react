@@ -1,6 +1,10 @@
 .formControl {
   display: flex;
   flex-direction: column;
-  text-align: left;
+  align-items: center;
   margin-bottom: 1rem;
+}
+
+.formControl label {
+  margin-bottom: 0.3rem;
 }

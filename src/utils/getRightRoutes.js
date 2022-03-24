@@ -74,7 +74,7 @@ const getRightRoutes = (userIsLoggedIn, isAdmin) => {
             <ProductDescription productInUrl="drink" imgUrl="drinks" />
           </Route>
 
-          <Route path="/admin/product/update/:id" exact>
+          <Route path="/admin/:product/update/:id" exact>
             <UpdateProductPage />
           </Route>
 

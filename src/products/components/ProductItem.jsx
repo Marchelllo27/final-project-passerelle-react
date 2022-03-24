@@ -43,8 +43,7 @@ const ProductItem = props => {
 
   const onUpdateHandler = event => {
     event.preventDefault();
-    history.push(`/admin/product/update/${id}`)
-    console.log(id);
+    history.push(`/admin/${props.singularProductWord}/update/${id}`)
   };
 
   const style = useStyles();
