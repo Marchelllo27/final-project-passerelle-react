@@ -10,8 +10,8 @@ const NutrientInput = ({ label, name, type = "number", id, onChange, value }) =>
         type={type}
         name={name}
         id={id}
-        min="0"
-        step="0.1"
+        // min="0"
+        // step="0.1"
         onChange={onChange}
         value={value}
       />

@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 import classes from "./ProductItemHome.module.css";
 const useStyles = makeStyles({
-   
   productItem: {
     transition: "all 0.2s linear",
     outline: "6px solid transparent",
@@ -38,7 +37,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ProductItem = (props) => {
+const ProductItem = props => {
   const style = useStyles();
 
   const { _id: id, name, image } = props.product;
@@ -51,9 +50,9 @@ const ProductItem = (props) => {
           sx={{ overflow: "hidden" }}
           elevation={3}
         >
-          <article >
+          <article>
             <img
-              src={`https://final-project-la-passerelle.herokuapp.com/uploads/images/${props.pluralProductWord}/${image}`}
+              src={`${process.env.REACT_APP_URL_API}/uploads/images/${props.pluralProductWord}/${image}`}
               alt={name}
               className={classes.productImage}
             />
@@ -63,8 +62,7 @@ const ProductItem = (props) => {
                 <h3>{name}</h3>
               </div>
               {/* price and add button */}
-              <div className={classes.actionControl}>
-              </div>
+              <div className={classes.actionControl}></div>
             </div>
           </article>
         </Paper>

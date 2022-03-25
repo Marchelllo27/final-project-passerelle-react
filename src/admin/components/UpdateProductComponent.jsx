@@ -19,17 +19,13 @@ import TypeOfProductChoice from "../components/TypeOfProductChoice";
 
 const AddProductPage = props => {
   const [error, setError] = useState(null);
-  const [image, setImage] = useState(null);
-  const [type, setType] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
-  const [clearPreview, setClearPreview] = useState(false);
+  const [image, setImage] = useState(props.preloadedValues.image);
+  const [type, setType] = useState(props.preloadedValues.type);
+  const [isChecked, setIsChecked] = useState(
+    props.preloadedValues.type && !!props.preloadedValues.type
+  );
   const [isProductAdded, setIsProductAdded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  if (props.preloadedValues.type === "vegetarian") {
-    setType("vegetarian")
-    setIsChecked(true);
-  }
 
   const formik = useFormik({
     initialValues: {
@@ -37,7 +33,6 @@ const AddProductPage = props => {
       name: props.preloadedValues.name,
       weight: props.preloadedValues.weight,
       description: props.preloadedValues.description,
-      type: props.preloadedValues.type,
       ingredients: props.preloadedValues.ingredients[0],
       energy: props.preloadedValues.energy || 0,
       proteins: props.preloadedValues.proteins || 0,
@@ -66,8 +61,8 @@ const AddProductPage = props => {
     validationSchema: addNewProductValidationForm,
     // SUBMIT HANDLER
     onSubmit: async (values, { resetForm }) => {
-    //   setIsLoading(true);
-    //   const { token } = JSON.parse(localStorage.getItem("userData"));
+      setIsLoading(true);
+      const { token } = JSON.parse(localStorage.getItem("userData"));
 
       const nutrientsData = [
         {
@@ -156,58 +151,47 @@ const AddProductPage = props => {
         },
       ];
 
-      console.log(nutrientsData);
-      console.log(values.product);
-      console.log(values.name);
-      console.log(values.ingredients);
-      console.log(props.preloadedValues.image);
-      console.log(values.description);
-      console.log(props.preloadedValues.type);
-      console.log(values.price);
+      let url;
+      switch (values.product) {
+        case "dish":
+          url = `/admin/products/dish/update/${props.id}`;
+          break;
+        case "drink":
+          url = `/admin/products/drink/update/${props.id}`;
+          break;
+        case "dessert":
+          url = `/admin/products/dessert/update/${props.id}`;
+          break;
+        default:
+          url = `/admin/products/dish/update/${props.id}`;
+      }
+      try {
+        const formData = new FormData();
+        formData.append("product", values.product);
+        formData.append("name", values.name);
+        formData.append("ingredients", JSON.stringify([values.ingredients]));
+        formData.append("image", image);
+        formData.append("weight", values.weight);
+        formData.append("description", values.description);
+        formData.append("type", isChecked ? type : "");
+        formData.append("price", values.price);
+        formData.append("nutrients", JSON.stringify(nutrientsData));
 
-    //   let url;
-    //   switch (values.product) {
-    //     case "dish":
-    //       url = "/admin/products/dish/add";
-    //       break;
-    //     case "drink":
-    //       url = "/admin/products/drink/add";
-    //       break;
-    //     case "dessert":
-    //       url = "/admin/products/dessert/add";
-    //       break;
-    //     default:
-    //       url = "/admin/products/dish/add";
-    //   }
-    //   try {
-    //     const formData = new FormData();
-    //     formData.append("product", values.product);
-    //     formData.append("name", values.name);
-    //     formData.append("ingredients", JSON.stringify([values.ingredients]));
-    //     formData.append("image", image);
-    //     formData.append("weight", values.weight);
-    //     formData.append("description", values.description);
-    //     formData.append("type", isChecked ? type : "");
-    //     formData.append("price", values.price);
-    //     formData.append("nutrients", JSON.stringify(nutrientsData));
-
-    //     await sendHttpRequest(
-    //       process.env.REACT_APP_URL_API + url,
-    //       "POST",
-    //       formData,
-    //       {
-    //         Authorization: "Bearer " + token,
-    //       }
-    //     );
-    //     setIsLoading(false);
-    //     setIsProductAdded(true);
-    //     setClearPreview(true);
-    //     resetForm();
-    //     setIsChecked(false);
-    //   } catch (error) {
-    //     setIsLoading(false);
-    //     setError(error.message);
-    //   }
+        await sendHttpRequest(
+          process.env.REACT_APP_URL_API + url,
+          "PUT",
+          formData,
+          {
+            Authorization: "Bearer " + token,
+          }
+        );
+        setIsLoading(false);
+        setIsProductAdded(true);
+        
+      } catch (error) {
+        setIsLoading(false);
+        setError(error.message);
+      }
     },
   });
 
@@ -224,342 +208,342 @@ const AddProductPage = props => {
     setIsProductAdded(false);
   };
 
-    return (
-      <>
-        {isProductAdded && (
-          <SuccessSnackBar
-            message="Le produit a été bien modifié"
-            closeModal={closeModalHandler}
-          />
+  return (
+    <>
+      {isProductAdded && (
+        <SuccessSnackBar
+          message="Le produit a été bien modifié"
+          closeModal={closeModalHandler}
+        />
+      )}
+      {isLoading && <BackDropSpinner />}
+      <form className={classes.form} onSubmit={formik.handleSubmit}>
+        <p>Modifier un produit existant!</p>
+        <ImageUpload
+          id="image"
+          name="image"
+          center
+          previewUrl={`${process.env.REACT_APP_URL_API}/uploads/images/${props.imageFolder}/${props.preloadedValues.image}`}
+          onInput={onInputHandler}
+          clearPreview=""
+        />
+        <ChoiceProductInput
+          onChange={formik.handleChange}
+          value={formik.values.product}
+        />
+        <TextField
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="name"
+          id="name"
+          label="Nom du produit"
+          variant="outlined"
+          required
+        />
+        {formik.touched.name && formik.errors.name && (
+          <small className={classes.invalidFeedback}>
+            {formik.errors.name}
+          </small>
         )}
-        {isLoading && <BackDropSpinner />}
-        <form className={classes.form} onSubmit={formik.handleSubmit}>
-          <p>Modifier un produit existant!</p>
-          <ImageUpload
-            id="image"
-            name="image"
-            center
-            onInput={onInputHandler}
-            clearPreview={clearPreview}
-          />
-          <ChoiceProductInput
-            onChange={formik.handleChange}
-            value={formik.values.product}
-          />
-          <TextField
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name="name"
-            id="name"
-            label="Nom du produit"
-            variant="outlined"
-            required
-          />
-          {formik.touched.name && formik.errors.name && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.name}
-            </small>
-          )}
 
-          <TextField
-            value={formik.values.ingredients}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name="ingredients"
-            id="ingredients"
-            label="Ingrédients(séparées par des virgules)"
-            variant="outlined"
-            required
-          />
-          {formik.touched.ingredients && formik.errors.ingredients && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.ingredients}
-            </small>
-          )}
+        <TextField
+          value={formik.values.ingredients}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="ingredients"
+          id="ingredients"
+          label="Ingrédients(séparées par des virgules)"
+          variant="outlined"
+          required
+        />
+        {formik.touched.ingredients && formik.errors.ingredients && (
+          <small className={classes.invalidFeedback}>
+            {formik.errors.ingredients}
+          </small>
+        )}
 
-          <TextField
-            value={formik.values.weight}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name="weight"
-            id="weight"
-            type="number"
-            label="Poids(grammes)"
-            variant="outlined"
-            inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-            required
-          />
-          {formik.touched.weight && formik.errors.weight && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.weight}
-            </small>
-          )}
+        <TextField
+          value={formik.values.weight}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="weight"
+          id="weight"
+          type="number"
+          label="Poids(grammes)"
+          variant="outlined"
+          inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+          required
+        />
+        {formik.touched.weight && formik.errors.weight && (
+          <small className={classes.invalidFeedback}>
+            {formik.errors.weight}
+          </small>
+        )}
 
-          <TypeOfProductChoice
-            // value={formik.values.type}
-            checked={isChecked}
-            onChange={onTypeChangeHandler}
-          />
+        <TypeOfProductChoice
+          checked={isChecked}
+          onChange={onTypeChangeHandler}
+        />
 
-          <Accordion
-            sx={{
-              "& .MuiAccordionSummary-content": {
-                margin: 0,
+        <Accordion
+          sx={{
+            "& .MuiAccordionSummary-content": {
+              margin: 0,
+            },
+            "& .MuiAccordionDetails-root": {
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              "@media (max-width: 48rem)": {
+                flexDirection: "column",
               },
-              "& .MuiAccordionDetails-root": {
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                "@media (max-width: 48rem)": {
-                  flexDirection: "column",
-                },
-              },
-            }}
-            className={classes.nutrients}
+            },
+          }}
+          className={classes.nutrients}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <p className={classes.nutrientTitle}>Nutrients</p>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className={classes.nutrientBox}>
-                <NutrientInput
-                  label="Energy"
-                  id="energy"
-                  name="energy"
-                  onChange={formik.handleChange}
-                  value={formik.values.energy}
-                />
+            <p className={classes.nutrientTitle}>Nutrients</p>
+          </AccordionSummary>
+          <AccordionDetails>
+            <div className={classes.nutrientBox}>
+              <NutrientInput
+                label="Energy"
+                id="energy"
+                name="energy"
+                onChange={formik.handleChange}
+                value={formik.values.energy}
+              />
 
-                <NutrientInput
-                  label="Protéines"
-                  id="proteins"
-                  name="proteins"
-                  onChange={formik.handleChange}
-                  value={formik.values.proteins}
-                />
+              <NutrientInput
+                label="Protéines"
+                id="proteins"
+                name="proteins"
+                onChange={formik.handleChange}
+                value={formik.values.proteins}
+              />
 
-                <NutrientInput
-                  label="Glucides"
-                  id="carbohydrates"
-                  name="carbohydrates"
-                  onChange={formik.handleChange}
-                  value={formik.values.carbohydrates}
-                />
+              <NutrientInput
+                label="Glucides"
+                id="carbohydrates"
+                name="carbohydrates"
+                onChange={formik.handleChange}
+                value={formik.values.carbohydrates}
+              />
 
-                <NutrientInput
-                  label="Lipides"
-                  id="lipids"
-                  name="lipids"
-                  onChange={formik.handleChange}
-                  value={formik.values.lipids}
-                />
+              <NutrientInput
+                label="Lipides"
+                id="lipids"
+                name="lipids"
+                onChange={formik.handleChange}
+                value={formik.values.lipids}
+              />
 
-                <NutrientInput
-                  label="Sucre"
-                  id="sugar"
-                  name="sugar"
-                  onChange={formik.handleChange}
-                  value={formik.values.sugar}
-                />
+              <NutrientInput
+                label="Sucre"
+                id="sugar"
+                name="sugar"
+                onChange={formik.handleChange}
+                value={formik.values.sugar}
+              />
 
-                <NutrientInput
-                  label="Fibre alimentaire"
-                  id="dietaryFiber"
-                  name="dietaryFiber"
-                  onChange={formik.handleChange}
-                  value={formik.values.dietaryFiber}
-                />
+              <NutrientInput
+                label="Fibre alimentaire"
+                id="dietaryFiber"
+                name="dietaryFiber"
+                onChange={formik.handleChange}
+                value={formik.values.dietaryFiber}
+              />
 
-                <NutrientInput
-                  label="Calcium"
-                  id="calcium"
-                  name="calcium"
-                  onChange={formik.handleChange}
-                  value={formik.values.calcium}
-                />
-              </div>
-              <div className={classes.nutrientBox}>
-                <NutrientInput
-                  label="Fer"
-                  id="iron"
-                  name="iron"
-                  onChange={formik.handleChange}
-                  value={formik.values.iron}
-                />
+              <NutrientInput
+                label="Calcium"
+                id="calcium"
+                name="calcium"
+                onChange={formik.handleChange}
+                value={formik.values.calcium}
+              />
+            </div>
+            <div className={classes.nutrientBox}>
+              <NutrientInput
+                label="Fer"
+                id="iron"
+                name="iron"
+                onChange={formik.handleChange}
+                value={formik.values.iron}
+              />
 
-                <NutrientInput
-                  label="Magnésium"
-                  id="magnesium"
-                  name="magnesium"
-                  onChange={formik.handleChange}
-                  value={formik.values.magnesium}
-                />
+              <NutrientInput
+                label="Magnésium"
+                id="magnesium"
+                name="magnesium"
+                onChange={formik.handleChange}
+                value={formik.values.magnesium}
+              />
 
-                <NutrientInput
-                  label="Zinc"
-                  id="zinc"
-                  name="zinc"
-                  onChange={formik.handleChange}
-                  value={formik.values.zinc}
-                />
+              <NutrientInput
+                label="Zinc"
+                id="zinc"
+                name="zinc"
+                onChange={formik.handleChange}
+                value={formik.values.zinc}
+              />
 
-                <NutrientInput
-                  label="Vitamine E"
-                  id="vitaminE"
-                  name="vitaminE"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminE}
-                />
+              <NutrientInput
+                label="Vitamine E"
+                id="vitaminE"
+                name="vitaminE"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminE}
+              />
 
-                <NutrientInput
-                  label="Vitamine K1"
-                  id="vitaminK1"
-                  name="vitaminK1"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminK1}
-                />
+              <NutrientInput
+                label="Vitamine K1"
+                id="vitaminK1"
+                name="vitaminK1"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminK1}
+              />
 
-                <NutrientInput
-                  label="Vitamine C"
-                  id="vitaminC"
-                  name="vitaminC"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminC}
-                />
+              <NutrientInput
+                label="Vitamine C"
+                id="vitaminC"
+                name="vitaminC"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminC}
+              />
 
-                <NutrientInput
-                  label="Vitamine D"
-                  id="vitaminD"
-                  name="vitaminD"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminD}
-                />
-              </div>
-              <div className={classes.nutrientBox}>
-                <NutrientInput
-                  label="Vitamine B1"
-                  id="vitaminB1"
-                  name="vitaminB1"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminB1}
-                />
+              <NutrientInput
+                label="Vitamine D"
+                id="vitaminD"
+                name="vitaminD"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminD}
+              />
+            </div>
+            <div className={classes.nutrientBox}>
+              <NutrientInput
+                label="Vitamine B1"
+                id="vitaminB1"
+                name="vitaminB1"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminB1}
+              />
 
-                <NutrientInput
-                  label="Vitamine B2"
-                  id="vitaminB2"
-                  name="vitaminB2"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminB2}
-                />
+              <NutrientInput
+                label="Vitamine B2"
+                id="vitaminB2"
+                name="vitaminB2"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminB2}
+              />
 
-                <NutrientInput
-                  label="Vitamine B3"
-                  id="vitaminB3"
-                  name="vitaminB3"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminB3}
-                />
+              <NutrientInput
+                label="Vitamine B3"
+                id="vitaminB3"
+                name="vitaminB3"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminB3}
+              />
 
-                <NutrientInput
-                  label="Vitamine B5"
-                  id="vitaminB5"
-                  name="vitaminB5"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminB5}
-                />
+              <NutrientInput
+                label="Vitamine B5"
+                id="vitaminB5"
+                name="vitaminB5"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminB5}
+              />
 
-                <NutrientInput
-                  label="Vitamine B6"
-                  id="vitaminB6"
-                  name="vitaminB6"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminB6}
-                />
+              <NutrientInput
+                label="Vitamine B6"
+                id="vitaminB6"
+                name="vitaminB6"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminB6}
+              />
 
-                <NutrientInput
-                  label="Vitamine B9"
-                  id="vitaminB9"
-                  name="vitaminB9"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminB9}
-                />
+              <NutrientInput
+                label="Vitamine B9"
+                id="vitaminB9"
+                name="vitaminB9"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminB9}
+              />
 
-                <NutrientInput
-                  label="Vitamine B12"
-                  id="vitaminB12"
-                  name="vitaminB12"
-                  onChange={formik.handleChange}
-                  value={formik.values.vitaminB12}
-                />
-              </div>
-            </AccordionDetails>
-          </Accordion>
+              <NutrientInput
+                label="Vitamine B12"
+                id="vitaminB12"
+                name="vitaminB12"
+                onChange={formik.handleChange}
+                value={formik.values.vitaminB12}
+              />
+            </div>
+          </AccordionDetails>
+        </Accordion>
 
-          <TextField
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name="description"
-            id="description"
-            type="description"
-            multiline
-            minRows={4}
-            className={classes.description}
-            sx={{
-              backgroundColor: "white",
-              borderRadius: "5px",
-              "& .MuiInputBase-multiline": {
-                padding: "0.5rem",
-              },
-            }}
-            required
-            label="Description du produit"
-            variant="outlined"
-          />
-          {formik.touched.description && formik.errors.description && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.description}
-            </small>
-          )}
+        <TextField
+          value={formik.values.description}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="description"
+          id="description"
+          type="description"
+          multiline
+          minRows={4}
+          className={classes.description}
+          sx={{
+            backgroundColor: "white",
+            borderRadius: "5px",
+            "& .MuiInputBase-multiline": {
+              padding: "0.5rem",
+            },
+          }}
+          required
+          label="Description du produit"
+          variant="outlined"
+        />
+        {formik.touched.description && formik.errors.description && (
+          <small className={classes.invalidFeedback}>
+            {formik.errors.description}
+          </small>
+        )}
 
-          <TextField
-            value={formik.values.price}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name="price"
-            id="price"
-            type="number"
-            label="Prix"
-            variant="outlined"
-            required
-          />
-          {formik.touched.price && formik.errors.price && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.price}
-            </small>
-          )}
+        <TextField
+          value={formik.values.price}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="price"
+          id="price"
+          type="number"
+          label="Prix"
+          variant="outlined"
+          required
+        />
+        {formik.touched.price && formik.errors.price && (
+          <small className={classes.invalidFeedback}>
+            {formik.errors.price}
+          </small>
+        )}
 
-          <Button
-            color="success"
-            type="submit"
-            variant="contained"
-            sx={{
-              maxWidth: "20rem",
-              margin: "0 auto",
-              "@media (max-width: 30rem)": { margin: 0 },
-            }}
-          >
-            Ajouter Produit !
-          </Button>
-          {error && <p className={classes.invalidFeedback}>{error} </p>}
-        </form>
-      </>
-    );
+        <Button
+          color="success"
+          type="submit"
+          variant="contained"
+          sx={{
+            maxWidth: "20rem",
+            margin: "0 auto",
+            "@media (max-width: 30rem)": { margin: 0 },
+          }}
+        >
+          Ajouter Produit !
+        </Button>
+        {error && <p className={classes.invalidFeedback}>{error} </p>}
+      </form>
+    </>
+  );
 };
 
 export default AddProductPage;

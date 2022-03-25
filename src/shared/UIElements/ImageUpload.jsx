@@ -5,13 +5,14 @@ import classes from "./ImageUpload.module.css";
 
 const ImageUpload = props => {
   const [file, setFile] = useState();
-  const [previewUrl, setPreviewUrl] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(props.previewUrl || null);
   const [isValid, setIsValid] = useState();
   const filePickerRef = useRef();
 
   useEffect(() => {
+    if (props.previewUrl) return;
     setPreviewUrl(null)
-  }, [props.clearPreview])
+  }, [props.clearPreview, props.previewUrl])
 
   useEffect(() => {
     if (!file) return;

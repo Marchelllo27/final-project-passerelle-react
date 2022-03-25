@@ -12,6 +12,22 @@ const UpdateProductPage = () => {
 
   const { id, product } = useParams();
 
+  let rightImageFolder;
+
+  switch (product) {
+    case "dish":
+      rightImageFolder = "dishes";
+      break;
+    case "drink":
+      rightImageFolder = "drinks";
+      break;
+    case "dessert":
+      rightImageFolder = "desserts";
+      break;
+    default:
+      rightImageFolder = "dishes";
+  }
+
   // FETCH CURRENT USER DATA TO FULFILL INPUTS
   useEffect(() => {
     setIsLoading(true);
@@ -38,13 +54,15 @@ const UpdateProductPage = () => {
     });
   }, [product, id]);
 
-  console.log(loadedProductData);
-
   return (
     <>
       {isLoading && <BackDropSpinner />}
       {loadedProductData && (
-        <UpdateProductComponent preloadedValues={loadedProductData} />
+        <UpdateProductComponent
+          preloadedValues={loadedProductData}
+          imageFolder={rightImageFolder}
+          id={id}
+        />
       )}
     </>
   );
