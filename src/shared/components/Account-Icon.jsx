@@ -9,8 +9,10 @@ const useStyles = makeStyles({
   accountMenu: {
     display: "flex",
     flexDirection: "column",
+    padding: 0,
     "& a": {
       color: "#585858",
+      width: "100%"
     },
     "& a:active": {
       color: "#78BF35",
@@ -21,6 +23,9 @@ const useStyles = makeStyles({
     "& a:last-child:hover": {
       color: "red",
     },
+    "& li": {
+      justifyContent: "center",
+    }
   },
   accountIcon: {
     cursor: "pointer",
@@ -72,7 +77,7 @@ const AccountIcon = (props) => {
         }}
       >
         <Link to="/profile">
-          <MenuItem onClick={handleClose}>Profil</MenuItem>
+          <MenuItem sx={{width: "100%"}} onClick={handleClose}>Profil</MenuItem>
         </Link>
         <Link to="/">
           <MenuItem onClick={logOutHandler}>Se déconnecter</MenuItem>

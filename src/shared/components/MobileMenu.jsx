@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     "& li": {
       justifyContent: "space-between",
       fontWeight: "bold",
+      "white-space": "normal",
     },
   },
   navLinks: {
@@ -129,7 +130,7 @@ const MobileMenu = props => {
             onClick={onAddProductClickHandler}
             className={style.productLinks}
           >
-            <MenuItem>Ajouter Produit !</MenuItem>
+            <MenuItem sx={{textAlign: "center"}}>Ajouter Produit</MenuItem>
           </NavLink>
           <hr className={classes.separator}></hr>
           {!AuthCtx.isLoggedIn && (

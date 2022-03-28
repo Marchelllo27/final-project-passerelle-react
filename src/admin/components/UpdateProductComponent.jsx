@@ -538,7 +538,7 @@ const AddProductPage = props => {
             "@media (max-width: 30rem)": { margin: 0 },
           }}
         >
-          Ajouter Produit !
+          Modifier Produit !
         </Button>
         {error && <p className={classes.invalidFeedback}>{error} </p>}
       </form>

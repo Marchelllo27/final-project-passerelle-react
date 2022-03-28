@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     width: "9rem",
     display: "flex",
     flexDirection: "column",
+    padding: 0,
   },
   productLinks: {
     color: "#585858",
