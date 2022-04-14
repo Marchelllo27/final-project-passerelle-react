@@ -7,6 +7,11 @@ const ProductItemStyles = {
       transform: "scale(1.1)",
       outline: "6px solid #78bf35",
     },
+    "@media (max-width: 48rem)": {
+      "&:hover": {
+        transform: "scale(1)",
+      },
+    },
   },
   addToBasketBox: {
     display: "flex",
