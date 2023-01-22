@@ -45,14 +45,9 @@ const Signup = () => {
     onSubmit: async values => {
       setIsLoading(true);
       try {
-        await sendHttpRequest(
-          `${process.env.REACT_APP_URL_API}/signup`,
-          "POST",
-          JSON.stringify(values),
-          {
-            "Content-Type": "application/json",
-          }
-        );
+        await sendHttpRequest(`${process.env.REACT_APP_URL_API}/signup`, "POST", JSON.stringify(values), {
+          "Content-Type": "application/json",
+        });
         setIsLoading(false);
         authCtx.showSuccessModal();
         history.replace("/login");
@@ -67,12 +62,7 @@ const Signup = () => {
     <>
       {isLoading && <BackDropSpinner />}
 
-      <Link
-        href="/login"
-        variant="body2"
-        underline="hover"
-        className={classes.connexion}
-      >
+      <Link href="/login" variant="body2" underline="hover" className={classes.connexion}>
         Vous avez déja un compte?
         <span className={classes.span}> Connectez vous</span>
       </Link>
@@ -97,9 +87,7 @@ const Signup = () => {
             required
           />
           {formik.touched.firstName && formik.errors.firstName && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.firstName}
-            </small>
+            <small className={classes.invalidFeedback}>{formik.errors.firstName}</small>
           )}
           <TextField
             defaultValue={formik.values.lastName}
@@ -112,9 +100,7 @@ const Signup = () => {
             required
           />
           {formik.touched.lastName && formik.errors.lastName && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.lastName}
-            </small>
+            <small className={classes.invalidFeedback}>{formik.errors.lastName}</small>
           )}
           <TextField
             defaultValue={formik.values.email}
@@ -128,9 +114,7 @@ const Signup = () => {
             variant="outlined"
           />
           {formik.touched.email && formik.errors.email && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.email}
-            </small>
+            <small className={classes.invalidFeedback}>{formik.errors.email}</small>
           )}
           <TextField
             defaultValue={formik.values.phoneNumber}
@@ -149,9 +133,7 @@ const Signup = () => {
             }}
           />
           {formik.touched.phoneNumber && formik.errors.phoneNumber && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.phoneNumber}
-            </small>
+            <small className={classes.invalidFeedback}>{formik.errors.phoneNumber}</small>
           )}
 
           <TextField
@@ -167,9 +149,7 @@ const Signup = () => {
             className={`form-control`}
           />
           {formik.touched.password && formik.errors.password && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.password}
-            </small>
+            <small className={classes.invalidFeedback}>{formik.errors.password}</small>
           )}
           <TextField
             defaultValue={formik.values.confirmPassword}
@@ -184,9 +164,7 @@ const Signup = () => {
             className={`form-control`}
           />
           {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.confirmPassword}
-            </small>
+            <small className={classes.invalidFeedback}>{formik.errors.confirmPassword}</small>
           )}
           <span className={classes.span}>Votre adresse</span>
           <TextField
@@ -200,9 +178,7 @@ const Signup = () => {
             variant="outlined"
           />
           {formik.touched.street && formik.errors.street && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.street}
-            </small>
+            <small className={classes.invalidFeedback}>{formik.errors.street}</small>
           )}
           <TextField
             defaultValue={formik.values.postalCode}
@@ -221,9 +197,7 @@ const Signup = () => {
             }}
           />
           {formik.touched.postalCode && formik.errors.postalCode && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.postalCode}
-            </small>
+            <small className={classes.invalidFeedback}>{formik.errors.postalCode}</small>
           )}
           <TextField
             defaultValue={formik.values.city}
@@ -236,9 +210,7 @@ const Signup = () => {
             variant="outlined"
           />
           {formik.touched.city && formik.errors.city && (
-            <small className={classes.invalidFeedback}>
-              {formik.errors.city}
-            </small>
+            <small className={classes.invalidFeedback}>{formik.errors.city}</small>
           )}
           <Button
             color="success"
